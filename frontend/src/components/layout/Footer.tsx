@@ -25,17 +25,23 @@ export function Footer() {
           {/* Navigation + services */}
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-5">
             <FooterLinkColumns groups={footerNavigation} className="contents" />
-            <FooterLinkColumns groups={[footerServices]} />
+            <FooterLinkColumns groups={[footerServices]} className="col-span-2 sm:col-span-1" />
           </div>
 
-          {/* Contact + newsletter */}
-          <div className="flex flex-col gap-8 lg:col-span-3">
+          {/* Contact */}
+          <div className="lg:col-span-3">
             <FooterContact />
-            <NewsletterForm />
+          </div>
+
+          {/* Newsletter strip */}
+          <div className="lg:col-span-12">
+            <div className="max-w-md">
+              <NewsletterForm />
+            </div>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/15 pt-8 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/15 pt-8 sm:flex-row">
           <p className="text-xs text-sand-400">
             © {year} {company.name}. All rights reserved.
           </p>
