@@ -29,7 +29,12 @@ export function PropertyCard({ property, isFavourite = false, onToggleFavourite 
         'focus-within:-translate-y-1.5 focus-within:shadow-lg',
       )}
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-tint-100">
+      {/*
+        Media. No overflow-hidden here: the price pill below is meant to overlap
+        the image's bottom edge and would be clipped by it — the article's own
+        overflow-hidden still rounds the top corners.
+      */}
+      <div className="relative aspect-[4/3] bg-tint-100">
         <SkeletonImage
           src={property.images[0]?.src ?? ''}
           alt={property.images[0]?.alt ?? property.title}
@@ -55,8 +60,8 @@ export function PropertyCard({ property, isFavourite = false, onToggleFavourite 
           )}
         </div>
 
-        {/* Price badge overlaps the media edge */}
-        <div className="absolute bottom-0 left-4 z-10 translate-y-1/2">
+        {/* Price badge overlaps the media edge, aligned with the body's 20px padding. */}
+        <div className="absolute bottom-0 left-5 z-10 translate-y-1/2">
           <Badge tone={isRental ? 'dark' : 'orange'} className="px-4 py-1.5 text-sm shadow-md">
             {formatPrice(property.price, property.pricePeriod)}
           </Badge>
