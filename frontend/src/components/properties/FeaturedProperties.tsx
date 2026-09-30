@@ -15,7 +15,7 @@ interface FeaturedPropertiesProps {
   onClearSearch?: () => void
 }
 
-/** Four-across listing grid. Doubles as the results panel for the hero search. */
+/** Three-across listing grid. Doubles as the results panel for the hero search. */
 export function FeaturedProperties({
   properties,
   isSearchResult = false,
@@ -42,9 +42,9 @@ export function FeaturedProperties({
         {isSearchResult && <SearchResultSummary count={properties.length} onClear={onClearSearch} />}
 
         {properties.length > 0 ? (
-          <ul className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7 xl:grid-cols-4">
+          <ul className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             {properties.map((property, index) => (
-              <Reveal as="li" key={property.id} delay={(index % 4) * 90} className="flex">
+              <Reveal as="li" key={property.id} delay={(index % 3) * 90} className="flex">
                 <PropertyCard
                   property={property}
                   isFavourite={isFavourite(property.id)}
