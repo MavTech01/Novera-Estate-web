@@ -1,0 +1,224 @@
+/*
+ * Reusable motion + surface utilities.
+ * Short distances, soft easing, and a full opt-out for reduced motion.
+ */
+
+@theme {
+  --animate-fade-up: fade-up 0.6s var(--ease-out-soft) both;
+  --animate-fade-up-slow: fade-up 0.85s var(--ease-out-soft) both;
+  --animate-fade-in: fade-in 0.9s ease-out both;
+  --animate-rise-in: rise-in 0.7s var(--ease-out-soft) both;
+  --animate-pulse-soft: pulse-soft 1.6s ease-in-out infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/* Scroll reveal ------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition:
+    opacity 0.45s var(--ease-out-soft),
+    transform 0.45s var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Mobile drawer navigation ------------------------------------------- */
+[data-nav-drawer] .mobile-nav-item > a {
+  opacity: 0;
+  transform: translate3d(12px, 0, 0);
+}
+
+[data-nav-drawer][data-open='true'] .mobile-nav-item > a {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.3s var(--ease-out-soft),
+    transform 0.3s var(--ease-out-soft);
+}
+
+[data-nav-drawer] .mobile-nav-item:nth-child(1) > a {
+  transition-delay: 60ms;
+}
+[data-nav-drawer] .mobile-nav-item:nth-child(2) > a {
+  transition-delay: 100ms;
+}
+[data-nav-drawer] .mobile-nav-item:nth-child(3) > a {
+  transition-delay: 140ms;
+}
+[data-nav-drawer] .mobile-nav-item:nth-child(4) > a {
+  transition-delay: 180ms;
+}
+[data-nav-drawer] .mobile-nav-item:nth-child(5) > a {
+  transition-delay: 220ms;
+}
+[data-nav-drawer] .mobile-nav-item:nth-child(6) > a {
+  transition-delay: 260ms;
+}
+[data-nav-drawer] .mobile-nav-item:nth-child(7) > a {
+  transition-delay: 300ms;
+}
+[data-nav-drawer] .mobile-nav-item:nth-child(8) > a {
+  transition-delay: 340ms;
+}
+
+/* Image zoom inside a hovered card ------------------------------------ */
+.media {
+  transition: transform 0.6s var(--ease-out-soft);
+}
+
+.group:hover .media,
+.group:focus-visible .media {
+  transform: scale(1.07);
+}
+
+/* Arrow nudge ---------------------------------------------------------- */
+.arrow-nudge {
+  transition: transform 0.3s var(--ease-out-soft);
+}
+
+.group:hover .arrow-nudge,
+.group:focus-visible .arrow-nudge {
+  transform: translateX(5px);
+}
+
+/* Scrollbar-free horizontal rails ------------------------------------- */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Decorative shapes --------------------------------------------------- */
+.blob-orange {
+  background: linear-gradient(135deg, var(--color-accent-200) 0%, var(--color-accent-400) 100%);
+}
+
+.dot-grid {
+  background-image: radial-gradient(var(--color-accent-200) 1.5px, transparent 1.5px);
+  background-size: 18px 18px;
+}
+
+/* Hairline used on dark surfaces --------------------------------------- */
+.hairline-light {
+  border-color: rgb(255 255 255 / 0.16);
+}
+
+/* Stepper items — fade and slide in once the observer reaches them -------- */
+.stepper-item {
+  transition:
+    opacity 500ms ease-out,
+    translate 500ms ease-out;
+}
+
+.stepper-item[data-revealed='false'] {
+  opacity: 0;
+  translate: 0 24px;
+}
+
+.stepper-item[data-revealed='true'] {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* Stepper current node — pulsing ring while this step is active ---------- */
+@keyframes stepper-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(249 115 22 / 0.45);
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 0 18px rgb(249 115 22 / 0);
+    transform: scale(1);
+  }
+}
+
+.stepper-node-current {
+  animation: stepper-pulse 1.8s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .stepper-item,
+  .stepper-item[data-revealed='false'],
+  .stepper-item[data-revealed='true'] {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+
+  /* Static ring instead of a pulsing one, so the active step still reads as active. */
+  .stepper-node-current {
+    animation: none;
+    box-shadow: 0 0 0 5px rgb(249 115 22 / 0.25);
+  }
+
+  [data-nav-drawer] .mobile-nav-item > a {
+    opacity: 1;
+    transform: none;
+  }
+
+  .media,
+  .arrow-nudge {
+    transition: none;
+  }
+
+  .group:hover .media,
+  .group:hover .arrow-nudge {
+    transform: none;
+  }
+}

@@ -1,0 +1,328 @@
+import type { Property } from '../types'
+import { agents } from './agents'
+import { locations } from './locations'
+
+/**
+ * Demo property listings.
+ *
+ * Field names deliberately match the future `properties` table so this file can
+ * be replaced by `GET /api/properties` without any component changes.
+ */
+export const properties: Property[] = [
+  {
+    id: 'prop-001',
+    slug: 'luxury-4-bedroom-detached-duplex-lekki-phase-1',
+    reference: 'NE-LK-1042',
+    title: 'Luxury 4 Bedroom Detached Duplex',
+    summary:
+      'A spacious detached duplex with private parking, landscaped garden and a service quarters wing.',
+    description:
+      'Set on a quiet road in Lekki Phase 1, this four-bedroom detached duplex offers generous living spaces, an all-black kitchen with granite counters, a dedicated laundry wing and staff quarters. The estate is fully serviced with perimeter fencing, 24-hour power and constant water supply.',
+    price: 450_000_000,
+    purpose: 'buy',
+    status: 'for-sale',
+    propertyType: 'house',
+    location: locations.lekkiPhase1,
+    bedrooms: 4,
+    bathrooms: 5,
+    parkingSpaces: 4,
+    area: 420,
+    features: [
+      'Private garden',
+      'Staff quarters',
+      '24-hour power',
+      'Borehole & treatment plant',
+      'CCTV and gated estate',
+    ],
+    amenities: ['Pool', 'Gym', 'Boys’ quarters', 'Laundry'],
+    images: [
+      {
+        src: '/images/properties/lekki-duplex.webp',
+        alt: 'Exterior of a luxury four bedroom detached duplex in Lekki Phase 1, Lagos',
+      },
+      {
+        src: '/images/development/oasis-alt.webp',
+        alt: 'Open-plan living area inside the duplex',
+      },
+    ],
+    agent: agents.adaeze,
+    isFeatured: true,
+    yearBuilt: 2021,
+    titleReference: 'M/pandas/LA/7741',
+    listedAt: '2026-02-11',
+  },
+  {
+    id: 'prop-002',
+    slug: 'contemporary-3-bedroom-apartment-ikoyi',
+    reference: 'NE-IK-1188',
+    title: 'Contemporary 3 Bedroom Apartment',
+    summary:
+      'A bright, fully furnished apartment with city views, concierge service and secure parking.',
+    description:
+      'Located in a quiet Ikoyi close, this contemporary three-bedroom apartment is finished with porcelain floors, fitted wardrobes and a fitted kitchen. Residents enjoy concierge and security services, a shared rooftop lounge and two dedicated parking bays.',
+    price: 310_000_000,
+    purpose: 'buy',
+    status: 'new-listing',
+    propertyType: 'apartment',
+    location: locations.ikoyi,
+    bedrooms: 3,
+    bathrooms: 3,
+    parkingSpaces: 2,
+    area: 210,
+    features: [
+      'Fitted kitchen',
+      'Concierge service',
+      'Rooftop lounge',
+      'Lift access',
+      'Smart home system',
+    ],
+    amenities: ['Pool', 'Gym', 'CCTV', 'Visitor parking'],
+    images: [
+      {
+        src: '/images/properties/ikoyi-apartment.webp',
+        alt: 'Contemporary three bedroom apartment living space in Ikoyi, Lagos',
+      },
+      {
+        src: '/images/properties/ikeja-residence.webp',
+        alt: 'Exterior view of the apartment building',
+      },
+    ],
+    agent: agents.adaeze,
+    isFeatured: true,
+    yearBuilt: 2023,
+    titleReference: null,
+    listedAt: '2026-03-02',
+  },
+  {
+    id: 'prop-003',
+    slug: 'premium-residential-land-ajah',
+    reference: 'NE-AJ-1305',
+    title: 'Premium Residential Land',
+    summary:
+      '600 sqm of fully documented, dry and immediately buildable residential land in a gated estate.',
+    description:
+      'This 600 sqm plot sits inside a developing gated estate in Ajah with graded roads, drainage in place and boundary pillars already fixed. The land is covered by a registered survey and a deed of assignment, making it suitable for immediate construction or resale.',
+    price: 18_000_000,
+    purpose: 'buy',
+    status: 'for-sale',
+    propertyType: 'land',
+    location: locations.ajah,
+    bedrooms: null,
+    bathrooms: null,
+    parkingSpaces: null,
+    area: 600,
+    features: [
+      'Registered survey',
+      'Deed of assignment',
+      'Gated estate',
+      'Graded roads',
+      'Immediate possession',
+    ],
+    amenities: ['Perimeter wall', 'Street lighting', 'Water'],
+    images: [
+      {
+        src: '/images/properties/ajah-land.webp',
+        alt: 'Open serviced residential land plots in Ajah, Lagos',
+      },
+    ],
+    agent: agents.tunde,
+    isFeatured: true,
+    yearBuilt: null,
+    titleReference: 'LA/AJ/9920/21',
+    listedAt: '2026-01-28',
+  },
+  {
+    id: 'prop-004',
+    slug: 'modern-family-residence-ikeja',
+    reference: 'NE-IK-1076',
+    title: 'Modern Family Residence',
+    summary:
+      'A well-finished five-bedroom home in a close, minutes from Ikeja mall and the airport road.',
+    description:
+      'Built in 2020 and recently renovated, this modern family residence offers five bedrooms, a separate family lounge, a covered parking for two cars and a paved compound. It is walking distance to schools and major shopping in Ikeja.',
+    price: 185_000_000,
+    purpose: 'buy',
+    status: 'for-sale',
+    propertyType: 'house',
+    location: locations.ikeja,
+    bedrooms: 5,
+    bathrooms: 4,
+    parkingSpaces: 2,
+    area: 340,
+    features: [
+      'Renovated 2024',
+      'Family lounge',
+      'Covered parking',
+      'Borehole',
+      'Security house',
+    ],
+    amenities: ['Garden', 'Laundry', 'Store', 'Fence'],
+    images: [
+      {
+        src: '/images/properties/ikeja-residence.webp',
+        alt: 'Modern five bedroom family residence in Ikeja, Lagos',
+      },
+    ],
+    agent: agents.adaeze,
+    isFeatured: true,
+    yearBuilt: 2020,
+    titleReference: 'M/pandas/LA/5520',
+    listedAt: '2026-02-24',
+  },
+  {
+    id: 'prop-005',
+    slug: 'smart-5-bedroom-home-banana-island',
+    reference: 'NE-BI-1420',
+    title: 'Smart 5 Bedroom Home',
+    summary:
+      'A waterfront residence with private dock access, home automation and full estate security.',
+    description:
+      'Positioned on the waterfront in Banana Island, this five-bedroom home includes an integrated home automation system, private jetty access, a temperature-controlled pantry and four en-suite bedrooms. Service charge is paid annually through the estate management.',
+    price: 1_200_000_000,
+    purpose: 'buy',
+    status: 'for-sale',
+    propertyType: 'luxury',
+    location: locations.bananaIsland,
+    bedrooms: 5,
+    bathrooms: 6,
+    parkingSpaces: 4,
+    area: 610,
+    features: [
+      'Private jetty',
+      'Home automation',
+      'Waterfront',
+      'Full estate security',
+      'Service quarters',
+    ],
+    amenities: ['Pool', 'Gym', 'Spa', 'Cinema', 'Lift'],
+    images: [
+      {
+        src: '/images/properties/banana-island-home.webp',
+        alt: 'Luxury five bedroom waterfront home in Banana Island, Lagos',
+      },
+    ],
+    agent: agents.adaeze,
+    isFeatured: true,
+    yearBuilt: 2022,
+    titleReference: null,
+    listedAt: '2026-03-09',
+  },
+  {
+    id: 'prop-006',
+    slug: 'semi-detached-4-bedroom-duplex-gupe',
+    reference: 'NE-GP-1233',
+    title: 'Semi-Detached 4 Bedroom Duplex',
+    summary:
+      'A well-maintained four-bedroom semi-detached duplex in a quiet estate close to the Lekki–Epe expressway.',
+    description:
+      'This semi-detached duplex sits in a small, quiet estate in Gupe with a shared recreation area. All four bedrooms are en-suite, the ground floor opens to a paved compound, and the estate is minutes from the Lekki–Epe expressway for easy commuting.',
+    price: 165_000_000,
+    purpose: 'buy',
+    status: 'for-sale',
+    propertyType: 'house',
+    location: locations.gupe,
+    bedrooms: 4,
+    bathrooms: 4,
+    parkingSpaces: 2,
+    area: 300,
+    features: [
+      'All en-suite rooms',
+      'Quiet estate',
+      'Paved compound',
+      '24-hour power',
+      'Recreation area',
+    ],
+    amenities: ['Fence', 'Borehole', 'Car park', 'Gate house'],
+    images: [
+      {
+        src: '/images/properties/gupe-duplex.webp',
+        alt: 'Semi-detached four bedroom duplex exterior in Gupe, Lekki, Lagos',
+      },
+    ],
+    agent: agents.tunde,
+    isFeatured: true,
+    yearBuilt: 2019,
+    titleReference: 'M/pandas/LA/6318',
+    listedAt: '2026-01-19',
+  },
+  {
+    id: 'prop-007',
+    slug: 'serviced-2-bedroom-apartment-victoria-island',
+    reference: 'NE-VI-1102',
+    title: 'Serviced 2 Bedroom Apartment',
+    summary:
+      'A fully serviced and furnished two-bedroom apartment with hotel-style facilities in Victoria Island.',
+    description:
+      'This serviced two-bedroom apartment on Victoria Island comes fully furnished with air conditioning, fitted kitchen and weekly housekeeping. Building facilities include a gym, backup power, 24-hour security and covered parking.',
+    price: 4_500_000,
+    pricePeriod: 'year',
+    purpose: 'rent',
+    status: 'for-rent',
+    propertyType: 'apartment',
+    location: locations.victoriaIsland,
+    bedrooms: 2,
+    bathrooms: 2,
+    parkingSpaces: 1,
+    area: 120,
+    features: [
+      'Fully furnished',
+      'Weekly housekeeping',
+      'Backup power',
+      '24-hour security',
+      'Covered parking',
+    ],
+    amenities: ['Gym', 'Lift', 'CCTV', 'Reception'],
+    images: [
+      {
+        src: '/images/properties/victoria-apartment.webp',
+        alt: 'Serviced two bedroom apartment interior in Victoria Island, Lagos',
+      },
+    ],
+    agent: agents.chiamaka,
+    isFeatured: false,
+    yearBuilt: 2023,
+    titleReference: null,
+    listedAt: '2026-03-14',
+  },
+  {
+    id: 'prop-008',
+    slug: 'grade-a-office-space-yaba',
+    reference: 'NE-YB-1311',
+    title: 'Grade A Office Space',
+    summary:
+      'A fitted open-plan office floor of approximately 320 sqm with parking and a dedicated server room.',
+    description:
+      'Located on a quiet road in Yaba, this Grade A office space covers roughly 320 sqm of open-plan area across one floor. It is delivered with raised flooring, a dedicated server room, fitted boardroom, two lifts and reserved basement parking.',
+    price: 28_000_000,
+    pricePeriod: 'year',
+    purpose: 'rent',
+    status: 'for-rent',
+    propertyType: 'commercial',
+    location: locations.yaba,
+    bedrooms: null,
+    bathrooms: 4,
+    parkingSpaces: 12,
+    area: 320,
+    features: [
+      'Raised flooring',
+      'Fitted boardroom',
+      'Server room',
+      'Two lifts',
+      'Reserved parking',
+    ],
+    amenities: ['Generator', 'CCTV', 'Reception', 'Pantry'],
+    images: [
+      {
+        src: '/images/properties/yaba-office.webp',
+        alt: 'Grade A open-plan office space in Yaba, Lagos',
+      },
+    ],
+    agent: agents.chiamaka,
+    isFeatured: false,
+    yearBuilt: 2022,
+    titleReference: null,
+    listedAt: '2026-02-06',
+  },
+]
+
+export const propertyLimit = 6
