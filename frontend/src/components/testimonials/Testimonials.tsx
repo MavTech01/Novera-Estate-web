@@ -2,7 +2,6 @@ import { getTestimonials } from '../../data'
 import { cn } from '../../lib/cn'
 import type { Testimonial } from '../../types'
 import { Container } from '../ui/Container'
-import { Icon } from '../ui/Icon'
 import { Rating } from '../ui/Rating'
 import { Reveal } from '../ui/Reveal'
 import { Section } from '../ui/Section'
@@ -30,12 +29,9 @@ function Author({ testimonial, className }: { testimonial: Testimonial; classNam
   )
 }
 
-/** "What Our Clients Say" — one featured quote with supporting testimonials. */
+/** "What Our Clients Say" — equal testimonial cards in the standard section grid. */
 export function Testimonials() {
   const testimonials = getTestimonials()
-  const [featured, ...supporting] = testimonials
-
-  if (!featured) return null
 
   return (
     <Section id="testimonials" tone="warm">
@@ -47,52 +43,27 @@ export function Testimonials() {
           align="center"
         />
 
-        <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-7">
-          {/* Featured quote */}
-          <Reveal className="lg:col-span-7">
-            <figure className="flex h-full flex-col justify-between gap-8 rounded-2xl bg-ink-700 p-8 text-white sm:p-10">
-              <div>
-                <Icon name="quote" className="size-10 text-accent-500" strokeWidth={1.5} />
-                <blockquote className="mt-6">
-                  <p className="font-display text-xl leading-relaxed tracking-[-0.01em] sm:text-2xl">
-                    “{featured.quote}”
-                  </p>
-                </blockquote>
-              </div>
+        <ul className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+          {testimonials.map((testimonial, index) => (
+            <Reveal as="li" key={testimonial.id} delay={index * 110} className="flex">
+              <figure className="flex h-full w-full flex-col justify-between gap-5 rounded-xl border border-sand-200 bg-white p-6 shadow-sm transition-all duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-1 hover:border-accent-200 hover:shadow-md sm:p-7">
+                <div>
+                  <Rating
+                    value={testimonial.rating}
+                    label={`${testimonial.rating} out of 5 from ${testimonial.name}`}
+                  />
+                  <blockquote className="mt-4">
+                    <p className="text-[0.9375rem] leading-relaxed text-ink-600">{testimonial.quote}</p>
+                  </blockquote>
+                </div>
 
-              <figcaption className="flex flex-col gap-5 border-t border-white/15 pt-6 sm:flex-row sm:items-center sm:justify-between">
-                <Author testimonial={featured} />
-                <Rating
-                  value={featured.rating}
-                  label={`${featured.rating} out of 5 from ${featured.name}`}
-                />
-              </figcaption>
-            </figure>
-          </Reveal>
-
-          {/* Supporting quotes */}
-          <div className="flex flex-col gap-6 lg:col-span-5">
-            {supporting.map((testimonial, index) => (
-              <Reveal key={testimonial.id} delay={index * 110} className="flex-1">
-                <figure className="flex h-full flex-col justify-between gap-5 rounded-xl border border-sand-200 bg-white p-6 transition-all duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-1 hover:border-accent-200 hover:shadow-md sm:p-7">
-                  <div>
-                    <Rating
-                      value={testimonial.rating}
-                      label={`${testimonial.rating} out of 5 from ${testimonial.name}`}
-                    />
-                    <blockquote className="mt-4">
-                      <p className="text-[0.9375rem] leading-relaxed text-ink-600">{testimonial.quote}</p>
-                    </blockquote>
-                  </div>
-
-                  <figcaption className="border-t border-sand-200 pt-5">
-                    <Author testimonial={testimonial} />
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
-        </div>
+                <figcaption className="border-t border-sand-200 pt-5">
+                  <Author testimonial={testimonial} />
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </ul>
       </Container>
     </Section>
   )
