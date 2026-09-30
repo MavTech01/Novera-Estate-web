@@ -31,6 +31,8 @@ export const primaryNavigation: NavigationLink[] = [
   { label: 'Properties', href: '/properties' },
   { label: 'Buy', href: '/properties?purpose=buy' },
   { label: 'Rent', href: '/properties?purpose=rent' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Locations', href: '/#locations' },
   { label: 'About Us', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
 ]

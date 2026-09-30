@@ -5,7 +5,6 @@ import { FeaturedDevelopment } from '../components/development/FeaturedDevelopme
 import { HeroSearchOverlay } from '../components/hero/HeroSearchOverlay'
 import { HeroSection } from '../components/hero/HeroSection'
 import { LocationsSection } from '../components/locations/LocationsSection'
-import { Navbar } from '../components/navigation/Navbar'
 import { HowItWorks } from '../components/process/HowItWorks'
 import { FeaturedProperties } from '../components/properties/FeaturedProperties'
 import { PropertyTypes } from '../components/property-types/PropertyTypes'
@@ -15,7 +14,10 @@ import { WhyChooseUs } from '../components/trust/WhyChooseUs'
 import { getFeaturedProperties } from '../data'
 import { usePropertySearch } from '../hooks/usePropertySearch'
 
-/** Landing page — composes every homepage section in order. */
+/**
+ * Landing page — composes every homepage section in order.
+ * The navigation bar is rendered once by `App`, outside the route outlet.
+ */
 export function HomePage() {
   const { criteria, updateCriteria, submit, reset, results, isSearching } = usePropertySearch()
 
@@ -29,40 +31,36 @@ export function HomePage() {
   }
 
   return (
-    <>
-      <Navbar />
+    <main id="main-content">
+      <HeroSection />
 
-      <main id="main-content">
-        <HeroSection />
+      <HeroSearchOverlay criteria={criteria} onChange={updateCriteria} onSubmit={handleSearch} />
 
-        <HeroSearchOverlay criteria={criteria} onChange={updateCriteria} onSubmit={handleSearch} />
+      <FeaturedProperties
+        properties={visibleProperties}
+        isSearchResult={isSearching}
+        onClearSearch={reset}
+      />
 
-        <FeaturedProperties
-          properties={visibleProperties}
-          isSearchResult={isSearching}
-          onClearSearch={reset}
-        />
+      <AboutSection />
 
-        <AboutSection />
+      <ServicesCarousel />
 
-        <ServicesCarousel />
+      <WhyChooseUs />
 
-        <WhyChooseUs />
+      <PropertyTypes />
 
-        <PropertyTypes />
+      <FeaturedDevelopment />
 
-        <FeaturedDevelopment />
+      <HowItWorks />
 
-        <HowItWorks />
+      <LocationsSection />
 
-        <LocationsSection />
+      <Testimonials />
 
-        <Testimonials />
+      <BlogPreview />
 
-        <BlogPreview />
-
-        <CTASection />
-      </main>
-    </>
+      <CTASection />
+    </main>
   )
 }

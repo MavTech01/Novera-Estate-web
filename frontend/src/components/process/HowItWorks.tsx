@@ -9,7 +9,7 @@ export function HowItWorks() {
   const steps = getProcessSteps()
 
   return (
-    <Section id="how-it-works" tone="warm" className="scroll-mt-24">
+    <Section id="how-it-works" tone="tint" className="scroll-mt-24">
       <Container>
         <SectionHeading
           eyebrow="How it works"

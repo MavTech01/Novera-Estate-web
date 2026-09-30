@@ -1,5 +1,6 @@
 import { cn } from '../../lib/cn'
 import { Icon } from './Icon'
+import { Link } from './Link'
 
 interface ButtonLinkProps {
   href: string
@@ -22,7 +23,7 @@ export function ArrowLink({
   ariaLabel,
 }: ButtonLinkProps) {
   return (
-    <a
+    <Link
       href={href}
       aria-label={ariaLabel}
       className={cn(
@@ -37,6 +38,6 @@ export function ArrowLink({
     >
       <span>{children}</span>
       {withArrow && <Icon name="arrow-right" className="arrow-nudge size-4 shrink-0" strokeWidth={2.2} />}
-    </a>
+    </Link>
   )
 }

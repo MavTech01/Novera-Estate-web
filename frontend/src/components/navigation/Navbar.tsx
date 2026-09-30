@@ -2,11 +2,13 @@ import { useState } from 'react'
 
 import { company, navigationCta, primaryNavigation } from '../../data'
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll'
+import { useRouter } from '../../hooks/useRouter'
 import { useScrolled } from '../../hooks/useScrolled'
 import { cn } from '../../lib/cn'
 import { ButtonLink } from '../ui/Button'
 import { Container } from '../ui/Container'
 import { Icon } from '../ui/Icon'
+import { Link } from '../ui/Link'
 import { Logo } from './Logo'
 import { MobileMenu } from './MobileMenu'
 import { NavLinks } from './NavLinks'
@@ -18,6 +20,7 @@ import { NavLinks } from './NavLinks'
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const isScrolled = useScrolled(16)
+  const { path, query } = useRouter()
 
   useLockBodyScroll(isMenuOpen)
 
@@ -30,12 +33,21 @@ export function Navbar() {
     >
       <Container>
         <div className="flex h-20 items-center justify-between gap-6 lg:h-[4.75rem]">
-          <a href="/" className="rounded-md transition-opacity duration-200 hover:opacity-80" aria-label={`${company.name} — home`}>
+          <Link
+            href="/"
+            className="rounded-md transition-opacity duration-200 hover:opacity-80"
+            aria-label={`${company.name} — home`}
+          >
             <Logo />
-          </a>
+          </Link>
 
           <nav className="hidden lg:block" aria-label="Primary">
-            <NavLinks links={primaryNavigation} className="flex-row items-center gap-8" />
+            <NavLinks
+              links={primaryNavigation}
+              currentPath={path}
+              currentQuery={query}
+              className="flex-row items-center gap-8"
+            />
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
@@ -71,6 +83,8 @@ export function Navbar() {
         cta={navigationCta}
         phone={company.phone}
         phoneHref={company.phoneHref}
+        currentPath={path}
+        currentQuery={query}
         onClose={() => setIsMenuOpen(false)}
       />
     </header>

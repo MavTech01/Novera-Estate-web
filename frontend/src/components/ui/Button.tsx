@@ -1,5 +1,6 @@
 import { cn } from '../../lib/cn'
 import { Icon } from './Icon'
+import { Link } from './Link'
 
 type ButtonVariant = 'primary' | 'accent' | 'outline' | 'soft' | 'ghost' | 'onBrown' | 'white'
 type ButtonSize = 'sm' | 'md' | 'lg'
@@ -57,7 +58,7 @@ interface ButtonLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> 
   withArrow?: boolean
 }
 
-/** Anchor styled as a button — used until routing is introduced. */
+/** Anchor styled as a button. Internal hrefs navigate without a page reload. */
 export function ButtonLink({
   href,
   variant = 'primary',
@@ -68,9 +69,9 @@ export function ButtonLink({
   ...rest
 }: ButtonLinkProps) {
   return (
-    <a href={href} className={buttonStyles(variant, size, className)} {...rest}>
+    <Link href={href} className={buttonStyles(variant, size, className)} {...rest}>
       {children}
       {withArrow && <Icon name="arrow-right" className="size-4" strokeWidth={2.2} />}
-    </a>
+    </Link>
   )
 }

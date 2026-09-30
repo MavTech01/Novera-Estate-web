@@ -81,8 +81,9 @@ export function Stepper({ steps, ariaLabel = 'Process', className }: StepperProp
                 aria-hidden
                 className={cn(
                   'absolute left-5 top-5 w-0.5 -translate-x-1/2 rounded-pill bg-sand-200',
-                  // Mobile: run down to the next node (gap 2rem − 20px node offset).
-                  'bottom-[-0.75rem]',
+                  // Mobile: run from this node's centre down to the next node's
+                  // centre — the 2rem row gap plus the 20px node offset.
+                  'bottom-[-3.25rem]',
                   // Desktop: bridge from this node centre to the next one (gap 1.75rem at md, 2rem at lg).
                   'md:bottom-auto md:left-1/2 md:right-[calc(-50%-1.75rem)] md:h-0.5 md:w-auto md:translate-x-0 md:-translate-y-1/2',
                   'lg:right-[calc(-50%-2rem)]',

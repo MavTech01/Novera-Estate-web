@@ -1,10 +1,13 @@
 import { cn } from '../../lib/cn'
+import { isHrefActive, normalisePath, splitHref } from '../../lib/router'
 import type { NavigationLink } from '../../types'
+import { Link } from '../ui/Link'
 
 interface NavLinksProps {
   links: NavigationLink[]
-  /** Current path, used to mark the active item. */
-  activePath?: string
+  /** Current location, used to mark the active item. */
+  currentPath?: string
+  currentQuery?: URLSearchParams
   onNavigate?: () => void
   className?: string
   itemClassName?: string
@@ -18,7 +21,8 @@ interface NavLinksProps {
 /** Shared link list used by both the desktop bar and the mobile drawer. */
 export function NavLinks({
   links,
-  activePath = '/',
+  currentPath = '/',
+  currentQuery,
   onNavigate,
   className,
   itemClassName,
@@ -26,14 +30,32 @@ export function NavLinks({
   animated = false,
   firstItemRef,
 }: NavLinksProps) {
+  const query = currentQuery ?? new URLSearchParams()
+
+  // "Buy" and "Rent" refine "/properties", so the plain entry only wins when no
+  // refined sibling matches — otherwise three items would light up at once.
+  const isRefinedLinkActive = (href: string) => {
+    if (!isHrefActive(href, currentPath, query)) return false
+
+    const linkPath = normalisePath(splitHref(href).path)
+    const isRefined = splitHref(href).search !== ''
+    if (isRefined) return true
+
+    return !links.some(
+      (sibling) =>
+        normalisePath(splitHref(sibling.href).path) === linkPath &&
+        isHrefActive(sibling.href, currentPath, query),
+    )
+  }
+
   return (
     <ul className={cn('flex flex-col', className)}>
       {links.map((link, index) => {
-        const isActive = link.href === activePath
+        const isActive = isRefinedLinkActive(link.href)
 
         return (
           <li key={link.href} className={cn('relative', animated && 'mobile-nav-item')}>
-            <a
+            <Link
               ref={index === 0 ? firstItemRef : undefined}
               href={link.href}
               onClick={onNavigate}
@@ -60,7 +82,7 @@ export function NavLinks({
                   aria-hidden
                 />
               )}
-            </a>
+            </Link>
           </li>
         )
       })}

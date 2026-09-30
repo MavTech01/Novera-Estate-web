@@ -13,18 +13,21 @@ import { company, footerNavigation, footerServices, legalLinks, navigationCta, p
 import { featuredDevelopment } from './development'
 import { featuredLocations, locations } from './locations'
 import { processSteps } from './processSteps'
+import { buildPropertyDetail } from './propertyDetails'
 import { properties } from './properties'
 import { propertyCategories } from './propertyCategories'
 import { serviceHighlights } from './serviceHighlights'
 import { services } from './services'
 import { companyStats } from './stats'
 import { testimonials } from './testimonials'
+import { findSimilarProperties } from '../lib/propertyDetails'
 import type {
   Article,
   Development,
   GeoLocation,
   Property,
   PropertyCategory,
+  PropertyDetail,
   PropertyPurpose,
   PropertyType,
   Service,
@@ -64,6 +67,20 @@ export function getFeaturedProperties(limit?: number): Property[] {
 
 export function getPropertyBySlug(slug: string): Property | undefined {
   return properties.find((property) => property.slug === slug)
+}
+
+/**
+ * Detail-page variant of `getPropertyBySlug`, returning the merged
+ * `PropertyDetail` record used by `/properties/:slug`.
+ */
+export function getPropertyDetailBySlug(slug: string): PropertyDetail | null {
+  const property = getPropertyBySlug(slug)
+  return property ? buildPropertyDetail(property) : null
+}
+
+/** Listings closest to the one being viewed, for the recommendation row. */
+export function getSimilarProperties(property: Property, limit = 3): Property[] {
+  return findSimilarProperties(property, properties, limit)
 }
 
 export function getPropertiesByPurpose(purpose: PropertyPurpose): Property[] {

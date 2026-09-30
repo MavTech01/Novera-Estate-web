@@ -13,10 +13,21 @@ interface MobileMenuProps {
   onClose: () => void
   phone: string
   phoneHref: string
+  currentPath?: string
+  currentQuery?: URLSearchParams
 }
 
 /** Slide-in navigation drawer for tablet and mobile. */
-export function MobileMenu({ isOpen, links, cta, onClose, phone, phoneHref }: MobileMenuProps) {
+export function MobileMenu({
+  isOpen,
+  links,
+  cta,
+  onClose,
+  phone,
+  phoneHref,
+  currentPath = '/',
+  currentQuery,
+}: MobileMenuProps) {
   const firstLinkRef = useRef<HTMLAnchorElement>(null)
   const previouslyFocused = useRef<HTMLElement | null>(null)
 
@@ -79,6 +90,8 @@ export function MobileMenu({ isOpen, links, cta, onClose, phone, phoneHref }: Mo
         <nav className="flex-1 overflow-y-auto overscroll-contain px-5 py-6 sm:px-6" aria-label="Mobile">
           <NavLinks
             links={links}
+            currentPath={currentPath}
+            currentQuery={currentQuery}
             onNavigate={onClose}
             animated
             firstItemRef={firstLinkRef}

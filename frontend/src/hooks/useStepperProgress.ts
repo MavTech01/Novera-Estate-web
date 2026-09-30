@@ -22,6 +22,7 @@ export interface StepperProgress {
 }
 
 const observerSupported = typeof IntersectionObserver !== 'undefined'
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value))
 
 /**
  * Drives the stepper's scroll behaviour:
@@ -34,7 +35,8 @@ const observerSupported = typeof IntersectionObserver !== 'undefined'
  *      - *Stacked* (below `md`): the step whose centre is nearest the vertical
  *        centre of the viewport.
  *      - *Row* (`md` up): the steps share a single height, so proximity is a
- *        tie. Progress instead follows the row's travel through the viewport.
+ *        permanent tie. Progress instead follows the row's own travel, measured
+ *        across the stretch where the row is fully on screen.
  *
  *    Either way it is measured every animation frame rather than watched through
  *    an observer: an observer only reports band *transitions*, so a quick flick
@@ -47,7 +49,10 @@ const observerSupported = typeof IntersectionObserver !== 'undefined'
  */
 export function useStepperProgress(
   count: number,
-  { revealThreshold = 0.2, revealMargin = '0px 0px -20% 0px' }: UseStepperProgressOptions = {},
+  {
+    revealThreshold = 0.2,
+    revealMargin = '0px 0px -20% 0px',
+  }: UseStepperProgressOptions = {},
 ): StepperProgress {
   const items = useRef<(HTMLElement | null)[]>([])
   const markers = useRef<(HTMLElement | null)[]>([])
@@ -111,23 +116,28 @@ export function useStepperProgress(
         return Math.abs(marker.getBoundingClientRect().top - firstTop) < 2
       })
 
-      if (isRow) {
-        // Row layout: progress follows the row's own journey through the
-        // viewport — 0 as it enters at the bottom, 1 as it leaves at the top,
-        // so the hand-off to step 2 lands as the row reaches the middle and step
-        // 3 as it carries on up. A pure function of position, so scrolling back
-        // down unwinds it exactly.
-        const row = items.current.find(Boolean)
-        if (row) {
-          const rect = row.getBoundingClientRect()
-          const travelled = viewport - rect.top
-          const total = viewport + rect.height
-          const progress = Math.min(1, Math.max(0, travelled / total))
-          nextIndex = Math.min(count - 1, Math.floor(progress * count))
-        }
+      // How much of the viewport the row leaves free while it is fully visible.
+      const rowRect = isRow ? items.current.find(Boolean)?.getBoundingClientRect() : undefined
+      const readable = rowRect ? viewport - rowRect.height : 0
+
+      if (rowRect && readable > 1) {
+        // Row layout: progress follows the row's travel across the stretch where
+        // it is fully on screen, starting as soon as it first is.
+        //
+        // Normalising over the row's whole enter-to-exit journey instead — which
+        // is `viewport + rowHeight` — makes the hand-off fire proportionally
+        // earlier the shorter the viewport, because the row occupies more of the
+        // screen. On a landscape tablet that put the last step's activation right
+        // as the row was leaving. Anchoring to the readable window keeps every
+        // hand-off on screen at any size, and reverses exactly on the way back.
+        const travelled = viewport - rowRect.top
+        const progress = clamp((travelled - rowRect.height) / readable, 0, 1)
+        nextIndex = Math.min(count - 1, Math.floor(progress * count))
       } else {
-        // Stacked layout: the step whose centre is nearest the middle of the
-        // viewport is the one being looked at.
+        // Stacked layout — or a row taller than the viewport, which is never
+        // fully visible and so has no readable window to measure. Either way the
+        // step whose centre is nearest the middle of the viewport is the one being
+        // looked at.
         const focusLine = viewport / 2
         let closestDistance = Number.POSITIVE_INFINITY
 
