@@ -144,13 +144,13 @@ export function ServicesCarousel() {
         <Reveal className="mt-10 lg:mt-12">
           <ul
             ref={railRef}
-            className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 pb-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
+            className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 py-2 scroll-px-5 sm:-mx-6 sm:px-6 sm:scroll-px-6 lg:-mx-8 lg:px-8 lg:scroll-px-8"
             aria-label="Services"
           >
             {services.map((service) => (
               <li
                 key={service.id}
-                className="w-[82%] shrink-0 snap-start sm:w-[46%] lg:w-[calc((100%-4.5rem)/3)]"
+                className="w-[82%] shrink-0 snap-start last:snap-end sm:w-[46%] lg:w-[calc((100%-4.5rem)/3)]"
               >
                 <ServiceCard service={service} />
               </li>
