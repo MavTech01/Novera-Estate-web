@@ -1,4 +1,5 @@
 import { cn } from '@/shared/lib/cn'
+import { usePrefersReducedMotion } from '@/shared/hooks/usePrefersReducedMotion'
 
 type WaveColor = 'white' | 'cream'
 
@@ -17,16 +18,57 @@ const frontFills: Record<WaveColor, string> = {
   cream: '#fff4e8',
 }
 
+/*
+ * The back wave is one path that ripples by morphing its own shape — a single
+ * translucent layer, no stacked copies. `backWavePath` samples a sine into a
+ * run of cubic segments with horizontal tangents, so every frame shares an
+ * identical command structure; SMIL can then interpolate between them and the
+ * shape rolls like water. The path is drawn wider than the viewBox so its ends
+ * are always clipped, and the last frame equals the first for a seamless loop.
+ */
+const BACK_X0 = -120
+const BACK_STEP = 280
+const BACK_POINTS = 7
+
+function backWavePath(phase: number): string {
+  const ys = Array.from({ length: BACK_POINTS }, (_, index) => {
+    const t = index / (BACK_POINTS - 1)
+    const amplitude = 0.55 + 0.45 * Math.sin(t * Math.PI)
+    return 74 - 24 * Math.sin(t * Math.PI * 2 + phase) * amplitude
+  })
+
+  let d = `M${BACK_X0},${ys[0].toFixed(1)}`
+  for (let index = 0; index < BACK_POINTS - 1; index += 1) {
+    const x1 = BACK_X0 + index * BACK_STEP
+    const x2 = x1 + BACK_STEP
+    const c1x = x1 + BACK_STEP / 3
+    const c2x = x2 - BACK_STEP / 3
+    d += ` C${c1x.toFixed(1)},${ys[index].toFixed(1)} ${c2x.toFixed(1)},${ys[index + 1].toFixed(1)} ${x2.toFixed(1)},${ys[index + 1].toFixed(1)}`
+  }
+  d += ` L${BACK_X0 + (BACK_POINTS - 1) * BACK_STEP},120 L${BACK_X0},120 Z`
+  return d
+}
+
+const WAVE_MORPH = [0, Math.PI / 2, Math.PI, (3 * Math.PI) / 2, Math.PI * 2]
+  .map(backWavePath)
+  .join(';')
+
+const frontWavePath =
+  'M0,78 C200,44 360,92 560,72 C760,52 940,96 1140,74 C1290,58 1380,66 1440,58 L1440,120 L0,120 Z'
+
 /**
  * The shared banner-to-section wave.
  *
- * Two stacked waves: a soft orange back wave that drifts slowly, and a solid
- * front wave filled with the next section's colour. The SVG stretches edge to
- * edge (`preserveAspectRatio="none"`) at a fixed height, and a one-pixel
- * negative bottom margin kills the hairline browsers otherwise leave where the
- * wave meets the section below.
+ * A single translucent orange wave ripples at the base of the banner, and a
+ * solid front wave — filled with the next section's colour — sits over it and
+ * stays still, so the seam meets the following section exactly. The SVG
+ * stretches edge to edge (`preserveAspectRatio="none"`) at a fixed height, and
+ * a one-pixel negative bottom margin kills the hairline browsers otherwise
+ * leave. The ripple is skipped for visitors who reduce motion.
  */
 export function WaveDivider({ color = 'white', className }: WaveDividerProps) {
+  const reduceMotion = usePrefersReducedMotion()
+
   return (
     <div aria-hidden className={cn('pointer-events-none -mb-px w-full', className)}>
       <svg
@@ -35,17 +77,18 @@ export function WaveDivider({ color = 'white', className }: WaveDividerProps) {
         role="presentation"
         className="block h-15 w-full lg:h-28"
       >
-        <g className="wave-drift">
-          <path
-            d="M-80,56 C100,96 300,20 540,44 C740,68 900,104 1080,80 C1260,56 1400,28 1520,48 L1520,120 L-80,120 Z"
-            fill="#F97316"
-            fillOpacity="0.25"
-          />
-        </g>
-        <path
-          d="M0,78 C200,44 360,92 560,72 C760,52 940,96 1140,74 C1290,58 1380,66 1440,58 L1440,120 L0,120 Z"
-          fill={frontFills[color]}
-        />
+        <path d={backWavePath(0)} fill="#F97316" fillOpacity="0.22">
+          {!reduceMotion && (
+            <animate
+              attributeName="d"
+              dur="5s"
+              repeatCount="indefinite"
+              calcMode="linear"
+              values={WAVE_MORPH}
+            />
+          )}
+        </path>
+        <path d={frontWavePath} fill={frontFills[color]} />
       </svg>
     </div>
   )

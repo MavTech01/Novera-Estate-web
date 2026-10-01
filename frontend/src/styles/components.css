@@ -83,16 +83,47 @@
 
 /* Wave divider ----------------------------------------------------------- */
 /*
- * A very slow horizontal drift on the back wave only, so the seam between a
- * banner and the section below has a little life without drawing attention.
- * The front wave stays still and its fill matches the next section exactly.
+ * The orange wave ripples from inside the SVG itself (see `WaveDivider`), so it
+ * needs no CSS animation here.
  */
-@keyframes wave-drift {
+
+/* Page hero entrance ----------------------------------------------------- */
+/*
+ * The banner is above the fold, so its copy animates in on load rather than on
+ * scroll. Words rise and un-blur one after another, the eyebrow rule draws
+ * itself, and everything else fades up. All of it is a one-shot animation with
+ * `both` fill, so nothing is left hidden if the run is skipped.
+ */
+@keyframes hero-word-in {
   from {
-    transform: translateX(-40px);
+    opacity: 0;
+    transform: translate3d(0, 0.7em, 0);
+    filter: blur(8px);
   }
   to {
-    transform: translateX(40px);
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-line-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 
@@ -226,8 +257,58 @@
   animation: var(--animate-hero-settle);
 }
 
-.wave-drift {
-  animation: wave-drift 20s ease-in-out infinite alternate;
+/* Hero entrance classes — each reads its own --hero-delay ---------------- */
+.hero-word {
+  display: inline-block;
+  animation: hero-word-in 0.85s var(--ease-out-soft) both;
+  animation-delay: var(--hero-delay, 0ms);
+  will-change: transform, opacity, filter;
+}
+
+.hero-fade {
+  animation: hero-fade-up 0.7s var(--ease-out-soft) both;
+  animation-delay: var(--hero-delay, 0ms);
+}
+
+.hero-line {
+  transform-origin: left center;
+  animation: hero-line-draw 0.7s var(--ease-out-soft) both;
+  animation-delay: var(--hero-delay, 0ms);
+}
+
+/* Hero photograph grain — a faint film texture over the banner ------------ */
+.hero-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Sheen that sweeps across the primary hero call to action on hover ------- */
+.hero-cta {
+  overflow: hidden;
+}
+
+.hero-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgb(255 255 255 / 0.34) 50%,
+    transparent 65%
+  );
+  transform: translateX(-130%);
+  transition: transform 0.7s var(--ease-out-soft);
+  pointer-events: none;
+}
+
+.hero-cta:hover::after {
+  transform: translateX(130%);
 }
 
 /* Stepper items — fade and slide in once the observer reaches them -------- */
@@ -279,9 +360,18 @@
     transform: none;
   }
 
-  /* The back wave holds still. */
-  .wave-drift {
+  /* Banner copy is shown in place; no per-word or per-element entrance. */
+  .hero-word,
+  .hero-fade,
+  .hero-line {
     animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .hero-cta::after {
+    display: none;
   }
 
   .stepper-item,

@@ -1,5 +1,8 @@
+import type { CSSProperties } from 'react'
+
 import { cn } from '@/shared/lib/cn'
 import type { IconName, ImageAsset } from '@/types'
+import { useHeroParallax } from '@/shared/hooks/useHeroParallax'
 import { Breadcrumbs, type BreadcrumbItem } from '@/shared/components/ui/Breadcrumbs'
 import { ButtonLink } from '@/shared/components/ui/Button'
 import { Container } from '@/shared/components/ui/Container'
@@ -50,18 +53,18 @@ export interface PageHeroProps {
   className?: string
 }
 
+const delay = (ms: number) => ({ '--hero-delay': `${ms}ms` }) as CSSProperties
+
 /**
  * The banner that opens every inner page.
  *
- * One full-width photograph, a scrim that runs dark on the left to light on the
- * right, and the copy held left-aligned at a comfortable measure. Below it a
- * `WaveDivider` dissolves the banner into the next section instead of a hard
- * edge — the front wave is filled to match whatever follows.
- *
- * The photograph settles into place on load via `.hero-settle` (a single
- * transform, disabled under `prefers-reduced-motion`). Copy is not revealed on
- * scroll: the banner is above the fold on arrival, so delaying it would only
- * make the visitor wait for what they came for.
+ * One full-width photograph (drifting slowly on scroll), a scrim that runs dark
+ * on the left to light on the right, and the copy held left-aligned at a
+ * comfortable measure. It animates in on load rather than on scroll: the words
+ * of the title rise and un-blur one after another, the eyebrow rule draws
+ * itself, and the supporting copy fades up — all of it one-shot and disabled
+ * under `prefers-reduced-motion`. A `WaveDivider` then dissolves the banner
+ * into the next section.
  */
 export function PageHero({
   title,
@@ -75,6 +78,9 @@ export function PageHero({
   wave = 'white',
   className,
 }: PageHeroProps) {
+  const parallaxRef = useHeroParallax<HTMLDivElement>()
+  const titleWords = title.split(' ')
+
   return (
     <section
       aria-labelledby={headingId}
@@ -84,25 +90,32 @@ export function PageHero({
         className,
       )}
     >
-      {/* Photograph and scrim, both behind the copy. */}
-      <div className="absolute inset-0 -z-20">
-        <SkeletonImage
-          src={image.src}
-          alt={image.alt}
-          width={1920}
-          height={1080}
-          loading="eager"
-          fetchPriority="high"
-          className="size-full"
-          imgClassName="hero-settle"
-        />
+      {/* Photograph (parallax) plus a faint film grain, both behind the copy. */}
+      <div className="hero-grain absolute inset-0 -z-20 overflow-hidden">
+        <div ref={parallaxRef} className="absolute inset-x-0 -top-[14%] h-[128%] will-change-transform">
+          <SkeletonImage
+            src={image.src}
+            alt={image.alt}
+            width={1920}
+            height={1080}
+            loading="eager"
+            fetchPriority="high"
+            className="size-full"
+            imgClassName="hero-settle"
+          />
+        </div>
       </div>
+
       {/* Left-to-right scrim: darkest behind the copy, lightest at the right edge. */}
       <div
         aria-hidden
         className="absolute inset-0 -z-10 bg-gradient-to-r from-[#140e0a]/85 via-[#140e0a]/60 to-[#140e0a]/25"
       />
-      {/* Deepens the base a touch so the wave blends evenly. */}
+      {/* Soft vignette that settles the top and bottom edges. */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[radial-gradient(130%_120%_at_18%_45%,transparent_45%,rgba(20,14,10,0.5)_100%)]"
+      />
       <div
         aria-hidden
         className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-[#140e0a]/40 to-transparent"
@@ -111,12 +124,18 @@ export function PageHero({
 
       <Container className="relative z-10 flex flex-1 flex-col justify-center pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-32 lg:pb-24">
         <div className="flex w-full max-w-[45rem] flex-col gap-6">
-          {breadcrumbs && breadcrumbs.length > 0 && <Breadcrumbs items={[...breadcrumbs]} tone="onBrown" />}
+          {breadcrumbs && breadcrumbs.length > 0 && (
+            <div className="hero-fade" style={delay(0)}>
+              <Breadcrumbs items={[...breadcrumbs]} tone="onBrown" />
+            </div>
+          )}
 
           {eyebrow && (
             <p className="flex items-center gap-2 text-[length:var(--text-label)] uppercase leading-4 text-accent-400">
-              <span aria-hidden className="h-px w-6 bg-accent-400/60" />
-              {eyebrow}
+              <span aria-hidden className="hero-line h-px w-6 bg-accent-400/60" style={delay(60)} />
+              <span className="hero-fade" style={delay(140)}>
+                {eyebrow}
+              </span>
             </p>
           )}
 
@@ -124,35 +143,56 @@ export function PageHero({
             id={headingId}
             className="max-w-[45rem] text-[length:clamp(2.5rem,4.4vw,4rem)] font-bold leading-[1.1] text-white"
           >
-            {title}
+            {titleWords.map((word, index) => (
+              <span key={`${word}-${index}`}>
+                <span className="hero-word" style={delay(180 + index * 45)}>
+                  {word}
+                </span>
+                {index < titleWords.length - 1 ? ' ' : null}
+              </span>
+            ))}
           </h1>
 
           {description && (
-            <p className="max-w-[35rem] text-lg leading-relaxed text-white/85">{description}</p>
+            <p className="hero-fade max-w-[35rem] text-lg leading-relaxed text-white/85" style={delay(480)}>
+              {description}
+            </p>
           )}
 
           {actions && actions.length > 0 && (
-            <div className="mt-1 flex flex-col gap-4 sm:flex-row">
-              {actions.map((action) => (
-                <ButtonLink
-                  key={`${action.label}-${action.href}`}
-                  href={action.href}
-                  variant={action.variant ?? 'primary'}
-                  size="lg"
-                  withArrow={action.withArrow}
-                  target={action.target}
-                  rel={action.rel}
-                  className="h-12 w-full justify-center text-base sm:h-13 sm:w-auto"
-                >
-                  {action.icon && <Icon name={action.icon} className="size-4" strokeWidth={2} />}
-                  {action.label}
-                </ButtonLink>
-              ))}
+            <div className="hero-fade mt-1 flex flex-col gap-4 sm:flex-row" style={delay(580)}>
+              {actions.map((action) => {
+                const isPrimary = (action.variant ?? 'primary') === 'primary'
+
+                return (
+                  <ButtonLink
+                    key={`${action.label}-${action.href}`}
+                    href={action.href}
+                    variant={action.variant ?? 'primary'}
+                    size="lg"
+                    target={action.target}
+                    rel={action.rel}
+                    className={cn(
+                      'group relative h-12 w-full justify-center text-base transition-transform duration-300 hover:-translate-y-0.5 sm:h-13 sm:w-auto',
+                      isPrimary && 'hero-cta',
+                    )}
+                  >
+                    {action.icon && <Icon name={action.icon} className="size-4" strokeWidth={2} />}
+                    {action.label}
+                    {action.withArrow && (
+                      <Icon name="arrow-right" className="arrow-nudge size-4" strokeWidth={2.2} />
+                    )}
+                  </ButtonLink>
+                )
+              })}
             </div>
           )}
 
           {trust && trust.length > 0 && (
-            <ul className="mt-2 flex flex-col gap-3 text-sm font-medium text-white/85 sm:flex-row sm:flex-wrap sm:items-center sm:gap-0">
+            <ul
+              className="hero-fade mt-2 flex flex-col gap-3 text-sm font-medium text-white/85 sm:flex-row sm:flex-wrap sm:items-center sm:gap-0"
+              style={delay(680)}
+            >
               {trust.map((item) => (
                 <li
                   key={item.id}
