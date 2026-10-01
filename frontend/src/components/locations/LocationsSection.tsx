@@ -1,14 +1,14 @@
-import { getFeaturedLocations } from '../../data'
-import { cn } from '../../lib/cn'
-import { locationPath } from '../../lib/routes'
-import type { LocationSummary } from '../../types'
-import { ArrowLink } from '../ui/ArrowLink'
-import { Container } from '../ui/Container'
-import { Icon } from '../ui/Icon'
-import { Reveal } from '../ui/Reveal'
-import { Section } from '../ui/Section'
-import { SectionHeading } from '../ui/SectionHeading'
-import { SkeletonImage } from '../ui/SkeletonImage'
+import { getFeaturedLocations } from '@/data'
+import { cn } from '@/shared/lib/cn'
+import { locationPath, propertiesPathForLocationSlug } from '@/shared/lib/routes'
+import type { LocationSummary } from '@/types'
+import { ArrowLink } from '@/shared/components/ui/ArrowLink'
+import { Container } from '@/shared/components/ui/Container'
+import { Icon } from '@/shared/components/ui/Icon'
+import { Reveal } from '@/shared/components/ui/Reveal'
+import { Section } from '@/shared/components/ui/Section'
+import { SectionHeading } from '@/shared/components/ui/SectionHeading'
+import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
 
 function LocationCard({ location }: { location: LocationSummary }) {
   return (
@@ -46,7 +46,7 @@ function LocationCard({ location }: { location: LocationSummary }) {
         <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{location.description}</p>
 
         <div className="mt-5 border-t border-sand-200 pt-4">
-          <ArrowLink href={locationPath(location.slug)}>View Properties</ArrowLink>
+          <ArrowLink href={propertiesPathForLocationSlug(location.slug)}>View Properties</ArrowLink>
         </div>
       </div>
     </article>

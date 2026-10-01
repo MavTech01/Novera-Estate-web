@@ -1,4 +1,4 @@
-import type { Property } from '../../types'
+import type { Property } from '@/types'
 import { PropertyCard } from './PropertyCard'
 
 interface PropertyGridProps {

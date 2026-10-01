@@ -1,5 +1,5 @@
-import { cn } from '../../lib/cn'
-import { Skeleton } from '../ui/Skeleton'
+import { cn } from '@/shared/lib/cn'
+import { Skeleton } from '@/shared/components/ui/Skeleton'
 
 interface PropertyCardSkeletonProps {
   className?: string

@@ -1,4 +1,4 @@
-import type { Stat } from '../types'
+import type { Stat } from '@/types'
 
 /** Trust figures shown directly beneath the hero. */
 export const companyStats: Stat[] = [

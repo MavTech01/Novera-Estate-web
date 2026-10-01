@@ -1,4 +1,4 @@
-import type { Property } from '../types'
+import type { Property } from '@/types'
 import { agents } from './agents'
 import { locations } from './locations'
 

@@ -1,4 +1,4 @@
-import type { Agent } from '../types'
+import type { Agent } from '@/types'
 
 /** The Novera Estates advisory team. Later served from an `agents` table. */
 export const agents: Record<'adaeze' | 'tunde' | 'chiamaka', Agent> = {

@@ -1,4 +1,4 @@
-import type { PropertyPurpose, PropertyType } from '../types'
+import type { PropertyPurpose, PropertyType } from '@/types'
 
 /** Options backing the hero property-search form. */
 export interface SelectOption<T extends string = string> {

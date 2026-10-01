@@ -1,9 +1,9 @@
-import { SURROUNDINGS_DISCLAIMER } from '../../data/propertyDetails'
-import { cn } from '../../lib/cn'
-import type { PropertyDetail } from '../../types'
-import { Icon } from '../ui/Icon'
-import { Link } from '../ui/Link'
-import { Reveal } from '../ui/Reveal'
+import { SURROUNDINGS_DISCLAIMER } from '@/data/propertyDetails'
+import { cn } from '@/shared/lib/cn'
+import type { PropertyDetail } from '@/types'
+import { Icon } from '@/shared/components/ui/Icon'
+import { Link } from '@/shared/components/ui/Link'
+import { Reveal } from '@/shared/components/ui/Reveal'
 import { PropertyMapPlaceholder } from './PropertyMapPlaceholder'
 
 interface PropertyLocationProps {

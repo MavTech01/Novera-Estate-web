@@ -6,7 +6,6 @@
  * read the catalogue — they render whatever `PropertyDetail` they are given.
  */
 
-export { GalleryLightbox } from './GalleryLightbox'
 export { InspectionCTA } from './InspectionCTA'
 export { InspectionForm } from './InspectionForm'
 export { InspectionModal } from './InspectionModal'

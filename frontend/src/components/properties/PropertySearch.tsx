@@ -1,11 +1,11 @@
-import { getSearchableLocations } from '../../data'
-import { getPriceBands, propertyTypeOptions, purposeOptions } from '../../data/searchOptions'
-import type { PropertyPurpose, PropertySearchCriteria, PropertyType } from '../../types'
-import { cn } from '../../lib/cn'
-import { Icon } from '../ui/Icon'
-import { SegmentedControl } from '../ui/SegmentedControl'
-import { SelectField } from '../ui/SelectField'
-import { TextField } from '../ui/TextField'
+import { getSearchableLocations } from '@/data'
+import { getPriceBands, propertyTypeOptions, purposeOptions } from '@/data/searchOptions'
+import type { PropertyPurpose, PropertySearchCriteria, PropertyType } from '@/types'
+import { cn } from '@/shared/lib/cn'
+import { Icon } from '@/shared/components/ui/Icon'
+import { SegmentedControl } from '@/shared/components/ui/SegmentedControl'
+import { SelectField } from '@/shared/components/ui/SelectField'
+import { TextField } from '@/shared/components/ui/TextField'
 
 interface PropertySearchProps {
   criteria: PropertySearchCriteria

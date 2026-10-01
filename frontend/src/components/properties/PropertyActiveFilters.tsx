@@ -1,5 +1,5 @@
-import type { ActiveFilter } from '../../types'
-import { Icon } from '../ui/Icon'
+import type { ActiveFilter } from '@/types'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface PropertyActiveFiltersProps {
   filters: ActiveFilter[]

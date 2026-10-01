@@ -1,12 +1,12 @@
-import { getTestimonials } from '../../data'
-import { cn } from '../../lib/cn'
-import type { Testimonial } from '../../types'
-import { Container } from '../ui/Container'
-import { Rating } from '../ui/Rating'
-import { Reveal } from '../ui/Reveal'
-import { Section } from '../ui/Section'
-import { SectionHeading } from '../ui/SectionHeading'
-import { SkeletonImage } from '../ui/SkeletonImage'
+import { getTestimonials } from '@/data'
+import { cn } from '@/shared/lib/cn'
+import type { Testimonial } from '@/types'
+import { Container } from '@/shared/components/ui/Container'
+import { Rating } from '@/shared/components/ui/Rating'
+import { Reveal } from '@/shared/components/ui/Reveal'
+import { Section } from '@/shared/components/ui/Section'
+import { SectionHeading } from '@/shared/components/ui/SectionHeading'
+import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
 
 function Author({ testimonial, className }: { testimonial: Testimonial; className?: string }) {
   return (

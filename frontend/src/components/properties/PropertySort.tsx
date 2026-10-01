@@ -1,6 +1,6 @@
-import { propertySortOptions } from '../../data/propertyFilters'
-import type { PropertySort } from '../../types'
-import { SelectField } from '../ui/SelectField'
+import { propertySortOptions } from '@/data/propertyFilters'
+import type { PropertySort } from '@/types'
+import { SelectField } from '@/shared/components/ui/SelectField'
 
 interface PropertySortProps {
   value: PropertySort

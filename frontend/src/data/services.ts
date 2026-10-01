@@ -1,4 +1,4 @@
-import type { Service } from '../types'
+import type { Service } from '@/types'
 
 /** Services shown in the swipeable "Our Services" carousel. */
 export const services: Service[] = [

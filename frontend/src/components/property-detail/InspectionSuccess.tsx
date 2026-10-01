@@ -1,8 +1,8 @@
-import { formatDate } from '../../lib/format'
-import { inspectionTimeOptions } from '../../lib/inspectionForm'
-import type { InspectionReceipt } from '../../data/inspectionRepository'
-import { Button } from '../ui/Button'
-import { Icon } from '../ui/Icon'
+import { formatDate } from '@/shared/lib/format'
+import { inspectionTimeOptions } from '@/shared/lib/inspectionForm'
+import type { InspectionReceipt } from '@/data/inspectionRepository'
+import { Button } from '@/shared/components/ui/Button'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface InspectionSuccessProps {
   receipt: InspectionReceipt

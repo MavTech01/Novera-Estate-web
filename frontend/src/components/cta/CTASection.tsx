@@ -1,9 +1,9 @@
-import { company } from '../../data'
-import { ButtonLink } from '../ui/Button'
-import { Container } from '../ui/Container'
-import { Icon } from '../ui/Icon'
-import { Reveal } from '../ui/Reveal'
-import { SkeletonImage } from '../ui/SkeletonImage'
+import { company } from '@/data'
+import { ButtonLink } from '@/shared/components/ui/Button'
+import { Container } from '@/shared/components/ui/Container'
+import { Icon } from '@/shared/components/ui/Icon'
+import { Reveal } from '@/shared/components/ui/Reveal'
+import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
 
 /** Split closing banner: message on the left, property photograph on the right. */
 export function CTASection() {

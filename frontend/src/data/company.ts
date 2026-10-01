@@ -1,4 +1,4 @@
-import type { CompanyProfile, NavigationGroup, NavigationLink } from '../types'
+import type { CompanyProfile, NavigationGroup, NavigationLink } from '@/types'
 
 /** Single source of truth for brand, contact details and site navigation. */
 export const company: CompanyProfile = {
@@ -31,9 +31,9 @@ export const primaryNavigation: NavigationLink[] = [
   { label: 'Properties', href: '/properties' },
   { label: 'Buy', href: '/properties?purpose=buy' },
   { label: 'Rent', href: '/properties?purpose=rent' },
-  { label: 'Projects', href: '/#projects' },
-  { label: 'Locations', href: '/#locations' },
-  { label: 'About Us', href: '/#about' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Locations', href: '/locations' },
+  { label: 'About Us', href: '/about' },
   { label: 'Contact', href: '/#contact' },
 ]
 
@@ -54,14 +54,14 @@ export const footerNavigation: NavigationGroup[] = [
       { label: 'Buy', href: '/properties?purpose=buy' },
       { label: 'Rent', href: '/properties?purpose=rent' },
       { label: 'Projects', href: '/projects' },
-      { label: 'Locations', href: '/#locations' },
+      { label: 'Locations', href: '/locations' },
     ],
   },
   {
     id: 'footer-company',
     title: 'Company',
     links: [
-      { label: 'About Us', href: '/#about' },
+      { label: 'About Us', href: '/about' },
       { label: 'Contact', href: '/#contact' },
       { label: 'Book an Inspection', href: '/contact?type=inspection' },
       { label: 'Insights', href: '/#insights' },

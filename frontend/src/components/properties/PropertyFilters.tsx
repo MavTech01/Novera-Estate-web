@@ -6,13 +6,13 @@ import {
   listingStatusOptions,
   propertyFeatureOptions,
   propertyTypeFilterOptions,
-} from '../../data/propertyFilters'
-import { cn } from '../../lib/cn'
-import { Button } from '../ui/Button'
-import { CheckboxGroup } from '../ui/CheckboxGroup'
-import { Icon } from '../ui/Icon'
-import { SelectField } from '../ui/SelectField'
-import type { PropertyFiltersController } from '../../hooks/usePropertyFilters'
+} from '@/data/propertyFilters'
+import { cn } from '@/shared/lib/cn'
+import { Button } from '@/shared/components/ui/Button'
+import { CheckboxGroup } from '@/shared/components/ui/CheckboxGroup'
+import { Icon } from '@/shared/components/ui/Icon'
+import { SelectField } from '@/shared/components/ui/SelectField'
+import type { PropertyFiltersController } from '@/features/properties/hooks/usePropertyFilters'
 import { PropertyFilterGroup } from './PropertyFilterGroup'
 import { PropertyPriceRangeSelect } from './PropertyPriceRangeSelect'
 

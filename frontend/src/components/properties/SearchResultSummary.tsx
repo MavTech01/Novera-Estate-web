@@ -1,5 +1,5 @@
-import { Button } from '../ui/Button'
-import { Icon } from '../ui/Icon'
+import { Button } from '@/shared/components/ui/Button'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface SearchResultSummaryProps {
   count: number

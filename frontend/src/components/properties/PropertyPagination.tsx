@@ -1,5 +1,5 @@
-import { buildPageWindow } from '../../lib/propertyQuery'
-import { Icon } from '../ui/Icon'
+import { buildPageWindow } from '@/shared/lib/propertyQuery'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface PropertyPaginationProps {
   page: number

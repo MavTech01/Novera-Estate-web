@@ -1,6 +1,6 @@
-import { cn } from '../../lib/cn'
-import { Badge } from '../ui/Badge'
-import { Icon } from '../ui/Icon'
+import { cn } from '@/shared/lib/cn'
+import { Badge } from '@/shared/components/ui/Badge'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface PropertyVerificationProps {
   isVerified: boolean

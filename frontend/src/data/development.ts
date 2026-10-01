@@ -1,4 +1,4 @@
-import type { Development } from '../types'
+import type { Development } from '@/types'
 import { locations } from './locations'
 
 /** Featured project spotlight on the homepage. */

@@ -1,6 +1,6 @@
-import { getSpecificationRows } from '../../lib/propertyDetails'
-import { cn } from '../../lib/cn'
-import type { PropertyDetail } from '../../types'
+import { getSpecificationRows } from '@/shared/lib/propertyDetails'
+import { cn } from '@/shared/lib/cn'
+import type { PropertyDetail } from '@/types'
 
 interface PropertySpecificationsProps {
   property: PropertyDetail

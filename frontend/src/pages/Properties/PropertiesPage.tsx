@@ -1,21 +1,21 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { MobileFilterDrawer } from '../../components/properties/MobileFilterDrawer'
-import { PropertiesPageHeader } from '../../components/properties/PropertiesPageHeader'
-import { PropertyActiveFilters } from '../../components/properties/PropertyActiveFilters'
-import { PropertyEmptyState } from '../../components/properties/PropertyEmptyState'
-import { PropertyErrorState } from '../../components/properties/PropertyErrorState'
-import { PropertyFiltersSidebar } from '../../components/properties/PropertyFiltersSidebar'
-import { PropertyGrid } from '../../components/properties/PropertyGrid'
-import { PropertyListingCTA } from '../../components/properties/PropertyListingCTA'
-import { PropertyPagination } from '../../components/properties/PropertyPagination'
-import { PropertyResultsHeader } from '../../components/properties/PropertyResultsHeader'
-import { PropertySearchBar } from '../../components/properties/PropertySearchBar'
-import { PropertyGridSkeleton } from '../../components/properties/PropertySkeleton'
-import { Container } from '../../components/ui/Container'
-import { useFavourites } from '../../hooks/useFavourites'
-import { usePropertyFilters } from '../../hooks/usePropertyFilters'
-import { usePropertyListing } from '../../hooks/usePropertyListing'
+import { MobileFilterDrawer } from '@/components/properties/MobileFilterDrawer'
+import { PropertiesPageHeader } from '@/components/properties/PropertiesPageHeader'
+import { PropertyActiveFilters } from '@/components/properties/PropertyActiveFilters'
+import { PropertyEmptyState } from '@/components/properties/PropertyEmptyState'
+import { PropertyErrorState } from '@/components/properties/PropertyErrorState'
+import { PropertyFiltersSidebar } from '@/components/properties/PropertyFiltersSidebar'
+import { PropertyGrid } from '@/components/properties/PropertyGrid'
+import { PropertyListingCTA } from '@/components/properties/PropertyListingCTA'
+import { PropertyPagination } from '@/components/properties/PropertyPagination'
+import { PropertyResultsHeader } from '@/components/properties/PropertyResultsHeader'
+import { PropertySearchBar } from '@/components/properties/PropertySearchBar'
+import { PropertyGridSkeleton } from '@/components/properties/PropertySkeleton'
+import { Container } from '@/shared/components/ui/Container'
+import { useFavourites } from '@/shared/hooks/useFavourites'
+import { usePropertyFilters } from '@/features/properties/hooks/usePropertyFilters'
+import { usePropertyListing } from '@/features/properties/hooks/usePropertyListing'
 
 /**
  * Property discovery page — search, filter, sort, browse, open, enquire.
@@ -70,7 +70,7 @@ export function PropertiesPage() {
 
   return (
     <>
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1} className="focus:outline-none">
         {/* Page header */}
         <section className="bg-white pb-8 pt-28 sm:pt-32 lg:pb-10 lg:pt-36">
           <Container>

@@ -1,6 +1,6 @@
-import { cn } from '../../lib/cn'
-import { formatArea } from '../../lib/format'
-import { Icon } from '../ui/Icon'
+import { cn } from '@/shared/lib/cn'
+import { formatArea } from '@/shared/lib/format'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface PropertyMetaProps {
   bedrooms: number | null

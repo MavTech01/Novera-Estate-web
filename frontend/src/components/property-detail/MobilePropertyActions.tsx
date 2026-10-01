@@ -1,10 +1,10 @@
-import { useElementInView } from '../../hooks/useElementInView'
-import { useScrolled } from '../../hooks/useScrolled'
-import { buildCallUrl, buildPropertyInquiry, buildWhatsAppLabel, buildWhatsAppUrl } from '../../lib/contactLinks'
-import { cn } from '../../lib/cn'
-import type { PropertyDetail } from '../../types'
-import { BrandIcon } from '../ui/BrandIcon'
-import { Icon } from '../ui/Icon'
+import { useElementInView } from '@/shared/hooks/useElementInView'
+import { useScrolled } from '@/shared/hooks/useScrolled'
+import { buildCallUrl, buildPropertyInquiry, buildWhatsAppLabel, buildWhatsAppUrl } from '@/shared/lib/contactLinks'
+import { cn } from '@/shared/lib/cn'
+import type { PropertyDetail } from '@/types'
+import { BrandIcon } from '@/shared/components/ui/BrandIcon'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface MobilePropertyActionsProps {
   property: PropertyDetail

@@ -1,8 +1,8 @@
-import { getProcessSteps } from '../../data'
-import { Container } from '../ui/Container'
-import { Section } from '../ui/Section'
-import { SectionHeading } from '../ui/SectionHeading'
-import { Stepper } from '../ui/Stepper'
+import { getProcessSteps } from '@/data'
+import { Container } from '@/shared/components/ui/Container'
+import { Section } from '@/shared/components/ui/Section'
+import { SectionHeading } from '@/shared/components/ui/SectionHeading'
+import { Stepper } from '@/shared/components/ui/Stepper'
 
 /** "A Simple Path to Your Property" — the three-step client journey. */
 export function HowItWorks() {

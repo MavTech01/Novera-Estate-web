@@ -1,4 +1,4 @@
-import type { ServiceHighlight } from '../types'
+import type { ServiceHighlight } from '@/types'
 
 /** "Why Choose Novera Estates" trust cards. */
 export const serviceHighlights: ServiceHighlight[] = [

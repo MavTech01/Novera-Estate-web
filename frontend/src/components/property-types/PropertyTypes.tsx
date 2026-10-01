@@ -1,8 +1,8 @@
-import { getPropertyCategories } from '../../data'
-import { Container } from '../ui/Container'
-import { Reveal } from '../ui/Reveal'
-import { Section } from '../ui/Section'
-import { SectionHeading } from '../ui/SectionHeading'
+import { getPropertyCategories } from '@/data'
+import { Container } from '@/shared/components/ui/Container'
+import { Reveal } from '@/shared/components/ui/Reveal'
+import { Section } from '@/shared/components/ui/Section'
+import { SectionHeading } from '@/shared/components/ui/SectionHeading'
 import { PropertyTypeCard } from './PropertyTypeCard'
 
 /** "Explore Properties" — browse the catalogue by category. */

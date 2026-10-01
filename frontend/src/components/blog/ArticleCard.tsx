@@ -1,8 +1,8 @@
-import { formatDate } from '../../lib/format'
-import type { Article } from '../../types'
-import { ArrowLink } from '../ui/ArrowLink'
-import { Badge } from '../ui/Badge'
-import { SkeletonImage } from '../ui/SkeletonImage'
+import { formatDate } from '@/shared/lib/format'
+import type { Article } from '@/types'
+import { ArrowLink } from '@/shared/components/ui/ArrowLink'
+import { Badge } from '@/shared/components/ui/Badge'
+import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
 
 interface ArticleCardProps {
   article: Article

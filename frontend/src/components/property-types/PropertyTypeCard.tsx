@@ -1,6 +1,6 @@
-import { cn } from '../../lib/cn'
-import type { PropertyCategory } from '../../types'
-import { Icon } from '../ui/Icon'
+import { cn } from '@/shared/lib/cn'
+import type { PropertyCategory } from '@/types'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface PropertyTypeCardProps {
   category: PropertyCategory

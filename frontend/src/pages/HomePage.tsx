@@ -1,18 +1,18 @@
-import { AboutSection } from '../components/about/AboutSection'
-import { BlogPreview } from '../components/blog/BlogPreview'
-import { CTASection } from '../components/cta/CTASection'
-import { FeaturedDevelopment } from '../components/development/FeaturedDevelopment'
-import { HeroSearchOverlay } from '../components/hero/HeroSearchOverlay'
-import { HeroSection } from '../components/hero/HeroSection'
-import { LocationsSection } from '../components/locations/LocationsSection'
-import { HowItWorks } from '../components/process/HowItWorks'
-import { FeaturedProperties } from '../components/properties/FeaturedProperties'
-import { PropertyTypes } from '../components/property-types/PropertyTypes'
-import { ServicesCarousel } from '../components/services/ServicesCarousel'
-import { Testimonials } from '../components/testimonials/Testimonials'
-import { WhyChooseUs } from '../components/trust/WhyChooseUs'
-import { getFeaturedProperties } from '../data'
-import { usePropertySearch } from '../hooks/usePropertySearch'
+import { AboutSection } from '@/components/about/AboutSection'
+import { BlogPreview } from '@/components/blog/BlogPreview'
+import { CTASection } from '@/components/cta/CTASection'
+import { FeaturedDevelopment } from '@/components/development/FeaturedDevelopment'
+import { HeroSearchOverlay } from '@/components/hero/HeroSearchOverlay'
+import { HeroSection } from '@/components/hero/HeroSection'
+import { LocationsSection } from '@/components/locations/LocationsSection'
+import { HowItWorks } from '@/components/process/HowItWorks'
+import { FeaturedProperties } from '@/components/properties/FeaturedProperties'
+import { PropertyTypes } from '@/components/property-types/PropertyTypes'
+import { ServicesCarousel } from '@/components/services/ServicesCarousel'
+import { Testimonials } from '@/components/testimonials/Testimonials'
+import { WhyChooseUs } from '@/components/trust/WhyChooseUs'
+import { getFeaturedProperties } from '@/data'
+import { usePropertySearch } from '@/features/properties/hooks/usePropertySearch'
 
 /**
  * Landing page — composes every homepage section in order.
@@ -31,7 +31,7 @@ export function HomePage() {
   }
 
   return (
-    <main id="main-content">
+    <main id="main-content" tabIndex={-1} className="focus:outline-none">
       <HeroSection />
 
       <HeroSearchOverlay criteria={criteria} onChange={updateCriteria} onSubmit={handleSearch} />

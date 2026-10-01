@@ -1,9 +1,9 @@
-import { getArticles } from '../../data'
-import { ArrowLink } from '../ui/ArrowLink'
-import { Container } from '../ui/Container'
-import { Reveal } from '../ui/Reveal'
-import { Section } from '../ui/Section'
-import { SectionHeading } from '../ui/SectionHeading'
+import { getArticles } from '@/data'
+import { ArrowLink } from '@/shared/components/ui/ArrowLink'
+import { Container } from '@/shared/components/ui/Container'
+import { Reveal } from '@/shared/components/ui/Reveal'
+import { Section } from '@/shared/components/ui/Section'
+import { SectionHeading } from '@/shared/components/ui/SectionHeading'
 import { ArticleCard } from './ArticleCard'
 
 /** "Real Estate Insights" — editorial preview, ready to be driven by a CMS/API. */

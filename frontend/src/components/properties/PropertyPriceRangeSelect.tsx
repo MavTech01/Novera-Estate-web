@@ -1,7 +1,7 @@
-import type { PriceBand } from '../../data/searchOptions'
-import { describePriceRange } from '../../data/searchOptions'
-import type { PropertyPurpose } from '../../types'
-import { SelectField } from '../ui/SelectField'
+import type { PriceBand } from '@/data/searchOptions'
+import { describePriceRange } from '@/data/searchOptions'
+import type { PropertyPurpose } from '@/types'
+import { SelectField } from '@/shared/components/ui/SelectField'
 
 interface PropertyPriceRangeSelectProps {
   id: string

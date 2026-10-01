@@ -1,6 +1,6 @@
-import { PropertyGrid } from '../properties/PropertyGrid'
-import { SectionHeading } from '../ui/SectionHeading'
-import type { Property } from '../../types'
+import { PropertyGrid } from '@/components/properties/PropertyGrid'
+import { SectionHeading } from '@/shared/components/ui/SectionHeading'
+import type { Property } from '@/types'
 
 interface SimilarPropertiesProps {
   properties: Property[]

@@ -1,7 +1,7 @@
-import { cn } from '../../lib/cn'
-import type { Coordinates } from '../../types'
-import { ButtonLink } from '../ui/Button'
-import { Icon } from '../ui/Icon'
+import { cn } from '@/shared/lib/cn'
+import type { Coordinates } from '@/types'
+import { ButtonLink } from '@/shared/components/ui/Button'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface PropertyMapPlaceholderProps {
   locationLabel: string

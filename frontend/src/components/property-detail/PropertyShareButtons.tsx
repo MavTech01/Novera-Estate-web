@@ -1,13 +1,13 @@
 import { useCallback, useRef } from 'react'
 
-import { useCopyToClipboard } from '../../hooks/useCopyToClipboard'
-import { useDisclosure } from '../../hooks/useDisclosure'
-import { useOutsideClick } from '../../hooks/useOutsideClick'
-import { buildShareLinks } from '../../lib/contactLinks'
-import { cn } from '../../lib/cn'
-import type { Property } from '../../types'
-import { BrandIcon } from '../ui/BrandIcon'
-import { Icon } from '../ui/Icon'
+import { useCopyToClipboard } from '@/shared/hooks/useCopyToClipboard'
+import { useDisclosure } from '@/shared/hooks/useDisclosure'
+import { useOutsideClick } from '@/shared/hooks/useOutsideClick'
+import { buildShareLinks } from '@/shared/lib/contactLinks'
+import { cn } from '@/shared/lib/cn'
+import type { Property } from '@/types'
+import { BrandIcon } from '@/shared/components/ui/BrandIcon'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface PropertyShareButtonsProps {
   property: Property

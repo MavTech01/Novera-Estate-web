@@ -1,4 +1,4 @@
-import type { GeoLocation, LocationSummary } from '../types'
+import type { GeoLocation, LocationSummary } from '@/types'
 
 /**
  * Canonical location records.
@@ -127,8 +127,6 @@ export const locations = {
     label: 'Lekki Phase 2, Lagos',
   },
 } satisfies Record<string, GeoLocation>
-
-export type LocationKey = keyof typeof locations
 
 /** Locations promoted in the "Explore Prime Locations" section. */
 export const featuredLocations: LocationSummary[] = [

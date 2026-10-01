@@ -1,9 +1,9 @@
-import { buildCallUrl, buildPropertyInquiry, buildWhatsAppLabel, buildWhatsAppUrl } from '../../lib/contactLinks'
-import { cn } from '../../lib/cn'
-import type { PropertyDetail } from '../../types'
-import { BrandIcon } from '../ui/BrandIcon'
-import { Button, ButtonLink } from '../ui/Button'
-import { Icon } from '../ui/Icon'
+import { buildCallUrl, buildPropertyInquiry, buildWhatsAppLabel, buildWhatsAppUrl } from '@/shared/lib/contactLinks'
+import { cn } from '@/shared/lib/cn'
+import type { PropertyDetail } from '@/types'
+import { BrandIcon } from '@/shared/components/ui/BrandIcon'
+import { Button, ButtonLink } from '@/shared/components/ui/Button'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface PropertyActionsProps {
   property: PropertyDetail

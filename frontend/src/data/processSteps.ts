@@ -1,4 +1,4 @@
-import type { ProcessStep } from '../types'
+import type { ProcessStep } from '@/types'
 
 /** "A Simple Path to Your Property" — the three-step client journey. */
 export const processSteps: ProcessStep[] = [

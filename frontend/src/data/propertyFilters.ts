@@ -1,5 +1,5 @@
-import { listingStatusLabels, propertyTagIcons, propertyTagLabels, propertySortLabels } from '../lib/labels'
-import type { IconName, ListingStatusFilter, PropertySort, PropertyTag, PropertyType } from '../types'
+import { listingStatusLabels, propertyTagIcons, propertyTagLabels, propertySortLabels } from '@/shared/lib/labels'
+import type { IconName, ListingStatusFilter, PropertySort, PropertyTag, PropertyType } from '@/types'
 import type { SelectOption } from './searchOptions'
 
 /**

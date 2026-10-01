@@ -1,10 +1,10 @@
-import { getServiceHighlights } from '../../data'
-import type { ServiceHighlight } from '../../types'
-import { Container } from '../ui/Container'
-import { Icon } from '../ui/Icon'
-import { Reveal } from '../ui/Reveal'
-import { Section } from '../ui/Section'
-import { SectionHeading } from '../ui/SectionHeading'
+import { getServiceHighlights } from '@/data'
+import type { ServiceHighlight } from '@/types'
+import { Container } from '@/shared/components/ui/Container'
+import { Icon } from '@/shared/components/ui/Icon'
+import { Reveal } from '@/shared/components/ui/Reveal'
+import { Section } from '@/shared/components/ui/Section'
+import { SectionHeading } from '@/shared/components/ui/SectionHeading'
 
 function TrustFeature({ item }: { item: ServiceHighlight }) {
   return (

@@ -1,4 +1,4 @@
-import type { InspectionRequestPayload } from '../types'
+import type { InspectionRequestPayload } from '@/types'
 
 /**
  * Inspection request submission.

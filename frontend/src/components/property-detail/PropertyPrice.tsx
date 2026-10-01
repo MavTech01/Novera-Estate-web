@@ -1,7 +1,7 @@
-import { formatPrice } from '../../lib/format'
-import { propertyPurposeLabels } from '../../lib/labels'
-import { cn } from '../../lib/cn'
-import type { Property } from '../../types'
+import { formatPrice } from '@/shared/lib/format'
+import { propertyPurposeLabels } from '@/shared/lib/labels'
+import { cn } from '@/shared/lib/cn'
+import type { Property } from '@/types'
 
 interface PropertyPriceProps {
   property: Property

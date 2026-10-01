@@ -20,7 +20,7 @@ import { serviceHighlights } from './serviceHighlights'
 import { services } from './services'
 import { companyStats } from './stats'
 import { testimonials } from './testimonials'
-import { findSimilarProperties } from '../lib/propertyDetails'
+import { findSimilarProperties } from '@/shared/lib/propertyDetails'
 import type {
   Article,
   Development,
@@ -31,7 +31,7 @@ import type {
   PropertyPurpose,
   PropertyType,
   Service,
-} from '../types'
+} from '@/types'
 
 export {
   agents,
@@ -81,18 +81,6 @@ export function getPropertyDetailBySlug(slug: string): PropertyDetail | null {
 /** Listings closest to the one being viewed, for the recommendation row. */
 export function getSimilarProperties(property: Property, limit = 3): Property[] {
   return findSimilarProperties(property, properties, limit)
-}
-
-export function getPropertiesByPurpose(purpose: PropertyPurpose): Property[] {
-  return properties.filter((property) => property.purpose === purpose)
-}
-
-export function getPropertiesByType(propertyType: PropertyType): Property[] {
-  return properties.filter((property) => property.propertyType === propertyType)
-}
-
-export function getPropertiesByLocation(slug: string): Property[] {
-  return properties.filter((property) => property.location.slug === slug)
 }
 
 /** Simple keyword search used by the hero search form. */
@@ -164,8 +152,4 @@ export function getServices(): Service[] {
 
 export function getProcessSteps() {
   return processSteps
-}
-
-export function getNavigation() {
-  return primaryNavigation
 }

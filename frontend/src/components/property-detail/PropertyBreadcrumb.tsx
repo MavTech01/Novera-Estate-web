@@ -1,6 +1,6 @@
-import { truncateMiddle, type BreadcrumbItem } from '../../lib/propertyDetails'
-import { Icon } from '../ui/Icon'
-import { Link } from '../ui/Link'
+import { truncateMiddle, type BreadcrumbItem } from '@/shared/lib/propertyDetails'
+import { Icon } from '@/shared/components/ui/Icon'
+import { Link } from '@/shared/components/ui/Link'
 
 interface PropertyBreadcrumbProps {
   items: BreadcrumbItem[]

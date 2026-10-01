@@ -1,11 +1,11 @@
-import { company, getStats } from '../../data'
-import { ButtonLink } from '../ui/Button'
-import { Container } from '../ui/Container'
-import { Icon } from '../ui/Icon'
-import { Reveal } from '../ui/Reveal'
-import { Section } from '../ui/Section'
-import { SectionHeading } from '../ui/SectionHeading'
-import { SkeletonImage } from '../ui/SkeletonImage'
+import { company, getStats } from '@/data'
+import { ButtonLink } from '@/shared/components/ui/Button'
+import { Container } from '@/shared/components/ui/Container'
+import { Icon } from '@/shared/components/ui/Icon'
+import { Reveal } from '@/shared/components/ui/Reveal'
+import { Section } from '@/shared/components/ui/Section'
+import { SectionHeading } from '@/shared/components/ui/SectionHeading'
+import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
 
 const promises = [
   'Every listing inspected before it is published',

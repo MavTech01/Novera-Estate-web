@@ -1,4 +1,4 @@
-import type { PropertyFiltersController } from '../../hooks/usePropertyFilters'
+import type { PropertyFiltersController } from '@/features/properties/hooks/usePropertyFilters'
 import { PropertyFilters } from './PropertyFilters'
 
 interface PropertyFiltersSidebarProps {

@@ -7,14 +7,14 @@ import {
   toInspectionPayload,
   validateInspectionRequest,
   type InspectionErrors,
-} from '../../lib/inspectionForm'
-import { cn } from '../../lib/cn'
-import type { InspectionRequest, InspectionRequestPayload, PropertyDetail } from '../../types'
-import { Button } from '../ui/Button'
-import { Icon } from '../ui/Icon'
-import { SelectField } from '../ui/SelectField'
-import { TextArea } from '../ui/TextArea'
-import { TextField } from '../ui/TextField'
+} from '@/shared/lib/inspectionForm'
+import { cn } from '@/shared/lib/cn'
+import type { InspectionRequest, InspectionRequestPayload, PropertyDetail } from '@/types'
+import { Button } from '@/shared/components/ui/Button'
+import { Icon } from '@/shared/components/ui/Icon'
+import { SelectField } from '@/shared/components/ui/SelectField'
+import { TextArea } from '@/shared/components/ui/TextArea'
+import { TextField } from '@/shared/components/ui/TextField'
 
 interface InspectionFormProps {
   property: PropertyDetail

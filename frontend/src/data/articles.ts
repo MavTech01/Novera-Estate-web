@@ -1,4 +1,4 @@
-import type { Article } from '../types'
+import type { Article } from '@/types'
 
 /**
  * Editorial content for the insights section.

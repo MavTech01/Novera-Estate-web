@@ -1,4 +1,4 @@
-import type { PropertyCategory } from '../types'
+import type { PropertyCategory } from '@/types'
 
 /** "Explore Properties" grid. */
 export const propertyCategories: PropertyCategory[] = [

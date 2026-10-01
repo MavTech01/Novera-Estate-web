@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react'
 
-import { useLockBodyScroll } from '../../hooks/useLockBodyScroll'
-import type { PropertyFiltersController } from '../../hooks/usePropertyFilters'
-import { cn } from '../../lib/cn'
-import { Icon } from '../ui/Icon'
+import { useLockBodyScroll } from '@/shared/hooks/useLockBodyScroll'
+import type { PropertyFiltersController } from '@/features/properties/hooks/usePropertyFilters'
+import { cn } from '@/shared/lib/cn'
+import { Icon } from '@/shared/components/ui/Icon'
 import { PropertyFilters } from './PropertyFilters'
 
 interface MobileFilterDrawerProps {

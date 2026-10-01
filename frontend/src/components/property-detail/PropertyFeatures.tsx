@@ -1,6 +1,6 @@
-import { cn } from '../../lib/cn'
-import { getFeatureIcon } from '../../lib/featureIcons'
-import { Icon } from '../ui/Icon'
+import { cn } from '@/shared/lib/cn'
+import { getFeatureIcon } from '@/shared/lib/featureIcons'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface PropertyFeaturesProps {
   features: string[]

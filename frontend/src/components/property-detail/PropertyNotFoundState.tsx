@@ -1,6 +1,6 @@
-import { routes } from '../../lib/routes'
-import { ButtonLink } from '../ui/Button'
-import { Icon } from '../ui/Icon'
+import { routes } from '@/shared/lib/routes'
+import { ButtonLink } from '@/shared/components/ui/Button'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface PropertyNotFoundStateProps {
   /** The slug that was requested, quoted back so the visitor can spot a typo. */

@@ -1,9 +1,9 @@
 import { useCallback, useState } from 'react'
 
-import { submitInspectionRequest, type InspectionReceipt } from '../../data/inspectionRepository'
-import { buildInspectionMessage, buildWhatsAppUrl } from '../../lib/contactLinks'
-import type { InspectionRequestPayload, PropertyDetail } from '../../types'
-import { Modal } from '../ui/Modal'
+import { submitInspectionRequest, type InspectionReceipt } from '@/data/inspectionRepository'
+import { buildInspectionMessage, buildWhatsAppUrl } from '@/shared/lib/contactLinks'
+import type { InspectionRequestPayload, PropertyDetail } from '@/types'
+import { Modal } from '@/shared/components/ui/Modal'
 import { InspectionForm } from './InspectionForm'
 import { InspectionSuccess } from './InspectionSuccess'
 

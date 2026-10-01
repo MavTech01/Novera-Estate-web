@@ -1,6 +1,6 @@
-import type { PropertySearchCriteria } from '../../types'
-import { PropertySearch } from '../properties/PropertySearch'
-import { Container } from '../ui/Container'
+import type { PropertySearchCriteria } from '@/types'
+import { PropertySearch } from '@/components/properties/PropertySearch'
+import { Container } from '@/shared/components/ui/Container'
 
 interface HeroSearchOverlayProps {
   criteria: PropertySearchCriteria

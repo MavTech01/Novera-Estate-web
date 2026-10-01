@@ -1,4 +1,4 @@
-import { Icon } from '../ui/Icon'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface PropertiesPageHeaderProps {
   title: string

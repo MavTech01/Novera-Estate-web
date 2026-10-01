@@ -1,5 +1,5 @@
-import { cn } from '../../lib/cn'
-import type { PropertyDetail } from '../../types'
+import { cn } from '@/shared/lib/cn'
+import type { PropertyDetail } from '@/types'
 import { InspectionCTA } from './InspectionCTA'
 import { PropertyActions } from './PropertyActions'
 import { PropertyAgentCard } from './PropertyAgentCard'

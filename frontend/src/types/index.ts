@@ -76,6 +76,7 @@ export type IconName =
   | 'check'
   | 'arrow-right'
   | 'arrow-up-right'
+  | 'arrow-up-down'
   | 'arrow-left'
   | 'bed'
   | 'bath'
@@ -119,6 +120,13 @@ export type IconName =
   | 'shopping-bag'
   | 'bus'
   | 'train'
+  | 'cctv'
+  | 'fence'
+  | 'layers'
+  | 'construction'
+  | 'hard-hat'
+  | 'calendar-check'
+  | 'map-pinned'
 
 /** Social platforms rendered with the dedicated brand icon set. */
 export type SocialPlatform = 'facebook' | 'instagram' | 'linkedin' | 'x'

@@ -266,4 +266,62 @@
   .card-stagger {
     animation: none;
   }
+
+  /* The bar still appears and still fades, it just no longer sweeps. */
+  .route-progress-enter {
+    animation: none;
+    transform: none;
+  }
+
+  .route-progress-complete {
+    animation: route-progress-fade 220ms ease-out forwards;
+  }
+}
+
+/* Route transition bar ------------------------------------------------ */
+/*
+ * A short wait needs a bar that grows quickly and stops short of the edge:
+ * reaching 100% before the page is ready would be a lie, and a full sweep for
+ * 250 ms reads as a flicker. So it eases to ~90% and holds, then snaps to 100%
+ * and fades out as the page commits.
+ */
+@keyframes route-progress-enter {
+  0% {
+    transform: scaleX(0.02);
+  }
+  60% {
+    transform: scaleX(0.62);
+  }
+  100% {
+    transform: scaleX(0.9);
+  }
+}
+
+@keyframes route-progress-complete {
+  from {
+    transform: scaleX(0.9);
+    opacity: 1;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+/* Reduced motion: full-width bar that simply fades, so no sweep and no jump. */
+@keyframes route-progress-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.route-progress-enter {
+  animation: route-progress-enter 1.1s var(--ease-out-soft) forwards;
+}
+
+.route-progress-complete {
+  animation: route-progress-complete 220ms ease-out forwards;
 }

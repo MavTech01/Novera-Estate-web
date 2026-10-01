@@ -1,10 +1,10 @@
-import { company, getStats } from '../../data'
-import { ButtonLink } from '../ui/Button'
-import { Container } from '../ui/Container'
-import { Icon } from '../ui/Icon'
-import { Reveal } from '../ui/Reveal'
-import { SkeletonImage } from '../ui/SkeletonImage'
-import { StatCard } from '../ui/StatCard'
+import { company, getStats } from '@/data'
+import { ButtonLink } from '@/shared/components/ui/Button'
+import { Container } from '@/shared/components/ui/Container'
+import { Icon } from '@/shared/components/ui/Icon'
+import { Reveal } from '@/shared/components/ui/Reveal'
+import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
+import { StatCard } from '@/shared/components/ui/StatCard'
 
 /**
  * Two-column hero: message on the left, property photography on the right

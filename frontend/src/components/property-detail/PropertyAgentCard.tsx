@@ -1,10 +1,10 @@
-import { buildCallUrl, buildPropertyInquiry, buildWhatsAppUrl } from '../../lib/contactLinks'
-import { cn } from '../../lib/cn'
-import type { Agent, PropertyDetail } from '../../types'
-import { BrandIcon } from '../ui/BrandIcon'
-import { ButtonLink } from '../ui/Button'
-import { Icon } from '../ui/Icon'
-import { SkeletonImage } from '../ui/SkeletonImage'
+import { buildCallUrl, buildPropertyInquiry, buildWhatsAppUrl } from '@/shared/lib/contactLinks'
+import { cn } from '@/shared/lib/cn'
+import type { Agent, PropertyDetail } from '@/types'
+import { BrandIcon } from '@/shared/components/ui/BrandIcon'
+import { ButtonLink } from '@/shared/components/ui/Button'
+import { Icon } from '@/shared/components/ui/Icon'
+import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
 
 interface PropertyAgentCardProps {
   agent: Agent

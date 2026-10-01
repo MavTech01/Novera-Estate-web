@@ -5,10 +5,10 @@ import type {
   PropertyDetailExtras,
   PropertyDocumentation,
   PropertySurroundings,
-} from '../types'
+} from '@/types'
 import { properties } from './properties'
-import { findSimilarProperties } from '../lib/propertyDetails'
-import { propertyTypeLabels } from '../lib/labels'
+import { findSimilarProperties } from '@/shared/lib/propertyDetails'
+import { propertyTypeLabels } from '@/shared/lib/labels'
 
 /**
  * Detail-page data for the demo catalogue.

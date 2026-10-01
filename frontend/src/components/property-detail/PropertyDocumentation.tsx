@@ -1,7 +1,7 @@
-import { cn } from '../../lib/cn'
-import type { DocumentStatus, PropertyDocumentation } from '../../types'
-import { Icon } from '../ui/Icon'
-import type { IconName } from '../../types'
+import { cn } from '@/shared/lib/cn'
+import type { DocumentStatus, PropertyDocumentation } from '@/types'
+import { Icon } from '@/shared/components/ui/Icon'
+import type { IconName } from '@/types'
 
 interface PropertyDocumentationProps {
   documentation: PropertyDocumentation

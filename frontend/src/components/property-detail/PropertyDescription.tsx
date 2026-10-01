@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import { cn } from '../../lib/cn'
-import { toParagraphs } from '../../lib/propertyDetails'
-import { Icon } from '../ui/Icon'
+import { cn } from '@/shared/lib/cn'
+import { toParagraphs } from '@/shared/lib/propertyDetails'
+import { Icon } from '@/shared/components/ui/Icon'
 
 interface PropertyDescriptionProps {
   description: string

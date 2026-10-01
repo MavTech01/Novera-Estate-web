@@ -1,8 +1,8 @@
-import { cn } from '../../lib/cn'
-import { Container } from '../ui/Container'
-import { Icon } from '../ui/Icon'
-import { Reveal } from '../ui/Reveal'
-import type { IconName } from '../../types'
+import { cn } from '@/shared/lib/cn'
+import { Container } from '@/shared/components/ui/Container'
+import { Icon } from '@/shared/components/ui/Icon'
+import { Reveal } from '@/shared/components/ui/Reveal'
+import type { IconName } from '@/types'
 
 export interface CtaAction {
   label: string

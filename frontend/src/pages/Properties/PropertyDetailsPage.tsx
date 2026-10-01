@@ -11,15 +11,16 @@ import {
   PropertyNotFoundState,
   PropertyOverview,
   SimilarProperties,
-} from '../../components/property-detail'
-import { PropertyErrorState } from '../../components/properties/PropertyErrorState'
-import { Container } from '../../components/ui/Container'
-import { getSimilarProperties } from '../../data'
-import { useDisclosure } from '../../hooks/useDisclosure'
-import { useFavourites } from '../../hooks/useFavourites'
-import { usePropertyDetail } from '../../hooks/usePropertyDetail'
-import { getBreadcrumbItems, type BreadcrumbItem } from '../../lib/propertyDetails'
-import { routes } from '../../lib/routes'
+} from '@/components/property-detail'
+import { PropertyErrorState } from '@/components/properties/PropertyErrorState'
+import { Container } from '@/shared/components/ui/Container'
+import { getSimilarProperties } from '@/data'
+import { useDisclosure } from '@/shared/hooks/useDisclosure'
+import { useFavourites } from '@/shared/hooks/useFavourites'
+import { useDocumentTitle } from '@/shared/hooks/useDocumentTitle'
+import { usePropertyDetail } from '@/features/properties/hooks/usePropertyDetail'
+import { getBreadcrumbItems, type BreadcrumbItem } from '@/shared/lib/propertyDetails'
+import { routes } from '@/shared/lib/routes'
 
 interface PropertyDetailsPageProps {
   /** Route param from `/properties/:slug`. */
@@ -34,12 +35,28 @@ const notFoundTrail: BreadcrumbItem[] = [
 ]
 
 /**
+ * Title owner for whichever branch renders.
+ *
+ * The page returns early per status, so hooks cannot sit above those branches;
+ * a one-line child in each branch keeps every status labelling itself correctly
+ * instead of inheriting the homepage's title.
+ */
+function PropertyTitle({ title }: { title: string }) {
+  useDocumentTitle(title)
+  return null
+}
+
+/**
  * Property detail page — `/properties/:slug`.
  *
  * The component only orchestrates: `usePropertyDetail` owns the request
  * lifecycle (loading, not-found, error, ready) and every visual decision is
  * delegated to a focused component that receives a plain `PropertyDetail`. Once
  * the Express API is live, only the hook's data source changes.
+ *
+ * `App` resolves the route but hands the title off with `null`, because the
+ * address only becomes meaningful once the property is known — each branch
+ * below owns its own.
  */
 export function PropertyDetailsPage({ slug }: PropertyDetailsPageProps) {
   const { status, property, retry } = usePropertyDetail(slug)
@@ -48,7 +65,8 @@ export function PropertyDetailsPage({ slug }: PropertyDetailsPageProps) {
 
   if (status === 'loading') {
     return (
-      <main id="main-content" className="bg-white pb-24 pt-28 sm:pt-32 lg:pb-28 lg:pt-36">
+      <main id="main-content" tabIndex={-1} className="focus:outline-none bg-white pb-24 pt-28 sm:pt-32 lg:pb-28 lg:pt-36">
+        <PropertyTitle title="Property — Novera Estates" />
         <Container>
           <PropertyDetailSkeleton />
         </Container>
@@ -58,7 +76,8 @@ export function PropertyDetailsPage({ slug }: PropertyDetailsPageProps) {
 
   if (status === 'error') {
     return (
-      <main id="main-content" className="bg-white pb-24 pt-28 sm:pt-32 lg:pb-28 lg:pt-36">
+      <main id="main-content" tabIndex={-1} className="focus:outline-none bg-white pb-24 pt-28 sm:pt-32 lg:pb-28 lg:pt-36">
+        <PropertyTitle title="Property Unavailable — Novera Estates" />
         <Container>
           <PropertyErrorState
             message="We couldn't load this property right now. Please try again."
@@ -72,7 +91,8 @@ export function PropertyDetailsPage({ slug }: PropertyDetailsPageProps) {
 
   if (status === 'not-found' || !property) {
     return (
-      <main id="main-content" className="bg-white pb-24 pt-28 sm:pt-32 lg:pb-28 lg:pt-36">
+      <main id="main-content" tabIndex={-1} className="focus:outline-none bg-white pb-24 pt-28 sm:pt-32 lg:pb-28 lg:pt-36">
+        <PropertyTitle title="Property Not Found — Novera Estates" />
         <Container>
           <PropertyBreadcrumb items={notFoundTrail} className="mb-8" />
           <PropertyNotFoundState slug={slug} />
@@ -83,7 +103,10 @@ export function PropertyDetailsPage({ slug }: PropertyDetailsPageProps) {
 
   return (
     <>
-      <main id="main-content" className="bg-white">
+      <PropertyTitle
+        title={`${property.title}, ${property.location.label} — Novera Estates`}
+      />
+      <main id="main-content" tabIndex={-1} className="focus:outline-none bg-white">
         {/* Identity band: trail, gallery and header */}
         <section className="pb-8 pt-28 sm:pt-32 lg:pt-36">
           <Container>

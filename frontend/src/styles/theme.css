@@ -50,6 +50,7 @@
   --color-ink-300: #d6d3d1;
 
   /* Sand — surfaces and borders --------------------------------------- */
+  --color-canvas: #fdfaf6; /* boot loader surface — pre-stylesheet only */
   --color-sand-50: #ffffff; /* page background */
   --color-sand-100: #fff9f4; /* warm section tint */
   --color-sand-200: #f1e4d6; /* borders */

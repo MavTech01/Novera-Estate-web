@@ -1,13 +1,13 @@
 import { useCallback, useRef } from 'react'
 
-import { useDisclosure } from '../../hooks/useDisclosure'
-import { useGallery } from '../../hooks/useGallery'
-import { cn } from '../../lib/cn'
-import type { ImageAsset } from '../../types'
-import { Button } from '../ui/Button'
-import { Icon } from '../ui/Icon'
-import { SkeletonImage } from '../ui/SkeletonImage'
-import { GalleryLightbox } from './GalleryLightbox'
+import { useDisclosure } from '@/shared/hooks/useDisclosure'
+import { useGallery } from '@/shared/hooks/useGallery'
+import { cn } from '@/shared/lib/cn'
+import type { ImageAsset } from '@/types'
+import { Button } from '@/shared/components/ui/Button'
+import { Icon } from '@/shared/components/ui/Icon'
+import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
+import { ImageLightbox } from '@/shared/components/ui/ImageLightbox'
 
 interface PropertyGalleryProps {
   images: ImageAsset[]
@@ -230,13 +230,13 @@ export function PropertyGallery({ images, propertyTitle, className }: PropertyGa
         )}
       </div>
 
-      <GalleryLightbox
+      <ImageLightbox
         isOpen={lightbox.isOpen}
         images={images}
         index={index}
         onIndexChange={selectImage}
         onClose={lightbox.close}
-        propertyTitle={propertyTitle}
+        title={propertyTitle}
       />
     </section>
   )
