@@ -14,7 +14,6 @@ import {
   findNotice,
   useAboutContent,
 } from '@/features/about'
-import { Icon } from '@/shared/components/ui/Icon'
 import { PageHero } from '@/shared/components/layout/PageHero'
 import { pageCrumbs } from '@/shared/lib/breadcrumbs'
 
@@ -74,12 +73,7 @@ export function AboutPage() {
             icon: hero.secondaryCta.icon,
           },
         ]}
-        meta={hero.highlights.map((highlight) => (
-          <span key={highlight.id} className="flex items-center gap-2">
-            <Icon name={highlight.icon} className="size-4 text-accent-300" strokeWidth={2} />
-            {highlight.label}
-          </span>
-        ))}
+        trust={hero.highlights}
       />
 
       <CompanyIntroduction introduction={about.introduction} />

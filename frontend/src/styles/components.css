@@ -81,6 +81,21 @@
   }
 }
 
+/* Wave divider ----------------------------------------------------------- */
+/*
+ * A very slow horizontal drift on the back wave only, so the seam between a
+ * banner and the section below has a little life without drawing attention.
+ * The front wave stays still and its fill matches the next section exactly.
+ */
+@keyframes wave-drift {
+  from {
+    transform: translateX(-40px);
+  }
+  to {
+    transform: translateX(40px);
+  }
+}
+
 .skeleton {
   position: relative;
   overflow: hidden;
@@ -211,6 +226,10 @@
   animation: var(--animate-hero-settle);
 }
 
+.wave-drift {
+  animation: wave-drift 20s ease-in-out infinite alternate;
+}
+
 /* Stepper items — fade and slide in once the observer reaches them -------- */
 .stepper-item {
   transition:
@@ -258,6 +277,11 @@
     animation: none;
     opacity: 1;
     transform: none;
+  }
+
+  /* The back wave holds still. */
+  .wave-drift {
+    animation: none;
   }
 
   .stepper-item,

@@ -1,8 +1,9 @@
 import { company } from '@/data/company'
 import { locationSearchShortcuts } from '@/features/locations/data/locationOptions'
+import { PageHero, type PageHeroTrustItem } from '@/shared/components/layout/PageHero'
+import { Container } from '@/shared/components/ui/Container'
 import { Icon } from '@/shared/components/ui/Icon'
 import { Link } from '@/shared/components/ui/Link'
-import { PageHero } from '@/shared/components/layout/PageHero'
 import { pageCrumbs } from '@/shared/lib/breadcrumbs'
 import { locationPath } from '@/shared/lib/routes'
 import type { LocationSearchController } from '@/features/locations/hooks/useLocationSearch'
@@ -14,7 +15,15 @@ interface LocationHeroProps {
   suggestions: { slug: string; name: string }[]
   /** Called when the search form is submitted, to bring the results into view. */
   onSearch: () => void
+  /** Fill of the closing wave — match whichever section follows the hero. */
+  wave?: 'white' | 'cream'
 }
+
+const locationTrust: readonly PageHeroTrustItem[] = [
+  { id: 'inspected', icon: 'shield-check', label: 'Inspected before you view' },
+  { id: 'visits', icon: 'calendar-search', label: 'Site visits available' },
+  { id: 'areas', icon: 'map-pinned', label: 'Six areas across Lagos' },
+]
 
 /**
  * Locations page hero: the promise over a Lagos photograph, with the search
@@ -22,77 +31,74 @@ interface LocationHeroProps {
  * separate widget.
  *
  * Kept deliberately short. The hero's job is to orient and to hand the visitor
- * to the search; the catalogue is the page, not the banner.
+ * to the search; the catalogue is the page, not the banner. The panel is a
+ * sibling so it can overlap the banner's wave cleanly.
  */
-export function LocationHero({ controller, suggestions, onSearch }: LocationHeroProps) {
+export function LocationHero({ controller, suggestions, onSearch, wave }: LocationHeroProps) {
   return (
-    <PageHero
-      headingId="locations-hero-heading"
-      size="compact"
-      eyebrow={company.descriptor}
-      title="Find Your Place in Lagos"
-      description="Discover properties and developments across some of Lagos's most sought-after areas."
-      image={{
-        src: '/images/hero/hero-main.webp',
-        alt: 'Aerial view of Lagos showing residential districts, roads and the coastline',
-      }}
-      breadcrumbs={pageCrumbs({ label: 'Locations' })}
-      meta={
-        <>
-          <span className="flex items-center gap-2">
-            <Icon name="shield-check" className="size-4 text-accent-300" strokeWidth={2} />
-            Inspected before you view
-          </span>
-          <span className="flex items-center gap-2">
-            <Icon name="calendar-search" className="size-4 text-accent-300" strokeWidth={2} />
-            Site visits available
-          </span>
-        </>
-      }
-    >
-      <div className="rounded-2xl border border-sand-200 bg-white p-5 shadow-lg sm:p-7">
-        <LocationSearch controller={controller} onSearch={onSearch} />
+    <>
+      <PageHero
+        headingId="locations-hero-heading"
+        eyebrow={company.descriptor}
+        title="Find Your Place in Lagos"
+        description="Discover properties and developments across some of Lagos's most sought-after areas."
+        image={{
+          src: '/images/hero/hero-main.webp',
+          alt: 'Aerial view of Lagos showing residential districts, roads and the coastline',
+        }}
+        breadcrumbs={pageCrumbs({ label: 'Locations' })}
+        trust={locationTrust}
+        wave={wave}
+      />
 
-        {/* Shortcuts for the three ways people arrive at an area. Buy and Rent
-            set the catalogue's own purpose filter; Invest has no matching
-            filter, so it goes to an agent rather than pretending a stock
-            filter exists. */}
-        <ul className="mt-4 flex flex-wrap items-center gap-2">
-          {locationSearchShortcuts.map((shortcut) => (
-            <li key={shortcut.id}>
-              <Link
-                href={shortcut.href}
-                className="inline-flex min-h-9 items-center gap-1.5 rounded-pill border border-sand-200 bg-sand-100 px-3.5 text-sm font-semibold text-ink-700 transition-colors duration-200 hover:border-accent-300 hover:bg-tint-50 hover:text-accent-700"
-              >
-                <Icon name={shortcut.icon} className="size-3.5 text-accent-500" strokeWidth={2} />
-                {shortcut.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+      {/* Pulled up 48px on desktop, over the banner's wave. */}
+      <div className="relative z-20 -mt-8 sm:-mt-10 lg:-mt-12">
+        <Container>
+          <div className="rounded-2xl border border-sand-200 bg-white p-5 shadow-lg sm:p-7">
+            <LocationSearch controller={controller} onSearch={onSearch} />
 
-        {suggestions.length > 0 && (
-          <div className="mt-5 border-t border-sand-200 pt-5">
-            <h2 className="text-[length:var(--text-label)] uppercase leading-4 text-ink-400">
-              Popular areas
-            </h2>
-
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {suggestions.map((suggestion) => (
-                <li key={suggestion.slug}>
+            {/* Shortcuts for the three ways people arrive at an area. Buy and Rent
+                set the catalogue's own purpose filter; Invest has no matching
+                filter, so it goes to an agent rather than pretending a stock
+                filter exists. */}
+            <ul className="mt-4 flex flex-wrap items-center gap-2">
+              {locationSearchShortcuts.map((shortcut) => (
+                <li key={shortcut.id}>
                   <Link
-                    href={locationPath(suggestion.slug)}
+                    href={shortcut.href}
                     className="inline-flex min-h-9 items-center gap-1.5 rounded-pill border border-sand-200 bg-sand-100 px-3.5 text-sm font-semibold text-ink-700 transition-colors duration-200 hover:border-accent-300 hover:bg-tint-50 hover:text-accent-700"
                   >
-                    <Icon name="map-pin" className="size-3.5 text-accent-500" strokeWidth={2} />
-                    {suggestion.name}
+                    <Icon name={shortcut.icon} className="size-3.5 text-accent-500" strokeWidth={2} />
+                    {shortcut.label}
                   </Link>
                 </li>
               ))}
             </ul>
+
+            {suggestions.length > 0 && (
+              <div className="mt-5 border-t border-sand-200 pt-5">
+                <h2 className="text-[length:var(--text-label)] uppercase leading-4 text-ink-400">
+                  Popular areas
+                </h2>
+
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {suggestions.map((suggestion) => (
+                    <li key={suggestion.slug}>
+                      <Link
+                        href={locationPath(suggestion.slug)}
+                        className="inline-flex min-h-9 items-center gap-1.5 rounded-pill border border-sand-200 bg-sand-100 px-3.5 text-sm font-semibold text-ink-700 transition-colors duration-200 hover:border-accent-300 hover:bg-tint-50 hover:text-accent-700"
+                      >
+                        <Icon name="map-pin" className="size-3.5 text-accent-500" strokeWidth={2} />
+                        {suggestion.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
-        )}
+        </Container>
       </div>
-    </PageHero>
+    </>
   )
 }

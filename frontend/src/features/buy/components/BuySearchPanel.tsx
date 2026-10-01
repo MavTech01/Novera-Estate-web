@@ -73,7 +73,7 @@ export function BuySearchPanel({ areas }: BuySearchPanelProps) {
     <Container>
       <div
         id="buy-search"
-        className="relative z-10 scroll-mt-24 rounded-2xl border border-sand-200 bg-white p-6 shadow-xl sm:p-8 lg:-mt-14 lg:p-10"
+        className="relative z-10 scroll-mt-24 rounded-2xl border border-sand-200 bg-white p-6 shadow-xl sm:p-8 lg:-mt-12 lg:p-10"
       >
         <form
           onSubmit={(event) => {

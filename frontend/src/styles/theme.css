@@ -87,5 +87,9 @@
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* Layout ------------------------------------------------------------ */
+  /* One page gutter (24px mobile, 32px from 640px up) and one content
+     width, with the navigation allowed a slightly wider 1280px rail so its
+     grouped links and CTA never crowd. */
   --container-page: 1200px;
+  --container-nav: 1280px;
 }

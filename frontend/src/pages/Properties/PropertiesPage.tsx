@@ -44,6 +44,13 @@ const catalogueHero = {
   },
 } as const
 
+/** The reassurance row shared by both catalogue banners. */
+const catalogueTrust = [
+  { id: 'verified', icon: 'badge-check', label: 'Verified listings' },
+  { id: 'inspected', icon: 'shield-check', label: 'Inspected before listing' },
+  { id: 'guided', icon: 'users', label: 'Guided viewings' },
+] as const
+
 /**
  * Property discovery page — search, filter, sort, browse, open, enquire.
  *
@@ -101,9 +108,14 @@ export function PropertiesPage() {
   return (
     <>
       <main id="main-content" tabIndex={-1} className="focus:outline-none">
-        <PageHero {...hero} size="compact">
-          <PropertySearchBar controller={controller} onSearch={handleSearch} />
-        </PageHero>
+        <PageHero {...hero} trust={catalogueTrust} />
+
+        {/* The search panel overlaps the base of the banner and its wave. */}
+        <div className="relative z-20 -mt-8 sm:-mt-10 lg:-mt-12">
+          <Container>
+            <PropertySearchBar controller={controller} onSearch={handleSearch} />
+          </Container>
+        </div>
 
         {/* Results */}
         <section className="pb-20 pt-12 sm:pt-14" aria-labelledby="property-results-heading">

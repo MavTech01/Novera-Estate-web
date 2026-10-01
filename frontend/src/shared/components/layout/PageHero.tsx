@@ -3,8 +3,9 @@ import type { IconName, ImageAsset } from '@/types'
 import { Breadcrumbs, type BreadcrumbItem } from '@/shared/components/ui/Breadcrumbs'
 import { ButtonLink } from '@/shared/components/ui/Button'
 import { Container } from '@/shared/components/ui/Container'
-import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
 import { Icon } from '@/shared/components/ui/Icon'
+import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
+import { WaveDivider } from './WaveDivider'
 
 /** Button variants that stay legible on the banner's dark overlay. */
 type PageHeroActionVariant = 'primary' | 'outline' | 'white'
@@ -20,6 +21,12 @@ export interface PageHeroAction {
   rel?: string
 }
 
+export interface PageHeroTrustItem {
+  id: string
+  icon: IconName
+  label: string
+}
+
 export interface PageHeroProps {
   title: string
   description?: string
@@ -31,38 +38,25 @@ export interface PageHeroProps {
   breadcrumbs?: readonly BreadcrumbItem[]
   /** Optional calls to action. The first should be the primary one. */
   actions?: readonly PageHeroAction[]
-  /**
-   * Where the copy sits on desktop. Mobile always stacks left-aligned, since
-   * right-aligned body copy is harder to read on a narrow screen.
-   */
-  align?: 'right' | 'left'
-  /** `compact` for pages whose first tool sits immediately below the banner. */
-  size?: 'default' | 'compact'
-  /**
-   * Content pulled up over the lower edge of the banner — a search panel, for
-   * example. Only one page uses the slot, but it is what keeps every hero on the
-   * site one component instead of a shared banner with two bespoke copies.
-   */
-  children?: React.ReactNode
-  /** A small reassurance row under the actions (icons + short labels). */
-  meta?: React.ReactNode
+  /** A small reassurance row under the actions (icon + short label each). */
+  trust?: readonly PageHeroTrustItem[]
   /** Overrides the heading id when a page needs a more specific hook. */
   headingId?: string
+  /**
+   * Fill of the wave at the base. Match the background of the section that
+   * follows so the two read as one surface. `none` drops the wave entirely.
+   */
+  wave?: 'white' | 'cream' | 'none'
   className?: string
-}
-
-const contentMinHeight: Record<NonNullable<PageHeroProps['size']>, string> = {
-  default: 'min-h-[clamp(22rem,46vh,30rem)]',
-  compact: 'min-h-[clamp(18rem,36vh,24rem)]',
 }
 
 /**
  * The banner that opens every inner page.
  *
- * One full-width photograph, a directional scrim, and the page title set in the
- * display type — deliberately not a plain title block. `align="right"` mirrors
- * the composition toward the right on desktop, matching the flow of the site,
- * while the photograph and the scrim carry the atmosphere.
+ * One full-width photograph, a scrim that runs dark on the left to light on the
+ * right, and the copy held left-aligned at a comfortable measure. Below it a
+ * `WaveDivider` dissolves the banner into the next section instead of a hard
+ * edge — the front wave is filled to match whatever follows.
  *
  * The photograph settles into place on load via `.hero-settle` (a single
  * transform, disabled under `prefers-reduced-motion`). Copy is not revealed on
@@ -76,24 +70,17 @@ export function PageHero({
   image,
   breadcrumbs,
   actions,
-  align = 'right',
-  size = 'default',
-  children,
-  meta,
+  trust,
   headingId = 'page-hero-heading',
+  wave = 'white',
   className,
 }: PageHeroProps) {
-  const alignsRight = align === 'right'
-
   return (
     <section
       aria-labelledby={headingId}
       className={cn(
-        'relative isolate flex flex-col justify-end overflow-hidden bg-ink-700',
-        // Clears the fixed navbar; the closing padding is the banner's own.
-        'pt-28 sm:pt-32 lg:pt-36',
-        children ? 'pb-0' : 'pb-14 sm:pb-16 lg:pb-20',
-        contentMinHeight[size],
+        'relative isolate flex flex-col overflow-hidden bg-ink-700',
+        'min-h-[clamp(34rem,72vh,40rem)]',
         className,
       )}
     >
@@ -110,59 +97,42 @@ export function PageHero({
           imgClassName="hero-settle"
         />
       </div>
-      <div aria-hidden className="absolute inset-0 -z-10 bg-ink-900/55" />
+      {/* Left-to-right scrim: darkest behind the copy, lightest at the right edge. */}
       <div
         aria-hidden
-        className={cn(
-          'absolute inset-0 -z-10',
-          alignsRight
-            ? 'bg-gradient-to-l from-ink-900/90 via-ink-900/50 to-ink-900/25'
-            : 'bg-gradient-to-r from-ink-900/90 via-ink-900/50 to-ink-900/25',
-        )}
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-[#140e0a]/85 via-[#140e0a]/60 to-[#140e0a]/25"
       />
-      {/* Deepens the bottom edge so the copy holds on small screens. */}
+      {/* Deepens the base a touch so the wave blends evenly. */}
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-t from-ink-900/80 via-ink-900/25 to-transparent"
+        className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-[#140e0a]/40 to-transparent"
       />
       <div aria-hidden className="absolute inset-x-0 top-0 -z-10 h-px bg-white/10" />
 
-      <Container
-        className={cn(
-          'relative z-10 flex w-full flex-1 items-end',
-          children ? 'pb-28 sm:pb-32' : undefined,
-        )}
-      >
-        <div
-          className={cn(
-            'flex w-full flex-col gap-5',
-            alignsRight ? 'lg:ml-auto lg:max-w-2xl lg:items-end lg:text-right' : 'lg:mr-auto lg:max-w-2xl',
-          )}
-        >
+      <Container className="relative z-10 flex flex-1 flex-col justify-center pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-32 lg:pb-24">
+        <div className="flex w-full max-w-[45rem] flex-col gap-6">
           {breadcrumbs && breadcrumbs.length > 0 && <Breadcrumbs items={[...breadcrumbs]} tone="onBrown" />}
 
           {eyebrow && (
-            <p
-              className={cn(
-                'flex items-center gap-2 text-[length:var(--text-label)] uppercase leading-4 text-accent-300',
-                alignsRight && 'lg:justify-end',
-              )}
-            >
-              <span aria-hidden className="h-px w-6 bg-accent-300/60" />
+            <p className="flex items-center gap-2 text-[length:var(--text-label)] uppercase leading-4 text-accent-400">
+              <span aria-hidden className="h-px w-6 bg-accent-400/60" />
               {eyebrow}
             </p>
           )}
 
-          <h1 id={headingId} className="text-white">
+          <h1
+            id={headingId}
+            className="max-w-[45rem] text-[length:clamp(2.5rem,4.4vw,4rem)] font-bold leading-[1.1] text-white"
+          >
             {title}
           </h1>
 
           {description && (
-            <p className="text-base leading-relaxed text-white/75 sm:text-lg">{description}</p>
+            <p className="max-w-[35rem] text-lg leading-relaxed text-white/85">{description}</p>
           )}
 
           {actions && actions.length > 0 && (
-            <div className={cn('mt-1 flex flex-col gap-3 sm:flex-row', alignsRight && 'lg:justify-end')}>
+            <div className="mt-1 flex flex-col gap-4 sm:flex-row">
               {actions.map((action) => (
                 <ButtonLink
                   key={`${action.label}-${action.href}`}
@@ -172,6 +142,7 @@ export function PageHero({
                   withArrow={action.withArrow}
                   target={action.target}
                   rel={action.rel}
+                  className="h-12 w-full justify-center text-base sm:h-13 sm:w-auto"
                 >
                   {action.icon && <Icon name={action.icon} className="size-4" strokeWidth={2} />}
                   {action.label}
@@ -180,20 +151,23 @@ export function PageHero({
             </div>
           )}
 
-          {meta && (
-            <div
-              className={cn(
-                'mt-1 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-medium text-white/75',
-                alignsRight && 'lg:justify-end',
-              )}
-            >
-              {meta}
-            </div>
+          {trust && trust.length > 0 && (
+            <ul className="mt-2 flex flex-col gap-3 text-sm font-medium text-white/85 sm:flex-row sm:flex-wrap sm:items-center sm:gap-0">
+              {trust.map((item) => (
+                <li
+                  key={item.id}
+                  className="flex items-center gap-2 sm:border-l sm:border-white/20 sm:px-6 sm:first:border-l-0 sm:first:pl-0"
+                >
+                  <Icon name={item.icon} className="size-4 text-accent-400" strokeWidth={2} />
+                  {item.label}
+                </li>
+              ))}
+            </ul>
           )}
         </div>
       </Container>
 
-      {children && <Container className="relative z-10 -mt-28 sm:-mt-32">{children}</Container>}
+      {wave !== 'none' && <WaveDivider color={wave === 'cream' ? 'cream' : 'white'} className="relative z-0" />}
     </section>
   )
 }

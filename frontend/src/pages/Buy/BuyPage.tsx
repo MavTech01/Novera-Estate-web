@@ -19,7 +19,6 @@ import {
   buyingProcessSteps,
   useBuyCatalogue,
 } from '@/features/buy'
-import { Icon } from '@/shared/components/ui/Icon'
 import { PageHero } from '@/shared/components/layout/PageHero'
 import { pageCrumbs } from '@/shared/lib/breadcrumbs'
 import { routes } from '@/shared/lib/routes'
@@ -81,12 +80,7 @@ export function BuyPage() {
             icon: 'calendar-search',
           },
         ]}
-        meta={buyHeroHighlights.map((highlight) => (
-          <span key={highlight.id} className="flex items-center gap-2">
-            <Icon name={highlight.icon} className="size-4 text-accent-300" strokeWidth={2} />
-            {highlight.label}
-          </span>
-        ))}
+        trust={buyHeroHighlights}
       />
 
       {/* Pulls up over the hero's lower edge, the way the listing page's search bar does. */}

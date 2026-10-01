@@ -93,6 +93,7 @@ export function LocationsPage() {
           controller={controller}
           suggestions={allLocations.map((location) => ({ slug: location.slug, name: location.name }))}
           onSearch={scrollToResults}
+          wave={isFiltered ? 'cream' : 'white'}
         />
 
         {/* Featured area: a promotion, not a result, so it hides as soon as a
