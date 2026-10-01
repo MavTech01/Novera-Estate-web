@@ -10,6 +10,7 @@
   --animate-rise-in: rise-in 0.7s var(--ease-out-soft) both;
   --animate-pulse-soft: pulse-soft 1.6s ease-in-out infinite;
   --animate-shimmer: shimmer 1.4s ease-in-out infinite;
+  --animate-hero-settle: hero-settle 1.15s var(--ease-out-soft) both;
 }
 
 @keyframes fade-up {
@@ -60,6 +61,23 @@
   }
   100% {
     transform: translateX(100%);
+  }
+}
+
+/* Inner-page banner photograph ------------------------------------------- */
+/*
+ * A slow settle rather than a scroll reveal: the banner is above the fold on
+ * arrival, so the photograph starts a few percent oversized and eases back to
+ * its resting scale. One transform on one composited layer, so it stays smooth
+ * without touching scroll position. Opacity is left to `SkeletonImage`, which
+ * already fades the file in when it decodes.
+ */
+@keyframes hero-settle {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
   }
 }
 
@@ -188,6 +206,11 @@
   border-color: rgb(255 255 255 / 0.16);
 }
 
+/* Inner-page banner ----------------------------------------------------- */
+.hero-settle {
+  animation: var(--animate-hero-settle);
+}
+
 /* Stepper items — fade and slide in once the observer reaches them -------- */
 .stepper-item {
   transition:
@@ -226,6 +249,13 @@
 
 @media (prefers-reduced-motion: reduce) {
   .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* The banner photograph arrives already in place rather than settling in. */
+  .hero-settle {
+    animation: none;
     opacity: 1;
     transform: none;
   }

@@ -14,24 +14,23 @@ import { Skeleton } from '@/shared/components/ui/Skeleton'
  */
 export function AboutSkeleton() {
   return (
-    <div className="bg-sand-100 pt-16 sm:pt-20 lg:pt-24">
-      <Container>
-        <div className="grid grid-cols-1 items-center gap-12 pb-20 lg:grid-cols-2 lg:gap-16">
-          <div className="flex flex-col gap-4">
-            <Skeleton className="h-6 w-48 rounded-pill" />
+    <div>
+      <div className="relative isolate flex min-h-[clamp(22rem,46vh,30rem)] flex-col justify-end overflow-hidden bg-ink-800 pt-28 pb-14 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20">
+        <Container className="relative z-10 flex w-full flex-1 items-end">
+          <div className="flex w-full flex-col gap-5 lg:ml-auto lg:max-w-2xl lg:items-end">
+            <Skeleton className="h-4 w-28" />
+            <Skeleton className="h-5 w-44" />
             <Skeleton className="h-12 w-full" />
             <Skeleton className="h-12 w-4/5" />
             <Skeleton className="h-5 w-full" />
             <Skeleton className="h-5 w-3/4" />
-            <div className="mt-4 flex gap-3">
+            <div className="mt-1 flex flex-wrap gap-3 lg:justify-end">
               <Skeleton className="h-14 w-44 rounded-md" />
               <Skeleton className="h-14 w-48 rounded-md" />
             </div>
           </div>
-
-          <Skeleton className="aspect-[4/3] w-full rounded-2xl" />
-        </div>
-      </Container>
+        </Container>
+      </div>
 
       <div className="bg-white py-20">
         <Container>

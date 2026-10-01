@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { MobileFilterDrawer } from '@/components/properties/MobileFilterDrawer'
-import { PropertiesPageHeader } from '@/components/properties/PropertiesPageHeader'
 import { PropertyActiveFilters } from '@/components/properties/PropertyActiveFilters'
 import { PropertyEmptyState } from '@/components/properties/PropertyEmptyState'
 import { PropertyErrorState } from '@/components/properties/PropertyErrorState'
@@ -13,9 +12,37 @@ import { PropertyResultsHeader } from '@/components/properties/PropertyResultsHe
 import { PropertySearchBar } from '@/components/properties/PropertySearchBar'
 import { PropertyGridSkeleton } from '@/components/properties/PropertySkeleton'
 import { Container } from '@/shared/components/ui/Container'
+import { PageHero } from '@/shared/components/layout/PageHero'
+import { pageCrumbs } from '@/shared/lib/breadcrumbs'
+import { routes } from '@/shared/lib/routes'
 import { useFavourites } from '@/shared/hooks/useFavourites'
 import { usePropertyFilters } from '@/features/properties/hooks/usePropertyFilters'
 import { usePropertyListing } from '@/features/properties/hooks/usePropertyListing'
+
+/** Banner copy and photograph, which differ for the sale and rent experiences. */
+const catalogueHero = {
+  buy: {
+    eyebrow: 'For sale',
+    title: 'Find Your Next Property',
+    description: 'Explore homes, apartments, land and investment opportunities from Novera Estates.',
+    image: {
+      src: '/images/hero/hero-main.webp',
+      alt: 'Aerial view of residential streets and rooftops across a city',
+    },
+    breadcrumbs: pageCrumbs({ label: 'Properties' }),
+  },
+  rent: {
+    eyebrow: 'To rent',
+    title: 'Homes and Apartments to Rent in Lagos',
+    description:
+      'Verified rentals across the neighbourhoods we know best, each one inspected before it reaches you.',
+    image: {
+      src: '/images/categories/apartments.webp',
+      alt: 'Modern apartment building with balconies and large windows',
+    },
+    breadcrumbs: pageCrumbs({ label: 'Properties', href: routes.properties }, { label: 'Rent' }),
+  },
+} as const
 
 /**
  * Property discovery page — search, filter, sort, browse, open, enquire.
@@ -68,23 +95,15 @@ export function PropertiesPage() {
   const total = results?.total ?? 0
   const items = results?.items ?? []
 
+  const isRenting = filters.purpose === 'rent'
+  const hero = isRenting ? catalogueHero.rent : catalogueHero.buy
+
   return (
     <>
       <main id="main-content" tabIndex={-1} className="focus:outline-none">
-        {/* Page header */}
-        <section className="bg-white pb-8 pt-28 sm:pt-32 lg:pb-10 lg:pt-36">
-          <Container>
-            <PropertiesPageHeader
-              title="Find Your Next Property"
-              description="Explore homes, apartments, land and investment opportunities from Novera Estates."
-            />
-          </Container>
-        </section>
-
-        {/* Search tool */}
-        <Container>
-          <PropertySearchBar controller={controller} onSearch={handleSearch} className="relative z-10 -mt-2 sm:-mt-6" />
-        </Container>
+        <PageHero {...hero} size="compact">
+          <PropertySearchBar controller={controller} onSearch={handleSearch} />
+        </PageHero>
 
         {/* Results */}
         <section className="pb-20 pt-12 sm:pt-14" aria-labelledby="property-results-heading">

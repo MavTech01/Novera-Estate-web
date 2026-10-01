@@ -5,7 +5,6 @@ import {
   BuyFaq,
   BuyFeaturedProperties,
   BuyFinalCta,
-  BuyHero,
   BuyInspectionCta,
   BuyLocations,
   BuySavedPropertiesCta,
@@ -13,11 +12,17 @@ import {
   BuySkeleton,
   BuyerGuidance,
   BuyingProcess,
+  BUY_HERO_IMAGE,
   buyFaq,
+  buyHeroHighlights,
   buyerGuidance,
   buyingProcessSteps,
   useBuyCatalogue,
 } from '@/features/buy'
+import { Icon } from '@/shared/components/ui/Icon'
+import { PageHero } from '@/shared/components/layout/PageHero'
+import { pageCrumbs } from '@/shared/lib/breadcrumbs'
+import { routes } from '@/shared/lib/routes'
 /**
  * Buy page — the guided way into the for-sale catalogue.
  *
@@ -61,7 +66,28 @@ export function BuyPage() {
 
   return (
     <main id="main-content" tabIndex={-1} className="focus:outline-none">
-      <BuyHero />
+      <PageHero
+        eyebrow="Buy property in Lagos"
+        title="Find a Property Worth Coming Home To."
+        description="Browse homes, apartments, land and development opportunities across Lekki, Ikoyi, Ikeja and beyond — then let our team guide you through every step, from first viewing to handover."
+        image={BUY_HERO_IMAGE}
+        breadcrumbs={pageCrumbs({ label: 'Buy' })}
+        actions={[
+          { label: 'Start Your Search', href: '#buy-search', withArrow: true },
+          {
+            label: 'Book an Inspection',
+            href: routes.bookInspection,
+            variant: 'outline',
+            icon: 'calendar-search',
+          },
+        ]}
+        meta={buyHeroHighlights.map((highlight) => (
+          <span key={highlight.id} className="flex items-center gap-2">
+            <Icon name={highlight.icon} className="size-4 text-accent-300" strokeWidth={2} />
+            {highlight.label}
+          </span>
+        ))}
+      />
 
       {/* Pulls up over the hero's lower edge, the way the listing page's search bar does. */}
       <BuySearchPanel areas={catalogue.locations} />

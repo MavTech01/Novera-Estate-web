@@ -17,28 +17,25 @@ import { BUY_FEATURED_LIMIT } from '@/features/buy/services/buyService'
 export function BuySkeleton() {
   return (
     <div>
-      <div className="bg-sand-100 pb-24 pt-16 sm:pb-28 sm:pt-20 lg:pb-36 lg:pt-24">
-        <Container>
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-            <div className="flex flex-col gap-4">
-              <Skeleton className="h-7 w-52 rounded-pill" />
-              <Skeleton className="h-12 w-full" />
-              <Skeleton className="h-12 w-4/5" />
-              <Skeleton className="h-5 w-full" />
-              <Skeleton className="h-5 w-3/4" />
-              <div className="mt-4 flex gap-3">
-                <Skeleton className="h-14 w-44 rounded-md" />
-                <Skeleton className="h-14 w-52 rounded-md" />
-              </div>
+      <div className="relative isolate flex min-h-[clamp(18rem,36vh,24rem)] flex-col justify-end overflow-hidden bg-ink-800 pt-28 sm:pt-32 lg:pt-36">
+        <Container className="relative z-10 flex w-full flex-1 items-end">
+          <div className="flex w-full flex-col gap-5 lg:ml-auto lg:max-w-2xl lg:items-end">
+            <Skeleton className="h-4 w-28" />
+            <Skeleton className="h-5 w-40" />
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-3/4" />
+            <Skeleton className="h-5 w-full" />
+            <Skeleton className="h-5 w-2/3" />
+            <div className="mt-1 flex flex-wrap gap-3 lg:justify-end">
+              <Skeleton className="h-14 w-44 rounded-md" />
+              <Skeleton className="h-14 w-52 rounded-md" />
             </div>
-
-            <Skeleton className="aspect-[4/3] w-full rounded-2xl" />
           </div>
         </Container>
       </div>
 
       <Container>
-        <Skeleton className="h-56 w-full rounded-2xl" />
+        <Skeleton className="h-56 w-full rounded-2xl lg:-mt-14" />
       </Container>
 
       <div className="bg-white py-20 pt-14 sm:py-24 sm:pt-16">

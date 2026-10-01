@@ -1,4 +1,4 @@
-import type { PropertyType } from '@/types'
+import type { IconName, PropertyType } from '@/types'
 import type {
   BuyCategory,
   BuyFaqItem,
@@ -26,6 +26,13 @@ export const BUY_HERO_IMAGE = {
   src: '/images/properties/lekki-duplex.webp',
   alt: 'Exterior of a four-bedroom duplex in a Lekki residential estate, Lagos',
 }
+
+/** What the buyer can expect from working with us — capability, not a claim. */
+export const buyHeroHighlights: readonly { id: string; icon: IconName; label: string }[] = [
+  { id: 'inspection', icon: 'calendar-search', label: 'Private viewings arranged' },
+  { id: 'documentation', icon: 'file-text', label: 'Documentation walk-through' },
+  { id: 'areas', icon: 'map-pin', label: 'Guidance across Lagos areas' },
+]
 
 /** How many featured sale listings the "Featured Properties For Sale" grid shows. */
 export const BUY_FEATURED_LIMIT = 6

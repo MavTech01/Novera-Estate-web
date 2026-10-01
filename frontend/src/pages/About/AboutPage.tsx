@@ -1,7 +1,6 @@
 import {
   AboutCTA,
   AboutErrorState,
-  AboutHero,
   AboutSkeleton,
   CompanyIntroduction,
   CompanyStory,
@@ -15,6 +14,9 @@ import {
   findNotice,
   useAboutContent,
 } from '@/features/about'
+import { Icon } from '@/shared/components/ui/Icon'
+import { PageHero } from '@/shared/components/layout/PageHero'
+import { pageCrumbs } from '@/shared/lib/breadcrumbs'
 
 /**
  * About page — who Novera Estates is, and where to go next.
@@ -52,9 +54,33 @@ export function AboutPage() {
     )
   }
 
+  const { hero } = about
+
   return (
     <main id="main-content" tabIndex={-1} className="focus:outline-none">
-      <AboutHero hero={about.hero} />
+      <PageHero
+        headingId="about-hero-heading"
+        eyebrow={hero.eyebrow}
+        title={hero.title}
+        description={hero.description}
+        image={hero.image}
+        breadcrumbs={pageCrumbs({ label: 'About' })}
+        actions={[
+          { label: hero.primaryCta.label, href: hero.primaryCta.href, withArrow: true },
+          {
+            label: hero.secondaryCta.label,
+            href: hero.secondaryCta.href,
+            variant: 'outline',
+            icon: hero.secondaryCta.icon,
+          },
+        ]}
+        meta={hero.highlights.map((highlight) => (
+          <span key={highlight.id} className="flex items-center gap-2">
+            <Icon name={highlight.icon} className="size-4 text-accent-300" strokeWidth={2} />
+            {highlight.label}
+          </span>
+        ))}
+      />
 
       <CompanyIntroduction introduction={about.introduction} />
 

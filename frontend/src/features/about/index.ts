@@ -12,7 +12,6 @@
 
 export { AboutCTA } from './components/AboutCTA'
 export { AboutErrorState } from './components/AboutErrorState'
-export { AboutHero } from './components/AboutHero'
 export { AboutSkeleton } from './components/AboutSkeleton'
 export { CompanyIntroduction } from './components/CompanyIntroduction'
 export { CompanyStory } from './components/CompanyStory'

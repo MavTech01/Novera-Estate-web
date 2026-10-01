@@ -6,7 +6,6 @@
  * without any change outside this folder.
  */
 
-export { BuyHero } from './components/BuyHero'
 export { BuySearchPanel } from './components/BuySearchPanel'
 export { BuyDemoNotice } from './components/BuyDemoNotice'
 export { BuyCategories } from './components/BuyCategories'
@@ -41,6 +40,7 @@ export {
   buyCategorySeeds,
   buyFaq,
   buyerGuidance,
+  buyHeroHighlights,
   buyPropertyTypes,
   buyingProcessSteps,
 } from './data/buyData'
