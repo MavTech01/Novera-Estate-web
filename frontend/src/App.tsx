@@ -7,6 +7,7 @@ import { matchRoute } from './shared/lib/router'
 import { findRoute } from './shared/lib/routeManifest'
 import { routePatterns, routes } from './shared/lib/routes'
 import { AboutPage } from './pages/About/AboutPage'
+import { BuyPage } from './pages/Buy/BuyPage'
 import { HomePage } from './pages/HomePage'
 import { LocationsPage } from './pages/Locations/LocationsPage'
 import { RouteNoticePage } from './pages/RouteNoticePage'
@@ -46,6 +47,8 @@ function resolveRoute(path: string): ResolvedRoute {
       return { page: <PropertiesPage />, title: `Properties for Sale & Rent in Lagos — ${SITE_NAME}` }
     case routes.propertyDetail:
       return { page: <PropertyDetailsPage slug={match.params.slug} />, title: null }
+    case routes.buy:
+      return { page: <BuyPage />, title: `Buy Property in Lagos — ${SITE_NAME}` }
     case routes.projects:
       return { page: <ProjectsPage />, title: `Developments in Lagos — ${SITE_NAME}` }
     case routes.projectDetail:

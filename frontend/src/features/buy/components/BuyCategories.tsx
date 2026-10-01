@@ -1,0 +1,79 @@
+import { buildBuyCategoryHref } from '@/features/buy/utils/buyQuery'
+import { ArrowLink } from '@/shared/components/ui/ArrowLink'
+import { Badge } from '@/shared/components/ui/Badge'
+import { Container } from '@/shared/components/ui/Container'
+import { Reveal } from '@/shared/components/ui/Reveal'
+import { Section } from '@/shared/components/ui/Section'
+import { SectionHeading } from '@/shared/components/ui/SectionHeading'
+import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
+import type { BuyCategory } from '@/features/buy/types/buy.types'
+
+interface BuyCategoriesProps {
+  categories: readonly BuyCategory[]
+}
+
+/** What "browse" means for each category, so the CTA reads as a sentence. */
+const ctaLabels: Record<BuyCategory['propertyType'], string> = {
+  house: 'homes',
+  apartment: 'apartments',
+  luxury: 'luxury residences',
+  land: 'land',
+  commercial: 'commercial properties',
+  development: 'new developments',
+}
+
+/** The six ways to buy — every card leads to a filtered catalogue on /properties. */
+export function BuyCategories({ categories }: BuyCategoriesProps) {
+  return (
+    <Section tone="white" ariaLabelledBy="buy-categories-heading" className="pt-14 sm:pt-16">
+      <Container>
+        <SectionHeading
+          id="buy-categories-heading"
+          eyebrow="Browse by category"
+          title="What Are You Looking To Buy?"
+          description="Start broad with our sample categories — each one opens the catalogue filtered to that property type."
+        />
+
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {categories.map((category, index) => {
+            const card = (
+              <div className="group flex h-full flex-col">
+                <div className="relative overflow-hidden rounded-t-2xl">
+                  <SkeletonImage
+                    src={category.image.src}
+                    alt={category.image.alt}
+                    width={900}
+                    height={560}
+                    loading="lazy"
+                    className="aspect-[3/2] w-full transition-transform duration-500 ease-[var(--ease-out-soft)] group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute left-4 top-4">
+                    <Badge tone="orange" className="shadow-sm">
+                      {category.count} sample {category.count === 1 ? 'listing' : 'listings'} for sale
+                    </Badge>
+                  </div>
+                </div>
+
+                <div className="flex flex-1 flex-col border border-t-0 border-sand-200 bg-white p-6">
+                  <h3 className="font-display text-lg font-bold text-ink-900">{category.name}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{category.description}</p>
+                  <div className="mt-5">
+                    <ArrowLink href={buildBuyCategoryHref(category.propertyType)} tone="orange">
+                      Browse {ctaLabels[category.propertyType]}
+                    </ArrowLink>
+                  </div>
+                </div>
+              </div>
+            )
+
+            return (
+              <Reveal key={category.id} className="flex" delay={index * 80}>
+                {card}
+              </Reveal>
+            )
+          })}
+        </div>
+      </Container>
+    </Section>
+  )
+}

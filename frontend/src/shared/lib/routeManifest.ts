@@ -2,6 +2,12 @@ import { PROPERTIES_PER_PAGE } from '@/data/propertyFilters'
 import { preloadProperties, preloadPropertyBySlug } from '@/data/propertyRepository'
 import { preloadAboutContent } from '@/features/about/services/aboutService'
 import {
+  BUY_FEATURED_LIMIT,
+  BUY_HERO_IMAGE,
+  preloadBuyCatalogue,
+  preloadFeaturedBuyProperties,
+} from '@/features/buy/services/buyService'
+import {
   preloadAllLocations,
   preloadFeaturedLocation,
   preloadLocations,
@@ -131,6 +137,21 @@ function loadAboutPage(): Promise<unknown> {
   return Promise.all([preloadAboutContent(), preloadAllLocations()])
 }
 
+/**
+ * Preloads the Buy page.
+ *
+ * Both sources are needed for the first frame, and neither can wait for the
+ * other's hook: the category cards and the "Popular Buying Locations" grid come
+ * from one catalogue request, while the featured grid and the hero's own sections
+ * read the listings. `preloadBuyPage` also decodes the hero photograph for the
+ * same reason `loadPropertyDetail` does — it is what the visitor looks at first.
+ */
+function loadBuyPage(): Promise<unknown> {
+  return Promise.all([preloadBuyCatalogue(), preloadFeaturedBuyProperties(BUY_FEATURED_LIMIT)]).then(
+    async () => decodeImage(BUY_HERO_IMAGE.src),
+  )
+}
+
 export const routeManifest: readonly RouteDefinition[] = [
   {
     pattern: routes.home,
@@ -152,6 +173,12 @@ export const routeManifest: readonly RouteDefinition[] = [
     status: 'ready',
     title: 'Property Details — Novera Estates',
     load: loadPropertyDetail,
+  },
+  {
+    pattern: routes.buy,
+    status: 'ready',
+    title: 'Buy Property in Lagos — Novera Estates',
+    load: loadBuyPage,
   },
   {
     pattern: routes.projects,
@@ -194,6 +221,14 @@ export const routeManifest: readonly RouteDefinition[] = [
     title: 'Services',
     description:
       'Sales, rentals, land and investment advisory are all handled in person. Talk to an agent about what you are looking for.',
+    load: noLoad,
+  },
+  {
+    pattern: routes.bookInspection,
+    status: 'planned',
+    title: 'Book an Inspection',
+    description:
+      'Online inspection scheduling is on the way. In the meantime our office is open Monday to Saturday and we answer every enquiry within one working day.',
     load: noLoad,
   },
   {

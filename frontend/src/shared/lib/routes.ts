@@ -9,12 +9,15 @@ export const routes = {
   home: '/',
   properties: '/properties',
   propertyDetail: '/properties/:slug',
+  /** Landing page for buying — a guided entry point into the filtered catalogue. */
+  buy: '/buy',
   projects: '/projects',
   projectDetail: '/projects/:slug',
   locations: '/locations',
   locationDetail: '/locations/:slug',
   about: '/about',
   services: '/services/:slug',
+  bookInspection: '/book-inspection',
   contact: '/contact',
 } as const
 
@@ -29,6 +32,7 @@ export const routePatterns: readonly string[] = [
   routes.home,
   routes.properties,
   routes.propertyDetail,
+  routes.buy,
   routes.projects,
   routes.projectDetail,
   routes.locations,

@@ -29,7 +29,7 @@ export const company: CompanyProfile = {
 export const primaryNavigation: NavigationLink[] = [
   { label: 'Home', href: '/' },
   { label: 'Properties', href: '/properties' },
-  { label: 'Buy', href: '/properties?purpose=buy' },
+  { label: 'Buy', href: '/buy' },
   { label: 'Rent', href: '/properties?purpose=rent' },
   { label: 'Projects', href: '/projects' },
   { label: 'Locations', href: '/locations' },
@@ -51,7 +51,7 @@ export const footerNavigation: NavigationGroup[] = [
     title: 'Properties',
     links: [
       { label: 'All Properties', href: '/properties' },
-      { label: 'Buy', href: '/properties?purpose=buy' },
+      { label: 'Buy', href: '/buy' },
       { label: 'Rent', href: '/properties?purpose=rent' },
       { label: 'Projects', href: '/projects' },
       { label: 'Locations', href: '/locations' },
