@@ -1,15 +1,19 @@
 import {
-  defaultFilters,
-  filterParams,
-  propertyTypes,
-  serialiseQuery,
-} from '@/shared/lib/propertyQuery'
-import { routes } from '@/shared/lib/routes'
+  ANY_FILTER,
+  buildListingPropertiesHref,
+  buildListingSearchHref,
+  emptyListingSearch,
+  findListingSearchProblem,
+  hasListingSearch,
+  parseListingSearch,
+  serialiseListingSearch,
+  toListingPropertyFilters,
+} from '@/shared/lib/propertySearchQuery'
 import type { PropertyFilters, PropertyType } from '@/types'
 import type { BuyLocation, BuySearchCriteria } from '@/features/buy/types/buy.types'
 
 /**
- * The Buy page query layer.
+ * The Buy page's query layer.
  *
  * Everything the Buy page's search panel does with the URL lives here, and the
  * central claim of this module is that **it speaks the listing page's own
@@ -20,6 +24,13 @@ import type { BuyLocation, BuySearchCriteria } from '@/features/buy/types/buy.ty
  * this page, which is what lets the same values work today against the mock and
  * tomorrow against `GET /api/properties`.
  *
+ * What actually happens is shared. The Rent page asks the same five questions of
+ * the same dialect and differs only in purpose and in what it calls money, so the
+ * query mechanics live in `propertySearchQuery` and this module is the Buy
+ * binding of them. These wrappers are Buy's public API: the panel imports
+ * `ANY_FILTER` from here and the barrel re-exports the rest, so the names stay
+ * put even though the implementation is no longer Buy's alone.
+ *
  * The only translation that happens is the area slug: a visitor picks "Lekki",
  * while the catalogue stores six separate rows for it. Expanding that one slug
  * into the `location` values the properties facet already accepts is what makes
@@ -27,80 +38,33 @@ import type { BuyLocation, BuySearchCriteria } from '@/features/buy/types/buy.ty
  */
 
 /** The "no selection" value shared by every `<select>` in the panel. */
-export const ANY_FILTER = 'any'
+export { ANY_FILTER }
 
-/** The unfiltered state — also the target of "Reset search". */
-export const emptyBuySearch: BuySearchCriteria = {
-  location: ANY_FILTER,
-  propertyType: ANY_FILTER,
-  minPrice: ANY_FILTER,
-  maxPrice: ANY_FILTER,
-  bedrooms: ANY_FILTER,
-}
+/**
+ * The unfiltered state — also the target of "Reset search".
+ *
+ * The same object the Rent panel resets to, since an unfiltered search is the
+ * same whatever it is for. Treated as read-only; the reset path hands it back
+ * rather than writing into it.
+ */
+export const emptyBuySearch: BuySearchCriteria = emptyListingSearch
 
 /* -------------------------------------------------------------------------- */
 /* URL <-> state                                                               */
 /* -------------------------------------------------------------------------- */
 
 /**
- * Reads a positive amount from a query parameter.
- *
- * Guards against a hand-edited or stale bookmark: a negative price or a
- * non-numeric value is dropped rather than passed on to the catalogue, where it
- * would silently return nothing.
- */
-function readAmount(value: string | null): string {
-  if (!value || value === ANY_FILTER) return ANY_FILTER
-
-  const parsed = Number(value)
-
-  return Number.isFinite(parsed) && parsed >= 0 ? String(parsed) : ANY_FILTER
-}
-
-/** Reads a minimum bedroom count, keeping only values the catalogue can match. */
-function readBedrooms(value: string | null): string {
-  if (!value || value === ANY_FILTER) return ANY_FILTER
-
-  const parsed = Number(value)
-
-  return Number.isInteger(parsed) && parsed > 0 ? String(parsed) : ANY_FILTER
-}
-
-function readPropertyType(value: string | null): PropertyType | typeof ANY_FILTER {
-  return propertyTypes.includes(value as PropertyType) ? (value as PropertyType) : ANY_FILTER
-}
-
-/**
  * Rebuilds the panel state from a query string.
  *
- * Unknown values are dropped rather than thrown, so a hand-edited or stale
- * bookmark can never break the page.
- *
  * `areas` is required because an area is only identifiable by its own slug *and*
- * by the catalogue slugs behind it. Both are accepted: `?location=lekki` is what
- * this page writes and what a visitor would type, while a link pasted from
- * `/properties?location=gupe` also selects Lekki, because Gupe is one of Lekki's
- * six catalogue rows. Passing an empty list is safe — it just means no area can
- * be recognised yet, and the panel falls back to "any".
+ * by the catalogue slugs behind it. Passing an empty list is safe — it just means
+ * no area can be recognised yet, and the panel falls back to "any".
  */
 export function parseBuySearch(
   query: URLSearchParams,
   areas: readonly BuyLocation[],
 ): BuySearchCriteria {
-  const requested = query.getAll(filterParams.location).filter(Boolean)
-  const area = areas.find(
-    (candidate) =>
-      candidate.slug === requested[0] ||
-      candidate.propertyLocationSlugs.some((slug) => requested.includes(slug)),
-  )
-
-  return {
-    location: area?.slug ?? ANY_FILTER,
-    propertyType: readPropertyType(query.get(filterParams.type)),
-    minPrice: readAmount(query.get(filterParams.minPrice)),
-    maxPrice: readAmount(query.get(filterParams.maxPrice)),
-    bedrooms: readBedrooms(query.get(filterParams.bedrooms)),
-  }
+  return parseListingSearch(query, areas)
 }
 
 /* -------------------------------------------------------------------------- */
@@ -110,25 +74,16 @@ export function parseBuySearch(
 /**
  * Translates the panel's criteria into the listing page's own filter shape.
  *
- * Returns a partial filter set rather than a whole one: the panel owns six
- * fields, while `PropertyFilters` also carries sort, pagination, statuses and
- * features that belong to the listing page alone. Filling in the defaults here
- * and overriding would be the same work with more to get wrong.
+ * This is the Buy binding of the shared translation, which returns a partial
+ * filter set rather than a whole one: the panel owns five fields, while
+ * `PropertyFilters` also carries sort, pagination, statuses and features that
+ * belong to the listing page alone.
  */
 export function toPropertyFilters(
   criteria: BuySearchCriteria,
   areas: readonly BuyLocation[],
 ): Partial<PropertyFilters> {
-  const area = areas.find((candidate) => candidate.slug === criteria.location)
-
-  return {
-    purpose: 'buy',
-    location: area ? [...area.propertyLocationSlugs] : [],
-    propertyType: criteria.propertyType === ANY_FILTER ? [] : [criteria.propertyType],
-    minPrice: criteria.minPrice === ANY_FILTER ? null : Number(criteria.minPrice),
-    maxPrice: criteria.maxPrice === ANY_FILTER ? null : Number(criteria.maxPrice),
-    bedrooms: criteria.bedrooms === ANY_FILTER ? null : Number(criteria.bedrooms),
-  }
+  return toListingPropertyFilters(criteria, areas, 'buy')
 }
 
 /**
@@ -145,11 +100,7 @@ export function toPropertyFilters(
  * and stating it keeps them working if that default ever changes.
  */
 export function buildBuyPropertiesHref(filters: Partial<PropertyFilters>): string {
-  const params = serialiseQuery({ ...defaultFilters, ...filters, purpose: 'buy' })
-
-  params.set(filterParams.purpose, 'buy')
-
-  return `${routes.properties}?${params.toString()}`
+  return buildListingPropertiesHref(filters, 'buy')
 }
 
 /**
@@ -169,16 +120,7 @@ export function serialiseBuySearch(
   criteria: BuySearchCriteria,
   areas: readonly BuyLocation[],
 ): URLSearchParams {
-  const params = new URLSearchParams()
-  const area = areas.find((candidate) => candidate.slug === criteria.location)
-
-  if (area) params.set(filterParams.location, area.slug)
-  if (criteria.propertyType !== ANY_FILTER) params.set(filterParams.type, criteria.propertyType)
-  if (criteria.minPrice !== ANY_FILTER) params.set(filterParams.minPrice, criteria.minPrice)
-  if (criteria.maxPrice !== ANY_FILTER) params.set(filterParams.maxPrice, criteria.maxPrice)
-  if (criteria.bedrooms !== ANY_FILTER) params.set(filterParams.bedrooms, criteria.bedrooms)
-
-  return params
+  return serialiseListingSearch(criteria, areas)
 }
 
 /**
@@ -192,7 +134,7 @@ export function buildBuySearchHref(
   criteria: BuySearchCriteria,
   areas: readonly BuyLocation[],
 ): string {
-  return buildBuyPropertiesHref(toPropertyFilters(criteria, areas))
+  return buildListingSearchHref(criteria, areas, 'buy')
 }
 
 /** The `/properties` URL for one property type. */
@@ -217,27 +159,10 @@ export function buildBuyLocationHref(area: Pick<BuyLocation, 'propertyLocationSl
  * in the field rather than in an error banner.
  */
 export function findBuySearchProblem(criteria: BuySearchCriteria): string | null {
-  const { minPrice, maxPrice } = criteria
-
-  if (minPrice === ANY_FILTER || maxPrice === ANY_FILTER) return null
-
-  const min = Number(minPrice)
-  const max = Number(maxPrice)
-
-  if (!Number.isFinite(min) || !Number.isFinite(max)) return null
-
-  return min <= max
-    ? null
-    : 'Your minimum price is higher than your maximum. Swap them, or choose a wider range.'
+  return findListingSearchProblem(criteria, 'price')
 }
 
 /** True when any field differs from the unfiltered state. */
 export function hasBuySearch(criteria: BuySearchCriteria): boolean {
-  return (
-    criteria.location !== ANY_FILTER ||
-    criteria.propertyType !== ANY_FILTER ||
-    criteria.minPrice !== ANY_FILTER ||
-    criteria.maxPrice !== ANY_FILTER ||
-    criteria.bedrooms !== ANY_FILTER
-  )
+  return hasListingSearch(criteria)
 }
