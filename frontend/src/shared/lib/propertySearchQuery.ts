@@ -53,6 +53,8 @@ export const ANY_FILTER = 'any'
  */
 export interface ListingSearchArea {
   slug: string
+  name?: string
+  label?: string
   /** The properties-catalogue slugs that make up this area. */
   propertyLocationSlugs: readonly string[]
 }
