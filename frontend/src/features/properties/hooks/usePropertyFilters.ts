@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { locations } from '@/data/locations'
@@ -62,49 +62,70 @@ export interface PropertyFiltersController {
 }
 
 /**
+ * The three pieces of listing state the URL carries together.
+ *
+ * They are always serialised as one unit because they are not independent: a
+ * filter change invalidates the page, and a sort change does too. Keeping them
+ * in a single value makes that coupling impossible to get wrong at the point
+ * where the URL is written.
+ */
+interface ListingState {
+  filters: PropertyFilters
+  sort: PropertySort
+  page: number
+}
+
+/**
  * Owns every piece of listing state — filters, sort and page — and keeps the
  * URL in sync.
  *
- * The URL is the single source of truth: it seeds the initial state, receives
- * every subsequent change via `replaceState` (so filters are shareable without
- * flooding the back button), and re-seeds the state when a navigation link such
- * as `/properties?purpose=rent` is followed while already on this page.
+ * The URL is the source of truth: `useSearchParams` is reactive, so a nav link
+ * such as `/properties?purpose=rent`, a shared deep link and the browser back
+ * button are all the same event as a filter click here. Nothing mirrors the
+ * listing state into component state, so the filter panels, the result count and
+ * the pagination control cannot disagree.
+ *
+ * Changes are written with `replace`, so filters are shareable without flooding
+ * the back button.
  */
 export function usePropertyFilters(): PropertyFiltersController {
-  const [query, setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const [filters, setFilters] = useState<PropertyFilters>(() => parseFilters(query))
-  const [sort, setSortState] = useState<PropertySort>(() => parseSort(query))
-  const [page, setPage] = useState<number>(() => parsePage(query))
+  // Derived, never mirrored: a new search string is a new listing state.
+  const filters = useMemo(() => parseFilters(searchParams), [searchParams])
+  const sort = useMemo(() => parseSort(searchParams), [searchParams])
+  const page = useMemo(() => parsePage(searchParams), [searchParams])
 
-  /** The query string we last wrote ourselves, used to ignore our own echo. */
-  const ownQueryKey = useRef(query.toString())
+  /** Writes a change back to the URL, seeing the listing state as it is now. */
+  const commit = useCallback(
+    (recipe: (current: ListingState) => ListingState) => {
+      setSearchParams((current) => {
+        const next = recipe({
+          filters: parseFilters(current),
+          sort: parseSort(current),
+          page: parsePage(current),
+        })
 
-  // Adopt filter state pushed into the URL by navigation (nav links, deep links).
-  const incomingQueryKey = query.toString()
+        return serialiseQuery(next.filters, next.sort, next.page)
+      }, { replace: true })
+    },
+    [setSearchParams],
+  )
+
+  // Tidies a hand-typed or legacy link once on arrival. Guarded by an inequality
+  // so it stops once the URL is canonical, which is also what keeps it from
+  // fighting back or forward — those never need rewriting.
   useEffect(() => {
-    if (incomingQueryKey === ownQueryKey.current) return
-
-    ownQueryKey.current = incomingQueryKey
-    setFilters(parseFilters(query))
-    setSortState(parseSort(query))
-    setPage(parsePage(query))
-    // `query` is derived from `incomingQueryKey`, which is the real dependency.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [incomingQueryKey])
-
-  // Publish state changes to the address bar.
-  useEffect(() => {
-    const nextQuery = serialiseQuery(filters, sort, page)
-    ownQueryKey.current = nextQuery.toString()
-    setSearchParams(nextQuery, { replace: true })
-  }, [filters, sort, page, setSearchParams])
+    const canonical = serialiseQuery(filters, sort, page)
+    if (canonical.toString() !== searchParams.toString()) setSearchParams(canonical, { replace: true })
+  }, [filters, sort, page, searchParams, setSearchParams])
 
   /** Any change resets to the first page — page 4 of the old result set makes no sense. */
-  const applyFilters = useCallback((updater: (current: PropertyFilters) => PropertyFilters) => {
-    setFilters(updater)
-    setPage(1)
-  }, [])
+  const applyFilters = useCallback(
+    (updater: (current: PropertyFilters) => PropertyFilters) =>
+      commit((current) => ({ ...current, filters: updater(current.filters), page: 1 })),
+    [commit],
+  )
 
   const setPurpose = useCallback(
     (purpose: PropertyPurpose | 'any') => {
@@ -228,16 +249,22 @@ export function usePropertyFilters(): PropertyFiltersController {
     [applyFilters],
   )
 
-  const setSort = useCallback((nextSort: PropertySort) => {
-    setSortState(nextSort)
-    setPage(1)
-  }, [])
+  // Sorting reorders the results, so the current page number stops meaning
+  // anything and the first page becomes current again.
+  const setSort = useCallback(
+    (nextSort: PropertySort) => commit((current) => ({ ...current, sort: nextSort, page: 1 })),
+    [commit],
+  )
 
-  const reset = useCallback(() => {
-    setFilters(defaultFilters)
-    setSortState(defaultSort)
-    setPage(1)
-  }, [])
+  const setPage = useCallback(
+    (nextPage: number) => commit((current) => ({ ...current, page: nextPage })),
+    [commit],
+  )
+
+  const reset = useCallback(
+    () => commit(() => ({ filters: defaultFilters, sort: defaultSort, page: 1 })),
+    [commit],
+  )
 
   const purpose: PropertyPurpose = filters.purpose === 'any' ? 'buy' : filters.purpose
 

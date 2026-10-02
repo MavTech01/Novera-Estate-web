@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { primeLocations } from '@/features/projects/data/projectOptions'
@@ -21,14 +21,14 @@ import {
 /**
  * Owns every piece of project filter state and keeps the URL in sync.
  *
- * The URL is the single source of truth: it seeds the initial state, receives
- * every subsequent change via `replaceState` (so filters are shareable without
- * flooding the back button), and re-seeds the state when a deep link such as
- * `/projects?location=lekki-phase-1` is followed while already on this page.
+ * The URL is the source of truth: `useSearchParams` is reactive, so a deep link
+ * such as `/projects?location=lekki-phase-1`, a location card, and the browser
+ * back button are all the same event as a filter click here. Nothing mirrors the
+ * filters into component state, so the category strip, the hero form and the
+ * mobile drawer cannot disagree.
  *
- * That also means the category strip, the hero form and the mobile drawer are
- * three presentations of one value — there is no second copy of the filters to
- * keep in step.
+ * Changes are written with `replace`, so filters are shareable without flooding
+ * the back button.
  */
 
 /**
@@ -65,57 +65,55 @@ export interface ProjectFiltersController {
 }
 
 export function useProjectFilters(): ProjectFiltersController {
-  const [query, setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const [filters, setFilters] = useState<ProjectFilters>(() => parseProjectFilters(query))
+  // Derived, never mirrored: a new search string is a new set of filters.
+  const filters = useMemo(() => parseProjectFilters(searchParams), [searchParams])
 
-  /** The query string we last wrote ourselves, used to ignore our own echo. */
-  const ownQueryKey = useRef(query.toString())
+  /** Writes a change back to the URL, seeing the filters as they are now. */
+  const commit = useCallback(
+    (recipe: (current: ProjectFilters) => ProjectFilters) => {
+      setSearchParams((current) => serialiseProjectFilters(recipe(parseProjectFilters(current))), {
+        replace: true,
+      })
+    },
+    [setSearchParams],
+  )
 
-  // Adopt filter state pushed into the URL by navigation (deep links, location
-  // cards) while this page is already mounted.
-  const incomingQueryKey = query.toString()
+  // Tidies a hand-typed or legacy link once on arrival. Guarded by an inequality
+  // so it stops once the URL is canonical, which is also what keeps it from
+  // fighting back or forward — those never need rewriting.
   useEffect(() => {
-    if (incomingQueryKey === ownQueryKey.current) return
+    const canonical = serialiseProjectFilters(filters)
+    if (canonical.toString() !== searchParams.toString()) setSearchParams(canonical, { replace: true })
+  }, [filters, searchParams, setSearchParams])
 
-    ownQueryKey.current = incomingQueryKey
-    setFilters(parseProjectFilters(query))
-    // `query` is derived from `incomingQueryKey`, which is the real dependency.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [incomingQueryKey])
+  const setQuery = useCallback((value: string) => commit((current) => ({ ...current, query: value })), [commit])
 
-  // Publish state changes to the address bar.
-  useEffect(() => {
-    const nextQuery = serialiseProjectFilters(filters)
-    ownQueryKey.current = nextQuery.toString()
-    setSearchParams(nextQuery, { replace: true })
-  }, [filters, setSearchParams])
+  const setLocation = useCallback(
+    (value: string) => commit((current) => ({ ...current, location: value })),
+    [commit],
+  )
 
-  const setQuery = useCallback((value: string) => {
-    setFilters((current) => ({ ...current, query: value }))
-  }, [])
+  const setProjectType = useCallback(
+    (value: ProjectTypeFilter) => commit((current) => ({ ...current, projectType: value })),
+    [commit],
+  )
 
-  const setLocation = useCallback((value: string) => {
-    setFilters((current) => ({ ...current, location: value }))
-  }, [])
+  const setStatus = useCallback(
+    (value: ProjectStatusFilter) => commit((current) => ({ ...current, status: value })),
+    [commit],
+  )
 
-  const setProjectType = useCallback((value: ProjectTypeFilter) => {
-    setFilters((current) => ({ ...current, projectType: value }))
-  }, [])
+  const removeFilter = useCallback(
+    (field?: keyof ProjectFilters) =>
+      commit((current) =>
+        field ? { ...current, [field]: defaultProjectFilters[field] } : defaultProjectFilters,
+      ),
+    [commit],
+  )
 
-  const setStatus = useCallback((value: ProjectStatusFilter) => {
-    setFilters((current) => ({ ...current, status: value }))
-  }, [])
-
-  const removeFilter = useCallback((field?: keyof ProjectFilters) => {
-    setFilters((current) =>
-      field
-        ? { ...current, [field]: defaultProjectFilters[field] }
-        : defaultProjectFilters,
-    )
-  }, [])
-
-  const reset = useCallback(() => setFilters(defaultProjectFilters), [])
+  const reset = useCallback(() => commit(() => defaultProjectFilters), [commit])
 
   const activeFilters = useMemo(
     () => describeActiveProjectFilters(filters, resolveLocationLabel),

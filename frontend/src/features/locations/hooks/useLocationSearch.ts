@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import type {
@@ -18,17 +18,17 @@ import {
  * Owns the Locations page's search and category state, and keeps the URL in
  * sync.
  *
- * The URL is the single source of truth: it seeds the initial state, receives
- * every subsequent change via `replaceState` (so a search is shareable without
- * flooding the back button), and re-seeds the state when a deep link such as
- * `/locations?q=lekki` is followed while this page is already mounted.
+ * The URL is the source of truth: `useSearchParams` is reactive, so a deep link
+ * such as `/locations?q=lekki` and a browser back button are the same event as a
+ * filter click here — they all change the search string and this hook reads it
+ * back. Nothing mirrors the filters into component state, so the hero search box,
+ * the category strip and the grid cannot disagree.
  *
- * That is what makes the hero search box, the category strip and the grid three
- * presentations of one value — there is no second copy of the filters to keep in
- * step, so they cannot disagree.
+ * Changes are written with `replace`, so a search is shareable without flooding
+ * the back button.
  *
  * The free-text matching itself lives in `../utils/locationUtils`; this hook
- * only manages state and serialisation.
+ * only derives state from the URL and serialises changes back to it.
  */
 export interface LocationSearchController {
   filters: LocationFilters
@@ -47,47 +47,49 @@ export interface LocationSearchController {
 }
 
 export function useLocationSearch(): LocationSearchController {
-  const [query, setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const [filters, setFilters] = useState<LocationFilters>(() => parseLocationFilters(query))
+  // Derived, never mirrored: a new search string is a new set of filters.
+  const filters = useMemo(() => parseLocationFilters(searchParams), [searchParams])
 
-  /** The query string we last wrote ourselves, used to ignore our own echo. */
-  const ownQueryKey = useRef(query.toString())
+  /**
+   * Writes a change back to the URL. The recipe is handed the filters as they
+   * are *now*, which is why this can use the functional form of `setSearchParams`
+   * instead of closing over `filters` and rebuilding it on every render.
+   */
+  const commit = useCallback(
+    (recipe: (current: LocationFilters) => LocationFilters) => {
+      setSearchParams((current) => serialiseLocationFilters(recipe(parseLocationFilters(current))), {
+        replace: true,
+      })
+    },
+    [setSearchParams],
+  )
 
-  // Adopt filter state pushed into the URL by navigation (deep links) while this
-  // page is already mounted.
-  const incomingQueryKey = query.toString()
+  // Tidies a hand-typed or legacy link once on arrival. Guarded by an inequality
+  // so it stops immediately once the URL is canonical, which is also what stops
+  // it fighting back or forward — those never need rewriting.
   useEffect(() => {
-    if (incomingQueryKey === ownQueryKey.current) return
+    const canonical = serialiseLocationFilters(filters)
+    if (canonical.toString() !== searchParams.toString()) setSearchParams(canonical, { replace: true })
+  }, [filters, searchParams, setSearchParams])
 
-    ownQueryKey.current = incomingQueryKey
-    setFilters(parseLocationFilters(query))
-    // `query` is derived from `incomingQueryKey`, which is the real dependency.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [incomingQueryKey])
+  const setQuery = useCallback((value: string) => commit((current) => ({ ...current, query: value })), [commit])
 
-  // Publish state changes to the address bar.
-  useEffect(() => {
-    const nextQuery = serialiseLocationFilters(filters)
-    ownQueryKey.current = nextQuery.toString()
-    setSearchParams(nextQuery, { replace: true })
-  }, [filters, setSearchParams])
+  const setCategory = useCallback(
+    (value: LocationCategoryValue) => commit((current) => ({ ...current, category: value })),
+    [commit],
+  )
 
-  const setQuery = useCallback((value: string) => {
-    setFilters((current) => ({ ...current, query: value }))
-  }, [])
+  const removeFilter = useCallback(
+    (field?: keyof LocationFilters) =>
+      commit((current) =>
+        field ? { ...current, [field]: defaultLocationFilters[field] } : defaultLocationFilters,
+      ),
+    [commit],
+  )
 
-  const setCategory = useCallback((value: LocationCategoryValue) => {
-    setFilters((current) => ({ ...current, category: value }))
-  }, [])
-
-  const removeFilter = useCallback((field?: keyof LocationFilters) => {
-    setFilters((current) =>
-      field ? { ...current, [field]: defaultLocationFilters[field] } : defaultLocationFilters,
-    )
-  }, [])
-
-  const reset = useCallback(() => setFilters(defaultLocationFilters), [])
+  const reset = useCallback(() => commit(() => defaultLocationFilters), [commit])
 
   const activeFilters = useMemo(() => describeActiveLocationFilters(filters), [filters])
 
