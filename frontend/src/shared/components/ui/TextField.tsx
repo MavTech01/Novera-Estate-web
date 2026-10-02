@@ -14,6 +14,8 @@ interface TextFieldProps {
   type?: 'text' | 'email' | 'tel' | 'date' | 'time' | 'number'
   autoComplete?: string
   required?: boolean
+  /** Locks the field while a form is in flight, so nothing is edited mid-send. */
+  disabled?: boolean
   /** Validation message — also wires up `aria-invalid` and `aria-describedby`. */
   error?: string
   min?: string
@@ -35,6 +37,7 @@ export function TextField({
   type = 'text',
   autoComplete,
   required = false,
+  disabled = false,
   error,
   min,
 }: TextFieldProps) {
@@ -70,11 +73,13 @@ export function TextField({
           placeholder={placeholder}
           autoComplete={autoComplete}
           required={required}
+          disabled={disabled}
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? errorId : undefined}
           className={cn(
             'h-12 w-full rounded-md border bg-white text-sm font-semibold text-ink-900',
             'transition-colors duration-200 placeholder:font-medium placeholder:text-ink-400',
+            disabled && 'cursor-not-allowed bg-sand-100 text-ink-400',
             error
               ? 'border-accent-500 focus-visible:border-accent-600'
               : 'border-sand-200 hover:border-accent-300 focus-visible:border-accent-500',

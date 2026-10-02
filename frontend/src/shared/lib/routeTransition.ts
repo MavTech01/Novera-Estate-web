@@ -1,9 +1,9 @@
 import {
-  applyScroll,
   consumeScrollIntent,
   getLocationSnapshot,
   locationKey,
   parseLocation,
+  recordCommittedScrollIntent,
   rememberScrollPosition,
   subscribeToLocation,
   type LocationChange,
@@ -139,18 +139,25 @@ async function runTransition(next: ParsedLocation, token: number, startedAt: num
   commit(next)
 }
 
-/** Makes `next` the rendered location and settles the scroll position. */
+/**
+ * Makes `next` the rendered location and hands the scroll to the layout phase.
+ *
+ * The scroll itself is *not* done here. Committing only changes what React
+ * renders; the window is moved afterwards by `useScrollRestoration`, in a layout
+ * effect, so the new page's DOM is already in place. Scrolling from inside this
+ * store would move the page the visitor is still looking at.
+ */
 function commit(next: ParsedLocation): void {
   rememberScrollPosition(locationKey(committed))
 
   const intent = consumeScrollIntent()
+  recordCommittedScrollIntent(next, intent)
 
   committed = next
   pending = null
   phase = 'exiting'
   publish()
 
-  applyScroll(next, intent)
   focusRouteRegion(intent)
 
   exitTimer = setTimeout(() => {

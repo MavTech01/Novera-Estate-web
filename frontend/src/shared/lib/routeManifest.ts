@@ -13,10 +13,17 @@ import {
   preloadLocations,
 } from '@/features/locations/services/locationService'
 import { parseLocationFilters } from '@/features/locations/utils/locationUtils'
+import { CONTACT_HERO_IMAGE } from '@/features/contact/data/contactData'
 import {
   preloadProjectBySlug,
   preloadProjects,
 } from '@/features/projects/services/projectService'
+import {
+  RENT_FEATURED_LIMIT,
+  RENT_HERO_IMAGE,
+  preloadFeaturedRentProperties,
+  preloadRentCatalogue,
+} from '@/features/rent/services/rentService'
 import { buildProjectGallery } from '@/features/projects/utils/projectGallery'
 import { parseProjectFilters } from '@/features/projects/utils/projectUtils'
 import type { ParsedLocation } from './location'
@@ -152,6 +159,36 @@ function loadBuyPage(): Promise<unknown> {
   )
 }
 
+/**
+ * Preloads the Rent page.
+ *
+ * Same reasoning as `loadBuyPage`: the category and location cards come from one
+ * catalogue request while the featured grid reads the listings, so neither can
+ * wait for the other, and the hero photograph is decoded before the route
+ * commits.
+ */
+function loadRentPage(): Promise<unknown> {
+  return Promise.all([preloadRentCatalogue(), preloadFeaturedRentProperties(RENT_FEATURED_LIMIT)]).then(
+    async () => decodeImage(RENT_HERO_IMAGE.src),
+  )
+}
+
+/**
+ * Preloads the Contact page.
+ *
+ * All of the page's content is local — the office details from `company`, the FAQ
+ * and the quick actions from the Contact feature — so the only thing worth
+ * warming is the hero photograph, which is the first thing the visitor sees.
+ */
+function loadContactPage(): Promise<unknown> {
+  return decodeImage(CONTACT_HERO_IMAGE.src)
+}
+
+/** The FAQ page is a static list, so it needs nothing but its hero-free shell. */
+function loadFaqPage(): Promise<unknown> {
+  return noLoad()
+}
+
 export const routeManifest: readonly RouteDefinition[] = [
   {
     pattern: routes.home,
@@ -179,6 +216,12 @@ export const routeManifest: readonly RouteDefinition[] = [
     status: 'ready',
     title: 'Buy Property in Lagos — Novera Estates',
     load: loadBuyPage,
+  },
+  {
+    pattern: routes.rent,
+    status: 'ready',
+    title: 'Rent Property in Lagos — Novera Estates',
+    load: loadRentPage,
   },
   {
     pattern: routes.projects,
@@ -233,10 +276,15 @@ export const routeManifest: readonly RouteDefinition[] = [
   },
   {
     pattern: routes.contact,
-    status: 'planned',
-    title: 'Contact',
-    description: 'Our office details and enquiry form are on the way. Reach us on any of the channels below.',
-    load: noLoad,
+    status: 'ready',
+    title: 'Contact Novera Estates — Lagos Office & Enquiries',
+    load: loadContactPage,
+  },
+  {
+    pattern: routes.faq,
+    status: 'ready',
+    title: 'Frequently Asked Questions — Novera Estates',
+    load: loadFaqPage,
   },
 ]
 

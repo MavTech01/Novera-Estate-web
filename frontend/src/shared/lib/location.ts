@@ -122,7 +122,13 @@ export function navigate(to: string, { replace = false, scroll = true }: Navigat
   }
 
   const { path, search, hash } = splitHref(to)
-  const nextUrl = `${normalisePath(path) || '/'}${search}${hash}`
+  // A bare `#section` or `?filter=x` carries no path of its own, so it belongs to
+  // the page the visitor is already on. Resolving it against the current pathname
+  // keeps `/properties#rent-search` on `/properties`; falling back to `/` would
+  // silently navigate to the home page and then scroll for an element that isn't
+  // there.
+  const destination = normalisePath(path || window.location.pathname)
+  const nextUrl = `${destination}${search}${hash}`
 
   const current = `${window.location.pathname}${window.location.search}${window.location.hash}`
   if (current === nextUrl) {
@@ -166,6 +172,41 @@ export function consumeScrollIntent(): ScrollIntent {
   return intent
 }
 
+/**
+ * The intent belonging to the most recently committed location, held against
+ * that location's key.
+ *
+ * Recorded rather than applied inside `commit()` so the scroll can be applied
+ * from React's layout phase — after the new page's DOM is committed, before the
+ * browser paints it. Applying it any earlier moves the *outgoing* page; applying
+ * it after paint leaves the new page visible at the old offset and points its
+ * scroll-triggered animations at the wrong viewport.
+ *
+ * Keying by location is what makes the consuming effect idempotent: it takes the
+ * intent once and sees nothing on any subsequent run, so a re-render — or
+ * StrictMode's double-invoked effect — can never apply a scroll twice.
+ */
+let committedScrollIntent: { key: string; intent: ScrollIntent } | null = null
+
+/** Records the scroll intent that a just-committed location should settle to. */
+export function recordCommittedScrollIntent(location: ParsedLocation, intent: ScrollIntent): void {
+  committedScrollIntent = { key: locationKey(location), intent }
+}
+
+/**
+ * Takes the recorded intent for `key`, or `{ type: 'none' }` if it has already
+ * been taken — which is also the correct answer for a query-only update, where
+ * the page must stay exactly where the visitor left it.
+ */
+export function takeCommittedScrollIntent(key: string): ScrollIntent {
+  if (!committedScrollIntent || committedScrollIntent.key !== key) return { type: 'none' }
+
+  const { intent } = committedScrollIntent
+  committedScrollIntent = null
+
+  return intent
+}
+
 export function rememberScrollPosition(key: string): void {
   if (typeof window === 'undefined') return
   scrollPositions.set(key, window.scrollY)
@@ -195,26 +236,44 @@ function scrollToHash(hash: string): void {
 }
 
 /**
- * Applies a navigation's scroll behaviour. Called once the new page is on
- * screen, and deferred a frame so the freshly committed layout can be measured.
+ * Moves the window to `top` as a single frame, never an animation.
+ *
+ * This is the whole reason the route reset used to look broken. `html` carries
+ * `scroll-behavior: smooth` so in-page anchors glide, and per the CSSOM spec
+ * `behavior: 'auto'` *inherits the element's computed value* — it does not mean
+ * "instant". So a reset written as `scrollTo({ top: 0, behavior: 'auto' })` was
+ * a smooth animation: the outgoing page visibly slid 1200 → 0, and the incoming
+ * page's entrance animations ran while it slid.
+ *
+ * `'instant'` is the only value that overrides the CSS. Anchors keep their
+ * intentional smooth scroll — they are genuine same-page navigation — while a
+ * route change becomes the single-frame jump it was always meant to be.
+ */
+function jumpTo(top: number): void {
+  window.scrollTo({ top, behavior: 'instant' })
+}
+
+/**
+ * Applies a navigation's scroll behaviour.
+ *
+ * Called from React's layout phase (see `useScrollRestoration`) rather than from
+ * the transition store: by then the new page's DOM is committed, so the scroll
+ * positions the *incoming* page instead of moving the one being replaced.
  */
 export function applyScroll(location: ParsedLocation, intent: ScrollIntent): void {
   if (typeof window === 'undefined' || intent.type === 'none') return
 
-  const run = () => {
-    if (intent.type === 'hash') {
-      scrollToHash(intent.hash)
-      return
-    }
-
-    if (intent.type === 'restore') {
-      const offset = readScrollPosition(locationKey(location))
-      window.scrollTo({ top: offset ?? 0, behavior: 'auto' })
-      return
-    }
-
-    window.scrollTo({ top: 0, behavior: 'auto' })
+  if (intent.type === 'hash') {
+    scrollToHash(intent.hash)
+    return
   }
 
-  window.requestAnimationFrame(run)
+  if (intent.type === 'restore') {
+    // Back/forward restores the remembered offset for the destination, which is
+    // the browser's own per-entry model rather than a blanket jump to the top.
+    jumpTo(readScrollPosition(locationKey(location)) ?? 0)
+    return
+  }
+
+  jumpTo(0)
 }

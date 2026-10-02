@@ -11,6 +11,8 @@ export const routes = {
   propertyDetail: '/properties/:slug',
   /** Landing page for buying — a guided entry point into the filtered catalogue. */
   buy: '/buy',
+  /** Landing page for renting — the same guided entry point, filtered to `purpose=rent`. */
+  rent: '/rent',
   projects: '/projects',
   projectDetail: '/projects/:slug',
   locations: '/locations',
@@ -19,26 +21,9 @@ export const routes = {
   services: '/services/:slug',
   bookInspection: '/book-inspection',
   contact: '/contact',
+  /** Site-wide FAQ, linked from the contact and rent previews. */
+  faq: '/faq',
 } as const
-
-/**
- * Patterns tried in order when resolving the active route.
- *
- * The list patterns are harmless on their own, but ordering them before their
- * detail patterns keeps `matchRoute` unambiguous and the table readable as
- * "the pages that exist, shallowest first".
- */
-export const routePatterns: readonly string[] = [
-  routes.home,
-  routes.properties,
-  routes.propertyDetail,
-  routes.buy,
-  routes.projects,
-  routes.projectDetail,
-  routes.locations,
-  routes.locationDetail,
-  routes.about,
-]
 
 export function propertyPath(slug: string): string {
   return `/properties/${slug}`

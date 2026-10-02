@@ -51,10 +51,16 @@ export function LocationHero({ controller, suggestions, onSearch, wave }: Locati
         wave={wave}
       />
 
-      {/* Pulled up 48px on desktop, over the banner's wave. */}
-      <div className="relative z-20 -mt-8 sm:-mt-10 lg:-mt-12">
+      {/*
+        Sits over the banner's wave, but only just. The site convention elsewhere
+        pulled these search panels up by 48px, which is too far for a panel this
+        deep — its top edge sat level with the wave crest and the two white shapes
+        merged into one. A smaller overlap keeps the "part of the banner" reading
+        while leaving a clear band of white between the curve and the card.
+      */}
+      <div className="relative z-20 -mt-4 sm:-mt-5 lg:-mt-6">
         <Container>
-          <div className="rounded-2xl border border-sand-200 bg-white p-5 shadow-lg sm:p-7">
+          <div className="rounded-2xl border border-sand-200 bg-white p-5 shadow-xl sm:p-7">
             <LocationSearch controller={controller} onSearch={onSearch} />
 
             {/* Shortcuts for the three ways people arrive at an area. Buy and Rent

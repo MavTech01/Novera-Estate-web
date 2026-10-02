@@ -7,6 +7,7 @@ import {
   ProjectDescription,
   ProjectDetailsSkeleton,
   ProjectDetailHero,
+  ProjectDetailSidebar,
   ProjectDocumentation,
   ProjectFeatures,
   ProjectGallery,
@@ -70,25 +71,58 @@ export function ProjectDetailsPage({ slug }: ProjectDetailsPageProps) {
   return (
     <>
       {/*
-        Extra bottom padding clears the fixed mobile contact bar. The bar is
-        hidden from `lg` up, so the desktop page gets its normal rhythm back.
+        Bottom clearance for the fixed contact bar, which is 56px plus any
+        safe-area inset. The bar is hidden from `lg` up, so the desktop page gets
+        its normal rhythm back. Without this the bar sat on top of the closing
+        section and clipped it.
       */}
-      <main id="main-content" className="pb-16 lg:pb-0">
+      <main id="main-content" className="pb-[calc(4.5rem+env(safe-area-inset-bottom))] lg:pb-0">
         <ProjectDetailHero project={project} />
 
-        <ProjectGallery project={project} />
+        {/*
+          The gallery is the one block that reads as a single unit, so it goes
+          straight after the hero at the page's own rhythm and shares the 1200px
+          container with everything below it. It used to render with no container
+          at all, which is why it ran edge to edge while every other section had
+          a gutter.
+        */}
+        <Section tone="white" spacing="none" className="pt-8 lg:pt-10">
+          <Container>
+            <ProjectGallery project={project} />
+          </Container>
+        </Section>
 
-        <ProjectOverview project={project} />
+        {/*
+          The reading column and the summary column. `space-y` rather than each
+          section carrying its own vertical rhythm, so the 56px / 96px gap between
+          blocks is decided once instead of per section.
 
-        <ProjectDescription project={project} />
+          The column order is content-then-sidebar in the DOM, which is the right
+          order for reading and for a screen reader. The sidebar is not reordered
+          visually: on desktop it sits to the right of the same grid row, so there
+          is nothing to reorder.
+        */}
+        <div className="bg-white pb-14 lg:pb-20">
+          <Container>
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-10">
+              <div className="space-y-6 lg:col-span-8 lg:space-y-8 xl:col-span-9">
+                <ProjectOverview project={project} contained />
+
+                <ProjectDescription project={project} />
+
+                <ProjectFeatures project={project} contained />
+
+                <ProjectLocation project={project} contained />
+              </div>
+
+              <ProjectDetailSidebar project={project} />
+            </div>
+          </Container>
+        </div>
 
         <ProjectUnitTypes project={project} />
 
         <ProjectAmenities project={project} />
-
-        <ProjectFeatures project={project} />
-
-        <ProjectLocation project={project} />
 
         <ProjectLocationHighlights project={project} />
 

@@ -110,8 +110,13 @@ export function PropertiesPage() {
       <main id="main-content" tabIndex={-1} className="focus:outline-none">
         <PageHero {...hero} trust={catalogueTrust} />
 
-        {/* The search panel overlaps the base of the banner and its wave. */}
-        <div className="relative z-20 -mt-8 sm:-mt-10 lg:-mt-12">
+        {/*
+          The search panel overlaps the base of the banner and its wave — but only
+          slightly, for the same reason as the Projects and Locations panels: a
+          48px pull-up put its top edge level with the wave crest, and two white
+          shapes at that height read as one.
+        */}
+        <div className="relative z-20 -mt-4 sm:-mt-5 lg:-mt-6">
           <Container>
             <PropertySearchBar controller={controller} onSearch={handleSearch} />
           </Container>

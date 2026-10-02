@@ -252,6 +252,81 @@
   border-color: rgb(255 255 255 / 0.16);
 }
 
+/* Floating background --------------------------------------------------- */
+/*
+ * The slow drift behind `FloatingBackground`. Two rules keep this cheap:
+ * only `transform` and `opacity` are animated (so the compositor handles it and
+ * nothing triggers layout or paint), and the loops are long enough — 20s to 40s
+ * — that the motion reads as ambience rather than as an animation.
+ *
+ * `alternate` plus slightly different end states give every layer its own
+ * direction, so the group never pulses in unison.
+ */
+@keyframes fb-drift-a {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(4%, -6%, 0) scale(1.12);
+  }
+}
+
+@keyframes fb-drift-b {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.08);
+  }
+  to {
+    transform: translate3d(-5%, 5%, 0) scale(1);
+  }
+}
+
+@keyframes fb-drift-c {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3%, 7%, 0) scale(1.15);
+  }
+}
+
+@keyframes fb-float-a {
+  from {
+    transform: rotate(-3deg) translate3d(0, 0, 0);
+  }
+  to {
+    transform: rotate(4deg) translate3d(0, -7%, 0);
+  }
+}
+
+@keyframes fb-float-b {
+  from {
+    transform: rotate(3deg) translate3d(0, -4%, 0);
+  }
+  to {
+    transform: rotate(-4deg) translate3d(0, 5%, 0);
+  }
+}
+
+.fb-drift-a {
+  animation: fb-drift-a var(--fb-duration, 28s) ease-in-out infinite alternate;
+}
+
+.fb-drift-b {
+  animation: fb-drift-b var(--fb-duration, 28s) ease-in-out infinite alternate;
+}
+
+.fb-drift-c {
+  animation: fb-drift-c var(--fb-duration, 28s) ease-in-out infinite alternate;
+}
+
+.fb-float-a {
+  animation: fb-float-a var(--fb-duration, 32s) ease-in-out infinite alternate;
+}
+
+.fb-float-b {
+  animation: fb-float-b var(--fb-duration, 32s) ease-in-out infinite alternate;
+}
+
 /* Inner-page banner ----------------------------------------------------- */
 .hero-settle {
   animation: var(--animate-hero-settle);
@@ -351,6 +426,19 @@
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  /*
+   * The floating background is decoration and stays put rather than being
+   * removed: the orbs and outlines are part of the section's visual identity,
+   * and dropping them would change the layout, not just the motion.
+   */
+  .fb-drift-a,
+  .fb-drift-b,
+  .fb-drift-c,
+  .fb-float-a,
+  .fb-float-b {
+    animation: none;
   }
 
   /* The banner photograph arrives already in place rather than settling in. */

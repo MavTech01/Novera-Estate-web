@@ -37,7 +37,8 @@ export function BuySkeleton() {
       </div>
 
       <Container>
-        <Skeleton className="h-56 w-full rounded-2xl -mt-8 sm:-mt-10 lg:-mt-12" />
+        {/* Matches `BuySearchPanel`: it only overlaps the wave from `lg` up. */}
+        <Skeleton className="h-56 w-full rounded-2xl lg:-mt-6" />
       </Container>
 
       <div className="bg-white py-20 pt-14 sm:py-24 sm:pt-16">

@@ -22,9 +22,18 @@ interface ProjectMobileContactBarProps {
 /**
  * Sticky contact bar for phones and small tablets.
  *
- * Hidden from `lg` up, where the inline actions in the hero, consultant panel and
- * closing CTA already cover the same three options — three permanently visible
- * buttons on a desktop would compete with the page content.
+ * Hidden from `lg` up, where the hero actions and the sticky sidebar already
+ * cover the same three options — three permanently visible buttons competing
+ * with the content would be noise on a desktop.
+ *
+ * The three actions are equal-width thirds with one filled orange primary, so the
+ * bar has a single obvious next step rather than three equal ones. Height is kept
+ * at a 56px touch target, and `PROJECT_BAR_CLEARANCE` on the page reserves
+ * exactly that much space so nothing is ever hidden behind it.
+ *
+ * Translates rather than removes itself when yielding to the inspection form, so
+ * the layout cannot shift, and `inert` keeps the buttons out of the tab order
+ * while hidden.
  */
 export function ProjectMobileContactBar({
   project,
@@ -56,7 +65,8 @@ export function ProjectMobileContactBar({
     { id: 'call', label: 'Call', href: projectConsultantTelHref(project), icon: 'phone' as const },
     {
       id: 'inspection',
-      label: 'Book Inspection',
+      label: 'Book',
+      fullLabel: 'Book Inspection',
       href: projectInspectionHref(project),
       icon: 'calendar-check' as const,
       primary: true,
@@ -66,8 +76,6 @@ export function ProjectMobileContactBar({
   return (
     <div
       data-project-contact-bar
-      // Translated rather than removed so the layout cannot shift on show/hide,
-      // and `inert` keeps the buttons out of the tab order while hidden.
       aria-hidden={isYielding}
       inert={isYielding}
       className={cn(
@@ -79,13 +87,16 @@ export function ProjectMobileContactBar({
         className,
       )}
     >
-      <ul className="grid grid-cols-3">
+      <ul className="mx-auto grid max-w-lg grid-cols-3">
         {actions.map((action) => (
           <li key={action.id}>
             <a
               href={action.href}
               data-contact-action={action.id}
               tabIndex={isYielding ? -1 : undefined}
+              // The full label is the accessible name on a narrow bar where the
+              // visible text has to be shortened to fit.
+              aria-label={action.fullLabel ?? action.label}
               className={cn(
                 'flex min-h-14 flex-col items-center justify-center gap-1 px-2 text-[0.6875rem] font-semibold transition-colors duration-200',
                 action.primary

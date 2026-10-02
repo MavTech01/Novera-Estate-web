@@ -32,7 +32,7 @@ export function ProjectSearchForm({ controller, onSearch, className }: ProjectSe
           event.preventDefault()
           onSearch()
         }}
-        className="rounded-xl border border-sand-200 bg-white p-5 shadow-md sm:p-6"
+        className="rounded-2xl border border-sand-200 bg-white p-5 shadow-xl sm:p-6"
       >
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12 lg:items-end lg:gap-3">
           <TextField

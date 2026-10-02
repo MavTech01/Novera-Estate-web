@@ -12,6 +12,8 @@ interface TextAreaProps {
   icon?: IconName | null
   rows?: number
   required?: boolean
+  /** Locks the field while a form is in flight, so nothing is edited mid-send. */
+  disabled?: boolean
   error?: string
 }
 
@@ -29,6 +31,7 @@ export function TextArea({
   icon = null,
   rows = 4,
   required = false,
+  disabled = false,
   error,
 }: TextAreaProps) {
   const errorId = `${id}-error`
@@ -61,11 +64,13 @@ export function TextArea({
           onChange={(event) => onChange(event.target.value)}
           placeholder={placeholder}
           required={required}
+          disabled={disabled}
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? errorId : undefined}
           className={cn(
             'w-full resize-y rounded-md border bg-white py-3 text-sm font-medium leading-relaxed text-ink-900',
             'transition-colors duration-200 placeholder:text-ink-400',
+            disabled && 'cursor-not-allowed bg-sand-100 text-ink-400',
             error
               ? 'border-accent-500 focus-visible:border-accent-600'
               : 'border-sand-200 hover:border-accent-300 focus-visible:border-accent-500',

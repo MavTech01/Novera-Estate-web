@@ -42,8 +42,14 @@ export function ProjectHero({ controller, onSearch }: ProjectHeroProps) {
         trust={projectTrust}
       />
 
-      {/* Pulled up 48px on desktop, over the banner's wave. */}
-      <div className="relative z-20 -mt-8 sm:-mt-10 lg:-mt-12">
+      {/*
+        Sits over the banner's wave, but only just. The site convention elsewhere
+        pulls these search panels up by 48px, which is too far for a panel this
+        deep — its top edge sat level with the wave crest and the two white
+        shapes merged into one. A smaller overlap keeps the "part of the banner"
+        reading while leaving a clear band of white between the curve and the card.
+      */}
+      <div className="relative z-20 -mt-4 sm:-mt-5 lg:-mt-6">
         <Container>
           <ProjectSearchForm controller={controller} onSearch={onSearch} />
         </Container>

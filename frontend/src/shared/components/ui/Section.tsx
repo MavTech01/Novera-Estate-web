@@ -16,6 +16,16 @@ interface SectionProps {
   tone?: SectionTone
   /** Vertical rhythm — 80px to 112px on desktop. */
   spacing?: 'default' | 'tight' | 'none'
+  /**
+   * Render as an in-flow panel instead of a full-width page band.
+   *
+   * For a section that sits inside a multi-column layout, where a full-bleed
+   * background would ignore the column it is in. A contained section takes its
+   * own padding instead of `spacing`, and the column supplies the rhythm
+   * between panels — so the vertical gap is decided in one place per column
+   * rather than per section.
+   */
+  contained?: boolean
   className?: string
   children: React.ReactNode
 }
@@ -33,17 +43,25 @@ const spacings = {
   none: '',
 } as const
 
+/** Panel padding for a contained section. */
+const panelPadding = 'rounded-2xl p-6 sm:p-8 lg:p-10'
+
 /** Consistent page band: background tone + vertical rhythm in one place. */
 export function Section({
   id,
   ariaLabelledBy,
   tone = 'white',
   spacing = 'default',
+  contained = false,
   className,
   children,
 }: SectionProps) {
   return (
-    <section id={id} aria-labelledby={ariaLabelledBy} className={cn(tones[tone], spacings[spacing], className)}>
+    <section
+      id={id}
+      aria-labelledby={ariaLabelledBy}
+      className={cn(tones[tone], contained ? panelPadding : spacings[spacing], className)}
+    >
       {children}
     </section>
   )

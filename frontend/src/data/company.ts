@@ -1,4 +1,4 @@
-import { projectPath } from '@/shared/lib/routes'
+import { projectPath, routes } from '@/shared/lib/routes'
 import type { CompanyProfile, NavigationEntry, NavigationGroup, NavigationLink } from '@/types'
 import { featuredDevelopment } from './development'
 
@@ -54,9 +54,9 @@ export const primaryNavigation: NavigationEntry[] = [
       },
       {
         label: 'Rent',
-        href: '/properties?purpose=rent',
+        href: '/rent',
         icon: 'house',
-        description: 'Verified rentals across Lagos neighbourhoods.',
+        description: 'A guided way into the rental catalogue.',
       },
       {
         label: 'Land',
@@ -121,7 +121,7 @@ export const primaryNavigation: NavigationEntry[] = [
       { label: 'Testimonials', href: '/#testimonials', icon: 'quote', description: 'What clients say about working with us.' },
     ],
   },
-  { label: 'Contact', href: '/#contact' },
+      { label: 'Contact', href: routes.contact },
 ]
 
 
@@ -140,7 +140,7 @@ export const footerNavigation: NavigationGroup[] = [
     links: [
       { label: 'All Properties', href: '/properties' },
       { label: 'Buy', href: '/buy' },
-      { label: 'Rent', href: '/properties?purpose=rent' },
+      { label: 'Rent', href: '/rent' },
       { label: 'Projects', href: '/projects' },
       { label: 'Locations', href: '/locations' },
     ],
@@ -150,7 +150,7 @@ export const footerNavigation: NavigationGroup[] = [
     title: 'Company',
     links: [
       { label: 'About Us', href: '/about' },
-      { label: 'Contact', href: '/#contact' },
+  { label: 'Contact', href: routes.contact },
       { label: 'Book an Inspection', href: '/contact?type=inspection' },
       { label: 'Insights', href: '/#insights' },
     ],

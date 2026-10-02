@@ -46,7 +46,7 @@ export function PropertySearchBar({ controller, onSearch, className }: PropertyS
           event.preventDefault()
           onSearch()
         }}
-        className="rounded-xl border border-sand-200 bg-white p-5 shadow-md sm:p-6"
+        className="rounded-2xl border border-sand-200 bg-white p-5 shadow-xl sm:p-6"
       >
         <SegmentedControl
           label="Purpose"
