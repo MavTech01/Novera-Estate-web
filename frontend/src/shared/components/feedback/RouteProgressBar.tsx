@@ -1,11 +1,11 @@
 import { usePrefersReducedMotion } from '@/shared/hooks/usePrefersReducedMotion'
-import type { RoutePhase } from '@/shared/lib/routeTransition'
+import type { RoutePhase } from '@/app/router/useRoutePhase'
 import { cn } from '@/shared/lib/cn'
 
 interface RouteProgressBarProps {
   /**
-   * Transition phase. The bar is a pure function of it: `entering` grows the
-   * fill, `loading` holds it, `exiting` completes it and fades, `idle` unmounts.
+   * Transition phase. The bar is a pure function of it: `active` sweeps the fill
+   * out and holds it, `exiting` completes it and fades, `idle` unmounts.
    * Keeping the animation here rather than in component state is what lets the
    * whole thing stay effect-free.
    */

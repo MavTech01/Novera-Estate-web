@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 import { Container } from '@/shared/components/ui/Container'
 import { Icon } from '@/shared/components/ui/Icon'
-import { Link } from '@/shared/components/ui/Link'
 import { Reveal } from '@/shared/components/ui/Reveal'
 import { Section } from '@/shared/components/ui/Section'
 import { SectionHeading } from '@/shared/components/ui/SectionHeading'
@@ -101,7 +101,7 @@ export function PropertiesByLocation({ locations, isLoading = false, className }
 
                       <td className="px-5 py-4 text-right align-middle sm:px-6 sm:py-5">
                         <Link
-                          href={href}
+                          to={href}
                           className="inline-flex min-h-11 items-center gap-1.5 rounded-md px-3 text-sm font-semibold text-accent-700 transition-colors duration-200 hover:bg-tint-100 hover:text-accent-800"
                         >
                           <span className="hidden sm:inline">View properties</span>

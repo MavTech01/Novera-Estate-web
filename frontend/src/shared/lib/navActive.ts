@@ -1,5 +1,64 @@
-import { isHrefActive, normalisePath, splitHref } from './router'
+import { normalisePath, splitHref } from './href'
 import type { NavigationEntry } from '@/types'
+
+/**
+ * Active-state rules for the site's navigation.
+ *
+ * These survive the move to React Router deliberately. `NavLink` decides what is
+ * active for a single link, and it does not know about the *other* links in the
+ * menu — so it cannot express the rule that "Properties" and "Rent" are siblings
+ * competing for the same section, and that only one of them may light up. The
+ * navigation is data-driven and query-aware, so it is tested here instead.
+ */
+
+/**
+ * Whether a link's path is the current path, or an ancestor of it.
+ *
+ * Section entries must stay highlighted while you are inside a section — being on
+ * `/properties/novera-estate` or `/projects/orogies-rise` does not make "Projects"
+ * an inactive link, it makes it the section you are in.
+ *
+ * The match is segment-wise, so `/projects` never claims `/projects-archive`, and
+ * the site root is excluded outright: it is the ancestor of every URL, and
+ * treating it as active would light up "Home" on every page.
+ */
+function isPathOrAncestor(linkPath: string, path: string): boolean {
+  const link = normalisePath(linkPath)
+  const target = normalisePath(path)
+
+  if (link === '/') return false
+  if (link === target) return true
+
+  return target.startsWith(`${link}/`)
+}
+
+/**
+ * Active-state test for navigation links.
+ *
+ * `/properties` is active on every listing view *and* on a property detail page,
+ * `/properties?purpose=rent` only when that query is present, and in-page anchors
+ * (`/#about`) never claim the active state.
+ *
+ * Query matching is still exact. A refined entry like `/properties?purpose=rent`
+ * must not light up on an unrelated detail page, so parent matching only applies
+ * to unrefined links — the ones carrying no `?`.
+ */
+export function isHrefActive(href: string, path: string, query: URLSearchParams): boolean {
+  const { path: linkPath, search, hash } = splitHref(href)
+
+  if (hash) return false
+
+  const isExact = normalisePath(linkPath) === normalisePath(path)
+  const isUnrefined = search === ''
+
+  if (!isExact && !(isUnrefined && isPathOrAncestor(linkPath, path))) return false
+
+  for (const [key, value] of new URLSearchParams(search)) {
+    if (query.get(key) !== value) return false
+  }
+
+  return true
+}
 
 /**
  * Every href reachable from the navigation, dropdown items included.

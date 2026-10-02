@@ -1,10 +1,10 @@
+import { Link } from 'react-router-dom'
 import { FavouriteButton } from '@/components/properties/FavouriteButton'
 import { formatDate } from '@/shared/lib/format'
 import { propertyTypeLabels } from '@/shared/lib/labels'
 import type { PropertyDetail } from '@/types'
 import { Badge } from '@/shared/components/ui/Badge'
 import { Icon } from '@/shared/components/ui/Icon'
-import { Link } from '@/shared/components/ui/Link'
 import { PropertyPrice } from './PropertyPrice'
 import { PropertyShareButtons } from './PropertyShareButtons'
 
@@ -58,7 +58,7 @@ export function PropertyHeader({
       <p className="mt-3 flex items-center gap-1.5 text-[0.9375rem] text-ink-500">
         <Icon name="map-pin" className="size-4 shrink-0 text-accent-500" strokeWidth={2} />
         <Link
-          href={`/properties?location=${property.location.slug}`}
+          to={`/properties?location=${property.location.slug}`}
           className="transition-colors duration-200 hover:text-accent-700"
         >
           {property.location.label}

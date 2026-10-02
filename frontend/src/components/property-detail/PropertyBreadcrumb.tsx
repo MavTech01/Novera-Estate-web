@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 import { truncateMiddle, type BreadcrumbItem } from '@/shared/lib/propertyDetails'
 import { Icon } from '@/shared/components/ui/Icon'
-import { Link } from '@/shared/components/ui/Link'
 
 interface PropertyBreadcrumbProps {
   items: BreadcrumbItem[]
@@ -21,7 +21,7 @@ export function PropertyBreadcrumb({ items, className }: PropertyBreadcrumbProps
       <ol className="flex items-center gap-1.5 text-xs font-medium text-ink-400">
         {items.slice(0, -1).map((item) => (
           <li key={item.id} className="flex items-center gap-1.5">
-            <Link href={item.href ?? '/'} className="transition-colors duration-200 hover:text-accent-700">
+            <Link to={item.href ?? '/'} className="transition-colors duration-200 hover:text-accent-700">
               <span className="sm:hidden">
                 {item.truncateAt ? truncateMiddle(item.label, item.truncateAt) : item.label}
               </span>

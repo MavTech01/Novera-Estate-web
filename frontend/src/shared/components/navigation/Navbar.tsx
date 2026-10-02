@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 
 import { company, navigationCta, primaryNavigation } from '@/data'
 import { useLockBodyScroll } from '@/shared/hooks/useLockBodyScroll'
-import { useRouter } from '@/shared/hooks/useRouter'
 import { useScrolled } from '@/shared/hooks/useScrolled'
 import { cn } from '@/shared/lib/cn'
 import {
@@ -13,7 +13,6 @@ import {
 import { ButtonLink } from '@/shared/components/ui/Button'
 import { Container } from '@/shared/components/ui/Container'
 import { Icon } from '@/shared/components/ui/Icon'
-import { Link } from '@/shared/components/ui/Link'
 import type { NavigationLink } from '@/types'
 import { Logo } from './Logo'
 import { MobileMenu } from './MobileMenu'
@@ -29,7 +28,7 @@ function NavPlainLink({ link, isActive }: NavPlainLinkProps) {
   return (
     <li className="relative">
       <Link
-        href={link.href}
+        to={link.href}
         className={cn(
           'relative flex items-center whitespace-nowrap rounded-md px-2 py-2 text-sm font-medium transition-colors duration-200 min-[1200px]:px-3 min-[1200px]:text-[0.9375rem]',
           isActive ? 'text-accent-700' : 'text-ink-600 hover:text-accent-600',
@@ -59,7 +58,8 @@ function NavPlainLink({ link, isActive }: NavPlainLinkProps) {
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const isScrolled = useScrolled(16)
-  const { path, query } = useRouter()
+  const { pathname: path } = useLocation()
+  const [query] = useSearchParams()
   const allHrefs = useMemo(() => collectNavigationHrefs(primaryNavigation), [])
 
   useLockBodyScroll(isMenuOpen)
@@ -74,7 +74,7 @@ export function Navbar() {
       <Container width="nav">
         <div className="flex h-18 items-center justify-between gap-4 lg:h-20">
           <Link
-            href="/"
+            to="/"
             className="shrink-0 rounded-md transition-opacity duration-200 hover:opacity-80"
             aria-label={`${company.name} — home`}
           >

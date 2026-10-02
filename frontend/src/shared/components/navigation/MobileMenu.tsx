@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { cn } from '@/shared/lib/cn'
 import {
@@ -9,7 +10,6 @@ import {
 import type { NavigationEntry, NavigationLink, NavigationMenu } from '@/types'
 import { ButtonLink } from '@/shared/components/ui/Button'
 import { Icon } from '@/shared/components/ui/Icon'
-import { Link } from '@/shared/components/ui/Link'
 
 interface MobileMenuProps {
   isOpen: boolean
@@ -37,7 +37,7 @@ function MobileLinkRow({
     <li className="mobile-nav-item border-b border-sand-200">
       <Link
         ref={firstFocusRef as React.Ref<HTMLAnchorElement>}
-        href={link.href}
+        to={link.href}
         onClick={onClose}
         aria-current={isActive ? 'page' : undefined}
         className={cn(
@@ -109,7 +109,7 @@ function MobileAccordion({
             return (
               <li key={`${item.label}-${item.href}`}>
                 <Link
-                  href={item.href}
+                  to={item.href}
                   onClick={onClose}
                   aria-current={itemActive ? 'page' : undefined}
                   className="flex items-start gap-3 py-3 pl-1 transition-colors duration-200 hover:bg-tint-50"

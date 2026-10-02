@@ -1,6 +1,7 @@
 import { cn } from '@/shared/lib/cn'
+
 import { Icon } from './Icon'
-import { Link } from './Link'
+import { SmartLink as Link } from './SmartLink'
 
 interface ButtonLinkProps {
   href: string

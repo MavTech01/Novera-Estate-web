@@ -1,5 +1,5 @@
+import { Link } from 'react-router-dom'
 import { ButtonLink } from '@/shared/components/ui/Button'
-import { Link } from '@/shared/components/ui/Link'
 import { Icon } from '@/shared/components/ui/Icon'
 import { Reveal } from '@/shared/components/ui/Reveal'
 import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
@@ -61,7 +61,7 @@ export function FeaturedLocation({ location, className }: FeaturedLocationProps)
         </p>
 
         <h3 className="mt-4 font-display text-[length:var(--text-subtitle)] text-ink-900">
-          <Link href={locationPath(location.slug)} className="after:absolute after:inset-0 after:content-['']">
+          <Link to={locationPath(location.slug)} className="after:absolute after:inset-0 after:content-['']">
             {location.name}, {location.state}
             <span className="sr-only"> — explore this location</span>
           </Link>

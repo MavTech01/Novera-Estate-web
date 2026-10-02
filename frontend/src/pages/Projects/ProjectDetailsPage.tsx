@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 import {
   ProjectAmenities,
@@ -26,10 +27,6 @@ import { Icon } from '@/shared/components/ui/Icon'
 import { Section } from '@/shared/components/ui/Section'
 import { routes } from '@/shared/lib/routes'
 
-interface ProjectDetailsPageProps {
-  slug: string
-}
-
 /**
  * Project detail page — `/projects/:slug`.
  *
@@ -42,7 +39,8 @@ interface ProjectDetailsPageProps {
  * through the service seam, so replacing the mock with `GET /api/projects/:slug`
  * touches nothing in this file.
  */
-export function ProjectDetailsPage({ slug }: ProjectDetailsPageProps) {
+export function ProjectDetailsPage() {
+  const { slug = '' } = useParams()
   const { project, status, error, retry } = useProject(slug)
 
   // Keep the tab title in step with what is actually on screen, and hand it back on

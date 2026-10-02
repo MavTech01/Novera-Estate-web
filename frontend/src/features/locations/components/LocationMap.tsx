@@ -1,7 +1,7 @@
+import { Link } from 'react-router-dom'
 import { ButtonLink } from '@/shared/components/ui/Button'
 import { Container } from '@/shared/components/ui/Container'
 import { Icon } from '@/shared/components/ui/Icon'
-import { Link } from '@/shared/components/ui/Link'
 import { Reveal } from '@/shared/components/ui/Reveal'
 import { Section } from '@/shared/components/ui/Section'
 import { SectionHeading } from '@/shared/components/ui/SectionHeading'
@@ -140,7 +140,7 @@ export function LocationMap({ locations, activeSlug, className }: LocationMapPro
                 {locations.map((location) => (
                   <li key={location.id}>
                     <Link
-                      href={locationPath(location.slug)}
+                      to={locationPath(location.slug)}
                       className="group flex items-center justify-between gap-4 py-3.5 transition-colors duration-200 hover:text-accent-700"
                     >
                       <span className="flex min-w-0 items-center gap-2.5">

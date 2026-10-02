@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
-import { navigate, replaceSearchParams, useRouter } from '@/shared/hooks/useRouter'
 import {
   buildRentSearchHref,
   emptyRentSearch,
@@ -29,7 +29,8 @@ import type {
  * would overwrite a deep link with an empty search before the areas loaded.
  */
 export function useRentSearch(areas: readonly RentLocation[]): RentSearchController {
-  const { query } = useRouter()
+  const [query, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   const areAreasKnown = areas.length > 0
   const [criteria, setCriteria] = useState<RentSearchCriteria>(() =>
@@ -57,8 +58,8 @@ export function useRentSearch(areas: readonly RentLocation[]): RentSearchControl
     const isFiltered = hasRentSearch(criteria)
     const next = isFiltered ? serialiseRentSearch(criteria, areas) : new URLSearchParams()
     ownQueryKey.current = next.toString()
-    replaceSearchParams(next)
-  }, [criteria, areas, areAreasKnown])
+    setSearchParams(next, { replace: true })
+  }, [criteria, areas, areAreasKnown, setSearchParams])
 
   const update = useCallback(
     <K extends keyof RentSearchCriteria>(key: K, value: RentSearchCriteria[K]) => {
@@ -74,7 +75,7 @@ export function useRentSearch(areas: readonly RentLocation[]): RentSearchControl
 
   const submit = useCallback(() => {
     navigate(buildRentSearchHref(criteria, areas))
-  }, [criteria, areas])
+  }, [criteria, areas, navigate])
 
   const { isFiltered, isValid, validationMessage } = useMemo(() => {
     const problem = findRentSearchProblem(criteria)

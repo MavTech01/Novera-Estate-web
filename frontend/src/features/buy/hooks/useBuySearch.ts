@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
-import { navigate, replaceSearchParams, useRouter } from '@/shared/hooks/useRouter'
 import {
   buildBuySearchHref,
   emptyBuySearch,
@@ -29,7 +29,8 @@ import type {
  * would overwrite a deep link with an empty search before the areas loaded.
  */
 export function useBuySearch(areas: readonly BuyLocation[]): BuySearchController {
-  const { query } = useRouter()
+  const [query, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   const areAreasKnown = areas.length > 0
   const [criteria, setCriteria] = useState<BuySearchCriteria>(() =>
@@ -57,8 +58,8 @@ export function useBuySearch(areas: readonly BuyLocation[]): BuySearchController
     const isFiltered = hasBuySearch(criteria)
     const next = isFiltered ? serialiseBuySearch(criteria, areas) : new URLSearchParams()
     ownQueryKey.current = next.toString()
-    replaceSearchParams(next)
-  }, [criteria, areas, areAreasKnown])
+    setSearchParams(next, { replace: true })
+  }, [criteria, areas, areAreasKnown, setSearchParams])
 
   const update = useCallback(
     <K extends keyof BuySearchCriteria>(key: K, value: BuySearchCriteria[K]) => {
@@ -74,7 +75,7 @@ export function useBuySearch(areas: readonly BuyLocation[]): BuySearchController
 
   const submit = useCallback(() => {
     navigate(buildBuySearchHref(criteria, areas))
-  }, [criteria, areas])
+  }, [criteria, areas, navigate])
 
   const { isFiltered, isValid, validationMessage } = useMemo(() => {
     const problem = findBuySearchProblem(criteria)

@@ -1,4 +1,4 @@
-import { Link } from '@/shared/components/ui/Link'
+import { Link } from 'react-router-dom'
 import { Icon } from '@/shared/components/ui/Icon'
 import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
 import { cn } from '@/shared/lib/cn'
@@ -73,7 +73,7 @@ export function ProjectCard({ project, index = 0, className }: ProjectCardProps)
         </p>
 
         <h3 className="mt-2 font-display text-lg leading-snug text-ink-900 transition-colors duration-200 group-hover:text-accent-700">
-          <Link href={href} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
+          <Link to={href} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
             {project.name}
             <span className="sr-only"> — view project</span>
           </Link>

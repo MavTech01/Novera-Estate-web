@@ -1,5 +1,5 @@
+import { Link } from 'react-router-dom'
 import { ButtonLink } from '@/shared/components/ui/Button'
-import { Link } from '@/shared/components/ui/Link'
 import { Icon } from '@/shared/components/ui/Icon'
 import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
 import { cn } from '@/shared/lib/cn'
@@ -65,7 +65,7 @@ export function LocationCard({ location, index = 0, className }: LocationCardPro
 
       <div className="flex flex-1 flex-col p-5">
         <h3 className="font-display text-xl text-ink-900 transition-colors duration-200 group-hover:text-accent-700">
-          <Link href={href} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
+          <Link to={href} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none">
             {location.name}
             <span className="sr-only"> — explore this location</span>
           </Link>

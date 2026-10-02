@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom'
+
 import { Container } from '@/shared/components/ui/Container'
 import { Icon } from '@/shared/components/ui/Icon'
 import { ButtonLink } from '@/shared/components/ui/Button'
@@ -16,8 +18,6 @@ interface RouteNoticePageProps {
   /** The section heading, e.g. "Projects". */
   title?: string
   description?: string
-  /** The unmatched path, echoed back so a mistyped URL is obvious. */
-  path?: string
 }
 
 /**
@@ -32,9 +32,13 @@ interface RouteNoticePageProps {
  * lands nothing has to be untangled. It also gets the same banner as every other
  * inner page, so an unfinished section is recognisably part of the site.
  */
-export function RouteNoticePage({ variant, title, description, path }: RouteNoticePageProps) {
+export function RouteNoticePage({ variant, title, description }: RouteNoticePageProps) {
   const isPlanned = variant === 'planned'
   const heading = isPlanned ? (title ?? 'Coming Soon') : 'Page Not Found'
+
+  // The unmatched address, echoed back so a mistyped URL is obvious. Read from
+  // the router rather than passed in, so every catch-all route gets it for free.
+  const { pathname } = useLocation()
 
   const heroDescription = isPlanned
     ? (description ??
@@ -62,9 +66,9 @@ export function RouteNoticePage({ variant, title, description, path }: RouteNoti
               <Icon name={isPlanned ? 'sparkles' : 'search'} className="size-7" strokeWidth={1.75} />
             </span>
 
-            {path && !isPlanned ? (
+            {pathname && !isPlanned ? (
               <p className="mt-5 max-w-md break-words text-sm text-ink-500">
-                Nothing is published at <span className="font-medium text-ink-600">{path}</span>.
+                Nothing is published at <span className="font-medium text-ink-600">{pathname}</span>.
               </p>
             ) : (
               <p className="mt-5 max-w-md text-sm leading-relaxed text-ink-500">

@@ -1,8 +1,8 @@
+import { Link } from 'react-router-dom'
 import { useAllLocations } from '@/features/locations'
 import { ButtonLink } from '@/shared/components/ui/Button'
 import { Container } from '@/shared/components/ui/Container'
 import { Icon } from '@/shared/components/ui/Icon'
-import { Link } from '@/shared/components/ui/Link'
 import { Reveal } from '@/shared/components/ui/Reveal'
 import { Section } from '@/shared/components/ui/Section'
 import { SectionHeading } from '@/shared/components/ui/SectionHeading'
@@ -56,7 +56,7 @@ export function LocationsPreview() {
                   <div className="min-w-0 flex-1">
                     <h3 className="font-display text-base font-bold text-ink-900">
                       <Link
-                        href={locationPath(location.slug)}
+                        to={locationPath(location.slug)}
                         className="transition-colors duration-200 after:absolute after:inset-0 after:content-[''] hover:text-accent-700 focus-visible:outline-none"
                       >
                         {location.name}

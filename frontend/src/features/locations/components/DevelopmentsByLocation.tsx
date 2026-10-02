@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { Link } from 'react-router-dom'
 
 import { ButtonLink } from '@/shared/components/ui/Button'
 import { Container } from '@/shared/components/ui/Container'
@@ -6,7 +7,6 @@ import { Icon } from '@/shared/components/ui/Icon'
 import { Reveal } from '@/shared/components/ui/Reveal'
 import { Section } from '@/shared/components/ui/Section'
 import { SectionHeading } from '@/shared/components/ui/SectionHeading'
-import { Link } from '@/shared/components/ui/Link'
 import { ProjectCard, type Project } from '@/features/projects'
 import { locationPath, routes } from '@/shared/lib/routes'
 import type { Location } from '@/features/locations/types/locationTypes'
@@ -79,7 +79,7 @@ export function DevelopmentsByLocation({ locations, projects, className }: Devel
                   <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
                     {total > MAX_PER_LOCATION && (
                       <Link
-                        href={`/projects?location=${location.propertyLocationSlugs[0]}`}
+                        to={`/projects?location=${location.propertyLocationSlugs[0]}`}
                         className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-600 transition-colors duration-200 hover:text-accent-700"
                       >
                         All {total} developments
@@ -87,7 +87,7 @@ export function DevelopmentsByLocation({ locations, projects, className }: Devel
                       </Link>
                     )}
                     <Link
-                      href={locationPath(location.slug)}
+                      to={locationPath(location.slug)}
                       className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-600 transition-colors duration-200 hover:text-accent-700"
                     >
                       About {location.name}

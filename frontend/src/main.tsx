@@ -2,12 +2,17 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import App from './App'
-import { whenBootReady } from './shared/lib/routeTransition'
+import { takeOverScrollRestoration, whenRouterReady } from './app/router/whenRouterReady'
+import { router } from './app/router/routes'
 import './styles/index.css'
 
 const container = document.getElementById('root')
 
 if (!container) throw new Error('Root element #root was not found in index.html')
+
+// Before the router exists, so the browser never competes with it for the
+// scroll position on back/forward.
+takeOverScrollRestoration()
 
 createRoot(container).render(
   <StrictMode>
@@ -45,8 +50,8 @@ function fontsReady(): Promise<unknown> {
 }
 
 void Promise.race([
-  // Resolves once the first route's data is in the repository cache.
-  Promise.all([fontsReady(), whenBootReady()]),
+  // Resolves once the router has run the first route's loaders.
+  Promise.all([fontsReady(), whenRouterReady(router)]),
   new Promise((resolve) => window.setTimeout(resolve, BOOT_TIMEOUT_MS)),
 ]).then(() => {
   // One more frame so React has certainly painted the committed page.

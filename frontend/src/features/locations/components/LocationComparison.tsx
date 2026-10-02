@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 import { Container } from '@/shared/components/ui/Container'
 import { Icon } from '@/shared/components/ui/Icon'
-import { Link } from '@/shared/components/ui/Link'
 import { Reveal } from '@/shared/components/ui/Reveal'
 import { Section } from '@/shared/components/ui/Section'
 import { SectionHeading } from '@/shared/components/ui/SectionHeading'
@@ -93,7 +93,7 @@ export function LocationComparison({ table, className }: LocationComparisonProps
                       className="sticky left-0 z-10 bg-white px-4 py-4 text-left align-middle font-normal"
                     >
                       <Link
-                        href={locationPath(location.slug)}
+                        to={locationPath(location.slug)}
                         className="font-display text-base font-bold text-ink-900 transition-colors duration-200 hover:text-accent-700"
                       >
                         {location.name}

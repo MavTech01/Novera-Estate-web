@@ -1,9 +1,9 @@
 import { useEffect, useId, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { cn } from '@/shared/lib/cn'
 import type { NavigationMenu } from '@/types'
 import { Icon } from '@/shared/components/ui/Icon'
-import { Link } from '@/shared/components/ui/Link'
 
 interface NavMenuProps {
   menu: NavigationMenu
@@ -103,7 +103,7 @@ export function NavMenu({ menu, isActive }: NavMenuProps) {
           {menu.items.map((item) => (
             <Link
               key={`${item.label}-${item.href}`}
-              href={item.href}
+              to={item.href}
               onClick={() => setIsOpen(false)}
               className="group flex items-start gap-3 rounded-lg p-2.5 transition-colors duration-200 hover:bg-tint-50 focus-visible:bg-tint-50"
             >

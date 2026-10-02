@@ -15,17 +15,14 @@ import {
 import { PropertyErrorState } from '@/components/properties/PropertyErrorState'
 import { Container } from '@/shared/components/ui/Container'
 import { getSimilarProperties } from '@/data'
+import { useParams } from 'react-router-dom'
+
 import { useDisclosure } from '@/shared/hooks/useDisclosure'
 import { useFavourites } from '@/shared/hooks/useFavourites'
 import { useDocumentTitle } from '@/shared/hooks/useDocumentTitle'
 import { usePropertyDetail } from '@/features/properties/hooks/usePropertyDetail'
 import { getBreadcrumbItems, type BreadcrumbItem } from '@/shared/lib/propertyDetails'
 import { routes } from '@/shared/lib/routes'
-
-interface PropertyDetailsPageProps {
-  /** Route param from `/properties/:slug`. */
-  slug: string
-}
 
 /** Trail shown when the requested slug matches no listing. */
 const notFoundTrail: BreadcrumbItem[] = [
@@ -54,11 +51,12 @@ function PropertyTitle({ title }: { title: string }) {
  * delegated to a focused component that receives a plain `PropertyDetail`. Once
  * the Express API is live, only the hook's data source changes.
  *
- * `App` resolves the route but hands the title off with `null`, because the
- * address only becomes meaningful once the property is known — each branch
- * below owns its own.
+ * The route table hands the title off with `null`, because the address only
+ * becomes meaningful once the property is known — each branch below owns its
+ * own.
  */
-export function PropertyDetailsPage({ slug }: PropertyDetailsPageProps) {
+export function PropertyDetailsPage() {
+  const { slug = '' } = useParams()
   const { status, property, retry } = usePropertyDetail(slug)
   const { isFavourite, toggleFavourite } = useFavourites()
   const inspection = useDisclosure()

@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 import { ButtonLink } from '@/shared/components/ui/Button'
 import { Icon } from '@/shared/components/ui/Icon'
-import { Link } from '@/shared/components/ui/Link'
 import { Reveal } from '@/shared/components/ui/Reveal'
 import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
 import { formatCurrency } from '@/shared/lib/format'
@@ -66,7 +66,7 @@ export function FeaturedProject({ project, className }: FeaturedProjectProps) {
         </p>
 
         <h3 className="mt-3 font-display text-3xl leading-tight text-ink-900 sm:text-4xl">
-          <Link href={href} className="transition-colors duration-200 hover:text-accent-700">
+          <Link to={href} className="transition-colors duration-200 hover:text-accent-700">
             {project.name}
           </Link>
         </h3>

@@ -1,9 +1,9 @@
+import { Link } from 'react-router-dom'
 import { company } from '@/data/company'
 import { locationSearchShortcuts } from '@/features/locations/data/locationOptions'
 import { PageHero, type PageHeroTrustItem } from '@/shared/components/layout/PageHero'
 import { Container } from '@/shared/components/ui/Container'
 import { Icon } from '@/shared/components/ui/Icon'
-import { Link } from '@/shared/components/ui/Link'
 import { pageCrumbs } from '@/shared/lib/breadcrumbs'
 import { locationPath } from '@/shared/lib/routes'
 import type { LocationSearchController } from '@/features/locations/hooks/useLocationSearch'
@@ -71,7 +71,7 @@ export function LocationHero({ controller, suggestions, onSearch, wave }: Locati
               {locationSearchShortcuts.map((shortcut) => (
                 <li key={shortcut.id}>
                   <Link
-                    href={shortcut.href}
+                    to={shortcut.href}
                     className="inline-flex min-h-9 items-center gap-1.5 rounded-pill border border-sand-200 bg-sand-100 px-3.5 text-sm font-semibold text-ink-700 transition-colors duration-200 hover:border-accent-300 hover:bg-tint-50 hover:text-accent-700"
                   >
                     <Icon name={shortcut.icon} className="size-3.5 text-accent-500" strokeWidth={2} />
@@ -91,7 +91,7 @@ export function LocationHero({ controller, suggestions, onSearch, wave }: Locati
                   {suggestions.map((suggestion) => (
                     <li key={suggestion.slug}>
                       <Link
-                        href={locationPath(suggestion.slug)}
+                        to={locationPath(suggestion.slug)}
                         className="inline-flex min-h-9 items-center gap-1.5 rounded-pill border border-sand-200 bg-sand-100 px-3.5 text-sm font-semibold text-ink-700 transition-colors duration-200 hover:border-accent-300 hover:bg-tint-50 hover:text-accent-700"
                       >
                         <Icon name="map-pin" className="size-3.5 text-accent-500" strokeWidth={2} />

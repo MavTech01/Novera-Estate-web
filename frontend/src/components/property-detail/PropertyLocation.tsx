@@ -1,8 +1,8 @@
+import { Link } from 'react-router-dom'
 import { SURROUNDINGS_DISCLAIMER } from '@/data/propertyDetails'
 import { cn } from '@/shared/lib/cn'
 import type { PropertyDetail } from '@/types'
 import { Icon } from '@/shared/components/ui/Icon'
-import { Link } from '@/shared/components/ui/Link'
 import { Reveal } from '@/shared/components/ui/Reveal'
 import { PropertyMapPlaceholder } from './PropertyMapPlaceholder'
 
@@ -29,7 +29,7 @@ export function PropertyLocation({ property, className }: PropertyLocationProps)
           {property.location.label}
         </span>
         <Link
-          href={`/properties?location=${property.location.slug}`}
+          to={`/properties?location=${property.location.slug}`}
           className="text-sm font-semibold text-accent-600 transition-colors duration-200 hover:text-accent-700"
         >
           View other properties in {property.location.name}

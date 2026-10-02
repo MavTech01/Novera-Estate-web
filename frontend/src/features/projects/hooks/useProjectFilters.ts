@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
-import { replaceSearchParams, useRouter } from '@/shared/hooks/useRouter'
 import { primeLocations } from '@/features/projects/data/projectOptions'
 import { projects } from '@/features/projects/data/projects'
 import type {
@@ -65,7 +65,7 @@ export interface ProjectFiltersController {
 }
 
 export function useProjectFilters(): ProjectFiltersController {
-  const { query } = useRouter()
+  const [query, setSearchParams] = useSearchParams()
 
   const [filters, setFilters] = useState<ProjectFilters>(() => parseProjectFilters(query))
 
@@ -88,8 +88,8 @@ export function useProjectFilters(): ProjectFiltersController {
   useEffect(() => {
     const nextQuery = serialiseProjectFilters(filters)
     ownQueryKey.current = nextQuery.toString()
-    replaceSearchParams(nextQuery)
-  }, [filters])
+    setSearchParams(nextQuery, { replace: true })
+  }, [filters, setSearchParams])
 
   const setQuery = useCallback((value: string) => {
     setFilters((current) => ({ ...current, query: value }))

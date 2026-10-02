@@ -1,5 +1,6 @@
 import { cn } from '@/shared/lib/cn'
-import { Link } from './Link'
+
+import { SmartLink as Link } from './SmartLink'
 
 export interface BreadcrumbItem {
   label: string

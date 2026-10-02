@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { cn } from '@/shared/lib/cn'
 import { formatPrice } from '@/shared/lib/format'
 import { propertyTypeLabels } from '@/shared/lib/labels'
@@ -5,7 +6,6 @@ import { propertyPath } from '@/shared/lib/routes'
 import type { Property } from '@/types'
 import { Badge } from '@/shared/components/ui/Badge'
 import { Icon } from '@/shared/components/ui/Icon'
-import { Link } from '@/shared/components/ui/Link'
 import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
 import { FavouriteButton } from './FavouriteButton'
 import { PropertyMeta } from './PropertyMeta'
@@ -114,7 +114,7 @@ export function PropertyCard({
 
         <h3 className="mt-2 font-display text-lg leading-snug text-ink-900 transition-colors duration-200 group-hover:text-accent-700">
           <Link
-            href={href}
+            to={href}
             className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
           >
             {property.title}

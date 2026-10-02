@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom'
 import {
   CONTACT_HERO_IMAGE,
   ContactEnquiryForm,
@@ -10,7 +11,6 @@ import {
 } from '@/features/contact'
 import { company } from '@/data/company'
 import { PageHero } from '@/shared/components/layout/PageHero'
-import { useRouter } from '@/shared/hooks/useRouter'
 import { pageCrumbs } from '@/shared/lib/breadcrumbs'
 import { buildCallUrl } from '@/shared/lib/contactLinks'
 
@@ -31,7 +31,7 @@ import { buildCallUrl } from '@/shared/lib/contactLinks'
  * brown closing band.
  */
 export function ContactPage() {
-  const { query } = useRouter()
+  const [query] = useSearchParams()
   const initialType = enquiryTypeFromQuery(query.get('type'))
 
   return (

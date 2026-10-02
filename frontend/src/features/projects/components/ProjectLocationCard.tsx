@@ -1,4 +1,4 @@
-import { Link } from '@/shared/components/ui/Link'
+import { Link } from 'react-router-dom'
 import { Icon } from '@/shared/components/ui/Icon'
 import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
 import { cn } from '@/shared/lib/cn'
@@ -60,7 +60,7 @@ export function ProjectLocationCard({
 
       <div className="flex flex-1 flex-col p-5">
         <h3 className="font-display text-xl text-ink-900 transition-colors duration-200 group-hover:text-accent-700">
-          <Link href={href} className="after:absolute after:inset-0 after:content-['']">
+          <Link to={href} className="after:absolute after:inset-0 after:content-['']">
             {location.name}
           </Link>
         </h3>

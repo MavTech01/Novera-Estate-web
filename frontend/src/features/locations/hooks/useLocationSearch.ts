@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
-import { replaceSearchParams, useRouter } from '@/shared/hooks/useRouter'
 import type {
   ActiveLocationFilter,
   LocationCategoryValue,
@@ -47,7 +47,7 @@ export interface LocationSearchController {
 }
 
 export function useLocationSearch(): LocationSearchController {
-  const { query } = useRouter()
+  const [query, setSearchParams] = useSearchParams()
 
   const [filters, setFilters] = useState<LocationFilters>(() => parseLocationFilters(query))
 
@@ -70,8 +70,8 @@ export function useLocationSearch(): LocationSearchController {
   useEffect(() => {
     const nextQuery = serialiseLocationFilters(filters)
     ownQueryKey.current = nextQuery.toString()
-    replaceSearchParams(nextQuery)
-  }, [filters])
+    setSearchParams(nextQuery, { replace: true })
+  }, [filters, setSearchParams])
 
   const setQuery = useCallback((value: string) => {
     setFilters((current) => ({ ...current, query: value }))

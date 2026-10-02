@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import { locations } from '@/data/locations'
 import { findPriceBandByBounds, getPriceBands, type PriceBand } from '@/data/searchOptions'
@@ -21,7 +22,6 @@ import type {
   PropertyTag,
   PropertyType,
 } from '@/types'
-import { replaceSearchParams, useRouter } from '@/shared/hooks/useRouter'
 
 const locationLabels = new Map<string, string>(Object.values(locations).map((l) => [l.slug, l.label]))
 
@@ -71,7 +71,7 @@ export interface PropertyFiltersController {
  * as `/properties?purpose=rent` is followed while already on this page.
  */
 export function usePropertyFilters(): PropertyFiltersController {
-  const { query } = useRouter()
+  const [query, setSearchParams] = useSearchParams()
 
   const [filters, setFilters] = useState<PropertyFilters>(() => parseFilters(query))
   const [sort, setSortState] = useState<PropertySort>(() => parseSort(query))
@@ -97,8 +97,8 @@ export function usePropertyFilters(): PropertyFiltersController {
   useEffect(() => {
     const nextQuery = serialiseQuery(filters, sort, page)
     ownQueryKey.current = nextQuery.toString()
-    replaceSearchParams(nextQuery)
-  }, [filters, sort, page])
+    setSearchParams(nextQuery, { replace: true })
+  }, [filters, sort, page, setSearchParams])
 
   /** Any change resets to the first page — page 4 of the old result set makes no sense. */
   const applyFilters = useCallback((updater: (current: PropertyFilters) => PropertyFilters) => {
