@@ -1,5 +1,5 @@
 import { company, navigationCta } from '@/data'
-import { CtaBand } from '@/components/cta/CtaBand'
+import { CtaBand } from '@/shared/components/CtaBand'
 
 /**
  * Closing conversion band for visitors whose criteria returned nothing useful.

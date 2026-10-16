@@ -25,12 +25,12 @@ export function Badge({ children, tone = 'softOrange', icon, className }: BadgeP
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1.5 rounded-pill px-3 py-1 text-xs font-semibold tracking-[0.01em]',
+        'inline-flex items-center gap-1 rounded-pill px-2 py-0.5 text-[0.625rem] font-semibold tracking-[0.01em] sm:gap-1.5 sm:px-3 sm:py-1 sm:text-xs',
         tones[tone],
         className,
       )}
     >
-      {icon && <Icon name={icon} className="size-3.5" strokeWidth={2} />}
+      {icon && <Icon name={icon} className="size-2.5 sm:size-3.5" strokeWidth={2} />}
       {children}
     </span>
   )

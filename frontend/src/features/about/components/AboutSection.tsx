@@ -1,4 +1,4 @@
-import { company, getStats } from '@/data'
+import { company } from '@/data'
 import { ButtonLink } from '@/shared/components/ui/Button'
 import { Container } from '@/shared/components/ui/Container'
 import { Icon } from '@/shared/components/ui/Icon'
@@ -15,7 +15,6 @@ const promises = [
 
 /** "Find Out More About Us" — company story with supporting proof points. */
 export function AboutSection() {
-  const stats = getStats()
 
   return (
     <Section id="about" tone="warm" className="scroll-mt-24">
@@ -35,23 +34,6 @@ export function AboutSection() {
                 height={900}
                 className="aspect-[4/3] w-full"
               />
-            </div>
-
-            <div className="relative z-10 mt-4 flex flex-wrap gap-4 sm:absolute sm:-bottom-8 sm:right-6 sm:mt-0 sm:w-max sm:flex-col sm:gap-3">
-              {stats.slice(0, 2).map((stat) => (
-                <div
-                  key={stat.id}
-                  className="flex items-center gap-3 rounded-xl bg-white px-5 py-4 shadow-md"
-                >
-                  <span className="font-display text-2xl font-bold leading-none text-accent-600">
-                    {stat.value}
-                    {stat.suffix}
-                  </span>
-                  <span className="max-w-[9rem] text-xs font-semibold leading-snug text-ink-600">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
             </div>
           </Reveal>
 

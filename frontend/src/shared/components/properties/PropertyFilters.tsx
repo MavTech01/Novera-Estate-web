@@ -12,7 +12,7 @@ import { Button } from '@/shared/components/ui/Button'
 import { CheckboxGroup } from '@/shared/components/ui/CheckboxGroup'
 import { Icon } from '@/shared/components/ui/Icon'
 import { SelectField } from '@/shared/components/ui/SelectField'
-import type { PropertyFiltersController } from '@/features/properties/hooks/usePropertyFilters'
+import type { PropertyFiltersController } from '@/shared/types/propertyFiltersController'
 import { PropertyFilterGroup } from './PropertyFilterGroup'
 import { PropertyPriceRangeSelect } from './PropertyPriceRangeSelect'
 

@@ -11,8 +11,8 @@ import {
   PropertyNotFoundState,
   PropertyOverview,
   SimilarProperties,
-} from '@/components/property-detail'
-import { PropertyErrorState } from '@/components/properties/PropertyErrorState'
+} from '@/features/properties/components/detail/index'
+import { PropertyErrorState } from '@/shared/components/properties/PropertyErrorState'
 import { Container } from '@/shared/components/ui/Container'
 import { getSimilarProperties } from '@/data'
 import { useParams } from 'react-router-dom'

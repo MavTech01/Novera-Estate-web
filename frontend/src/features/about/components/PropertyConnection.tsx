@@ -1,4 +1,4 @@
-import { PropertyCard } from '@/components/properties/PropertyCard'
+import { PropertyCard } from '@/shared/components/properties/PropertyCard'
 import { navigationCta } from '@/data/company'
 import { getFeaturedProperties } from '@/data'
 import { ButtonLink } from '@/shared/components/ui/Button'

@@ -1,6 +1,6 @@
 import { company } from '@/data'
 import { routes } from '@/shared/lib/routes'
-import { CtaBand } from '@/components/cta/CtaBand'
+import { CtaBand } from '@/shared/components/CtaBand'
 
 /**
  * Closing call to action for the property detail page.

@@ -1,6 +1,6 @@
 import { Container } from '@/shared/components/ui/Container'
 import { Skeleton } from '@/shared/components/ui/Skeleton'
-import { PropertyGridSkeleton } from '@/components/properties/PropertySkeleton'
+import { PropertyGridSkeleton } from '@/shared/components/properties/PropertySkeleton'
 import { RENT_FEATURED_LIMIT } from '@/features/rent/services/rentService'
 
 /**

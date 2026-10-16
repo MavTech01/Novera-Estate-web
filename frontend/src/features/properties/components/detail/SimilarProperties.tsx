@@ -1,4 +1,4 @@
-import { PropertyGrid } from '@/components/properties/PropertyGrid'
+import { PropertyGrid } from '@/shared/components/properties/PropertyGrid'
 import { SectionHeading } from '@/shared/components/ui/SectionHeading'
 import type { Property } from '@/types'
 

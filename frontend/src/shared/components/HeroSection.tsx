@@ -88,14 +88,16 @@ export function HeroSection() {
         </div>
 
         {/* Trust counters */}
-        <Reveal className="mt-16 border-t border-sand-200 pt-10 sm:mt-20">
-          <dl className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6" aria-label="Novera Estates in numbers">
-            {stats.map((stat) => (
-              <div key={stat.id} className="sm:border-l sm:border-sand-200 sm:pl-6 sm:first:border-l-0 sm:first:pl-0">
-                <StatCard stat={stat} active />
-              </div>
-            ))}
-          </dl>
+        <Reveal className="mt-12 sm:mt-16 lg:mt-20">
+          <div className="rounded-2xl border border-sand-200/90 bg-gradient-to-b from-white via-white to-tint-50/40 p-3 shadow-sm backdrop-blur-xs sm:p-7 sm:shadow-md">
+            <dl className="grid grid-cols-3 divide-x divide-sand-200" aria-label="Novera Estates in numbers">
+              {stats.map((stat) => (
+                <div key={stat.id} className="px-1.5 sm:px-6 first:pl-0 sm:first:pl-2 last:pr-0 sm:last:pr-2">
+                  <StatCard stat={stat} active />
+                </div>
+              ))}
+            </dl>
+          </div>
         </Reveal>
       </Container>
     </section>

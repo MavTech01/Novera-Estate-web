@@ -24,7 +24,7 @@ export function FavouriteButton({
       onClick={onToggle}
       aria-pressed={isFavourite}
       className={cn(
-        'relative z-10 inline-flex size-11 items-center justify-center rounded-pill transition-all duration-200 ease-[var(--ease-out-soft)]',
+        'relative z-10 inline-flex size-8 items-center justify-center rounded-pill transition-all duration-200 ease-[var(--ease-out-soft)] sm:size-11',
         tone === 'overlay'
           ? 'bg-white/90 text-ink-700 backdrop-blur-sm hover:bg-white hover:text-accent-600'
           : 'border border-sand-200 text-ink-600 hover:border-accent-300 hover:text-ink-900',
@@ -37,7 +37,7 @@ export function FavouriteButton({
       <Icon
         name="heart"
         strokeWidth={1.75}
-        className={cn('size-[1.15rem] transition-colors duration-200', isFavourite && 'fill-accent-500 text-accent-600')}
+        className={cn('size-3.5 transition-colors duration-200 sm:size-[1.15rem]', isFavourite && 'fill-accent-500 text-accent-600')}
       />
     </button>
   )

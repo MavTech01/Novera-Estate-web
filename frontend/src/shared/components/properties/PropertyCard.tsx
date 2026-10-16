@@ -69,7 +69,7 @@ export function PropertyCard({
           imgClassName="media"
         />
 
-        <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-2 p-3.5">
+        <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-1.5 p-2 sm:gap-2 sm:p-3.5">
           <div className="flex flex-wrap items-center gap-1.5">
             {listingBadge(property)}
             {property.isFeatured && (
@@ -88,9 +88,9 @@ export function PropertyCard({
           )}
         </div>
 
-        {/* Price badge overlaps the media edge, aligned with the body's 20px padding. */}
-        <div className="absolute bottom-0 left-5 z-10 flex translate-y-1/2 items-center gap-2">
-          <Badge tone={property.purpose === 'rent' ? 'dark' : 'orange'} className="px-4 py-1.5 text-sm shadow-md">
+        {/* Price badge overlaps the media edge, aligned with the body's padding. */}
+        <div className="absolute bottom-0 left-4 z-10 flex translate-y-1/2 items-center gap-2 sm:left-5">
+          <Badge tone={property.purpose === 'rent' ? 'dark' : 'orange'} className="px-3.5 py-1.5 text-xs shadow-md sm:px-4 sm:text-sm">
             {formatPrice(property.price, property.pricePeriod)}
           </Badge>
 
@@ -98,7 +98,7 @@ export function PropertyCard({
             <Badge
               tone="light"
               icon="badge-check"
-              className="hidden px-2.5 py-1.5 text-xs shadow-sm sm:inline-flex"
+              className="hidden px-2.5 py-1.5 text-xs shadow-sm xs:inline-flex"
             >
               Verified
             </Badge>
@@ -107,12 +107,12 @@ export function PropertyCard({
       </div>
 
       <div className="flex flex-1 flex-col p-5 pt-8">
-        <p className="flex items-center gap-1.5 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-ink-400">
+        <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-ink-400">
           <Icon name="map-pin" className="size-3.5 shrink-0 text-accent-500" strokeWidth={2} />
           <span className="truncate">{property.location.label}</span>
         </p>
 
-        <h3 className="mt-2 font-display text-lg leading-snug text-ink-900 transition-colors duration-200 group-hover:text-accent-700">
+        <h3 className="mt-2 line-clamp-2 font-display text-lg leading-snug text-ink-900 transition-colors duration-200 group-hover:text-accent-700 sm:text-xl">
           <Link
             to={href}
             className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
@@ -132,7 +132,7 @@ export function PropertyCard({
         />
 
         <div className="mt-5 flex items-center justify-between gap-3">
-          <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-accent-600">
+          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-accent-600 sm:text-[0.6875rem]">
             {propertyTypeLabels[property.propertyType]}
           </span>
 

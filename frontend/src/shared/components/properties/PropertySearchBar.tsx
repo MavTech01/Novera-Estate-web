@@ -1,6 +1,6 @@
 import { propertyTypeFilterOptions } from '@/data/propertyFilters'
 import { purposeOptions } from '@/data/searchOptions'
-import type { PropertyFiltersController } from '@/features/properties/hooks/usePropertyFilters'
+import type { PropertyFiltersController } from '@/shared/types/propertyFiltersController'
 import { cn } from '@/shared/lib/cn'
 import type { PropertyPurpose, PropertyType } from '@/types'
 import { Icon } from '@/shared/components/ui/Icon'

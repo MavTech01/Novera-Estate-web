@@ -27,7 +27,7 @@ const sizes: Record<ButtonSize, string> = {
 
 function buttonStyles(variant: ButtonVariant = 'primary', size: ButtonSize = 'md', className?: string) {
   return cn(
-    'inline-flex items-center justify-center gap-2 rounded-md font-semibold tracking-[-0.005em]',
+    'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-semibold tracking-[-0.005em]',
     'transition-all duration-200 ease-[var(--ease-out-soft)]',
     'disabled:cursor-not-allowed disabled:opacity-60',
     variants[variant],

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 import { useLockBodyScroll } from '@/shared/hooks/useLockBodyScroll'
-import type { PropertyFiltersController } from '@/features/properties/hooks/usePropertyFilters'
+import type { PropertyFiltersController } from '@/shared/types/propertyFiltersController'
 import { cn } from '@/shared/lib/cn'
 import { Icon } from '@/shared/components/ui/Icon'
 import { PropertyFilters } from './PropertyFilters'

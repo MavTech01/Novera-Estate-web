@@ -1,4 +1,4 @@
-import { PropertyCard } from '@/components/properties/PropertyCard'
+import { PropertyCard } from '@/shared/components/properties/PropertyCard'
 import { Container } from '@/shared/components/ui/Container'
 import { Reveal } from '@/shared/components/ui/Reveal'
 import { Section } from '@/shared/components/ui/Section'

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FavouriteButton } from '@/components/properties/FavouriteButton'
+import { FavouriteButton } from '@/shared/components/properties/FavouriteButton'
 import { formatDate } from '@/shared/lib/format'
 import { propertyTypeLabels } from '@/shared/lib/labels'
 import type { PropertyDetail } from '@/types'
