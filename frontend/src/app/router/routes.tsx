@@ -122,6 +122,17 @@ export const router = createBrowserRouter([
         handle: { title: `About Novera Estates — ${SITE_NAME}` },
       },
       {
+        path: '/services',
+        element: (
+          <RouteNoticePage
+            variant="planned"
+            title="Services"
+            description="Sales, rentals, land and investment advisory are all handled in person. Talk to an agent about what you are looking for."
+          />
+        ),
+        handle: { title: `Services — ${SITE_NAME}` },
+      },
+      {
         path: routes.services,
         element: (
           <RouteNoticePage
@@ -131,6 +142,28 @@ export const router = createBrowserRouter([
           />
         ),
         handle: { title: `Services — ${SITE_NAME}` },
+      },
+      {
+        path: '/insights',
+        element: (
+          <RouteNoticePage
+            variant="planned"
+            title="Market Insights"
+            description="Our full market insights, property guides, and Lagos real estate trends will be available here soon."
+          />
+        ),
+        handle: { title: `Market Insights — ${SITE_NAME}` },
+      },
+      {
+        path: '/insights/:slug',
+        element: (
+          <RouteNoticePage
+            variant="planned"
+            title="Market Insights"
+            description="Our full market insights, property guides, and Lagos real estate trends will be available here soon."
+          />
+        ),
+        handle: { title: `Market Insights — ${SITE_NAME}` },
       },
       {
         path: routes.bookInspection,

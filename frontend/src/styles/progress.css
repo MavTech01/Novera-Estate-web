@@ -1,19 +1,43 @@
-#nprogress .bar {
-  height: 2px;
-  background: var(--color-accent-500);
-  box-shadow: none;
+.route-progress-enter {
+  animation: route-progress-sweep 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-#nprogress .peg {
-  display: none;
+.route-progress-complete {
+  animation: route-progress-finish 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-#nprogress .spinner {
-  display: none;
+@keyframes route-progress-sweep {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(0.85);
+  }
+}
+
+@keyframes route-progress-finish {
+  0% {
+    transform: scaleX(0.85);
+    opacity: 1;
+  }
+  70% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #nprogress .bar {
-    transition: none;
+  .route-progress-enter {
+    animation: none;
+    transform: scaleX(0.5);
+  }
+
+  .route-progress-complete {
+    animation: none;
+    opacity: 0;
   }
 }

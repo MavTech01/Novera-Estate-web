@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { getFeaturedLocations } from '@/data'
 import { cn } from '@/shared/lib/cn'
 import { locationPath, propertiesPathForLocationSlug } from '@/shared/lib/routes'
@@ -38,9 +39,9 @@ function LocationCard({ location }: { location: LocationSummary }) {
 
       <div className="flex flex-1 flex-col p-5">
         <h3 className="font-display text-xl text-ink-900 transition-colors duration-200 group-hover:text-accent-700">
-          <a href={locationPath(location.slug)} className="after:absolute after:inset-0 after:content-['']">
+          <Link to={locationPath(location.slug)} className="after:absolute after:inset-0 after:content-['']">
             {location.name}
-          </a>
+          </Link>
         </h3>
 
         <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{location.description}</p>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { formatDate } from '@/shared/lib/format'
 import type { Article } from '@/types'
 import { ArrowLink } from '@/shared/components/ui/ArrowLink'
@@ -34,9 +35,9 @@ export function ArticleCard({ article }: ArticleCardProps) {
         </p>
 
         <h3 className="mt-3 font-display text-xl leading-snug text-ink-900 transition-colors duration-200 group-hover:text-accent-700">
-          <a href={`/insights/${article.slug}`} className="after:absolute after:inset-0 after:content-['']">
+          <Link to={`/insights/${article.slug}`} className="after:absolute after:inset-0 after:content-['']">
             {article.title}
-          </a>
+          </Link>
         </h3>
 
         <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-500">{article.excerpt}</p>

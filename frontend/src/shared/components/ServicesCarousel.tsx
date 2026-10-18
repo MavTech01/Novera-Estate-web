@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { getServices } from '@/data'
 import { cn } from '@/shared/lib/cn'
@@ -32,9 +33,9 @@ function ServiceCard({ service }: { service: Service }) {
           {service.caption}
         </p>
         <h3 className="mt-2 font-display text-xl text-ink-900 transition-colors duration-200 group-hover:text-accent-700">
-          <a href={service.href} className="after:absolute after:inset-0 after:content-['']">
+          <Link to={service.href} className="after:absolute after:inset-0 after:content-['']">
             {service.title}
-          </a>
+          </Link>
         </h3>
         <p className="mt-3 text-sm leading-relaxed text-ink-500">{service.description}</p>
 

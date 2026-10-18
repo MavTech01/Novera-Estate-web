@@ -57,9 +57,23 @@ const noLoad = async (): Promise<void> => {}
 /** Resolves once an image has decoded, so a committed page never pops in. */
 function decodeImage(src: string): Promise<void> {
   return new Promise((resolve) => {
+    let resolved = false
+    const done = () => {
+      if (!resolved) {
+        resolved = true
+        resolve()
+      }
+    }
+    const timer = setTimeout(done, 350)
     const image = new Image()
-    image.onload = () => resolve()
-    image.onerror = () => resolve()
+    image.onload = () => {
+      clearTimeout(timer)
+      done()
+    }
+    image.onerror = () => {
+      clearTimeout(timer)
+      done()
+    }
     image.src = src
   })
 }
