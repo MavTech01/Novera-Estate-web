@@ -2,6 +2,7 @@ import { cn } from '@/shared/lib/cn'
 import { Container } from '@/shared/components/ui/Container'
 import { Icon } from '@/shared/components/ui/Icon'
 import { Reveal } from '@/shared/components/ui/Reveal'
+import { SmartLink } from '@/shared/components/ui/SmartLink'
 import type { IconName } from '@/types'
 
 export interface CtaAction {
@@ -59,7 +60,7 @@ export function CtaBand({
 
               <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row lg:flex-col xl:flex-row">
                 {actions.map((action) => (
-                  <a
+                  <SmartLink
                     key={action.label}
                     href={action.href}
                     className={cn(
@@ -72,7 +73,7 @@ export function CtaBand({
                   >
                     {action.label}
                     {action.withArrow && <Icon name="arrow-right" className="size-4" strokeWidth={2.2} />}
-                  </a>
+                  </SmartLink>
                 ))}
               </div>
             </div>

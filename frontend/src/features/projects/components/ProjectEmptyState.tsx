@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { Icon } from '@/shared/components/ui/Icon'
 import { cn } from '@/shared/lib/cn'
 
@@ -43,13 +45,13 @@ export function ProjectEmptyState({ onReset, action, className }: ProjectEmptySt
         </button>
 
         {action && (
-          <a
-            href={action.href}
+          <Link
+            to={action.href}
             className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-accent-200 bg-white px-6 text-sm font-semibold text-accent-700 transition-colors duration-200 hover:border-accent-400 hover:bg-tint-50"
           >
             {action.label}
             <Icon name="arrow-right" className="size-4" strokeWidth={2.2} />
-          </a>
+          </Link>
         )}
       </div>
     </div>

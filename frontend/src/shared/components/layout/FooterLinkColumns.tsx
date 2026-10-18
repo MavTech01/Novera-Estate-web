@@ -1,3 +1,4 @@
+import { SmartLink } from '@/shared/components/ui/SmartLink'
 import type { NavigationGroup } from '@/types'
 
 interface FooterLinkColumnsProps {
@@ -16,12 +17,12 @@ export function FooterLinkColumns({ groups, className }: FooterLinkColumnsProps)
           <ul className="mt-4 flex flex-col gap-2.5">
             {group.links.map((link) => (
               <li key={link.href}>
-                <a
+                <SmartLink
                   href={link.href}
                   className="inline-flex min-h-8 items-center text-sm text-sand-300 transition-colors duration-200 hover:text-accent-300"
                 >
                   {link.label}
-                </a>
+                </SmartLink>
               </li>
             ))}
           </ul>

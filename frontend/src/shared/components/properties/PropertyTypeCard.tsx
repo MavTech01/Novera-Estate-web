@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { cn } from '@/shared/lib/cn'
 import type { PropertyCategory } from '@/types'
 import { Icon } from '@/shared/components/ui/Icon'
@@ -10,8 +12,8 @@ interface PropertyTypeCardProps {
 /** Image-led category card: image, label, description and a hover arrow. */
 export function PropertyTypeCard({ category, className }: PropertyTypeCardProps) {
   return (
-    <a
-      href={category.href}
+    <Link
+      to={category.href}
       className={cn(
         'group relative flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-xl bg-tint-100',
         'shadow-sm transition-all duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-1 hover:shadow-md',
@@ -46,6 +48,6 @@ export function PropertyTypeCard({ category, className }: PropertyTypeCardProps)
       </span>
 
       <span className="sr-only">Browse {category.name}</span>
-    </a>
+    </Link>
   )
 }
