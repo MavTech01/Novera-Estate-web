@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import type { Property } from '@/types'
 import { agents } from './agents'
 import { locations } from './locations'
@@ -41,11 +42,11 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'bq', 'garden', 'power', 'swimming-pool'],
     images: [
       {
-        src: '/images/properties/lekki-duplex.webp',
+        src: images.properties.lekkiDuplex,
         alt: 'Exterior of a luxury four bedroom detached duplex in Lekki Phase 1, Lagos',
       },
       {
-        src: '/images/development/oasis-alt.webp',
+        src: images.development.oasisAlt,
         alt: 'Open-plan living area inside the duplex',
       },
     ],
@@ -86,11 +87,11 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'gym', 'lift', 'furnished'],
     images: [
       {
-        src: '/images/properties/ikoyi-apartment.webp',
+        src: images.properties.ikoyiApartment,
         alt: 'Contemporary three bedroom apartment living space in Ikoyi, Lagos',
       },
       {
-        src: '/images/properties/ikeja-residence.webp',
+        src: images.properties.ikejaResidence,
         alt: 'Exterior view of the apartment building',
       },
     ],
@@ -131,7 +132,7 @@ export const properties: Property[] = [
     tags: ['security', 'serviced', 'power'],
     images: [
       {
-        src: '/images/properties/ajah-land.webp',
+        src: images.properties.ajahLand,
         alt: 'Open serviced residential land plots in Ajah, Lagos',
       },
     ],
@@ -172,7 +173,7 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'garden', 'bq'],
     images: [
       {
-        src: '/images/properties/ikeja-residence.webp',
+        src: images.properties.ikejaResidence,
         alt: 'Modern five bedroom family residence in Ikeja, Lagos',
       },
     ],
@@ -222,7 +223,7 @@ export const properties: Property[] = [
     ],
     images: [
       {
-        src: '/images/properties/banana-island-home.webp',
+        src: images.properties.bananaIslandHome,
         alt: 'Luxury five bedroom waterfront home in Banana Island, Lagos',
       },
     ],
@@ -263,7 +264,7 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'power', 'serviced'],
     images: [
       {
-        src: '/images/properties/gupe-duplex.webp',
+        src: images.properties.gupeDuplex,
         alt: 'Semi-detached four bedroom duplex exterior in Gupe, Lekki, Lagos',
       },
     ],
@@ -305,7 +306,7 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'serviced', 'gym', 'lift', 'furnished', 'generator', 'power'],
     images: [
       {
-        src: '/images/properties/victoria-apartment.webp',
+        src: images.properties.victoriaApartment,
         alt: 'Serviced two bedroom apartment interior in Victoria Island, Lagos',
       },
     ],
@@ -347,7 +348,7 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'lift', 'generator', 'serviced'],
     images: [
       {
-        src: '/images/properties/yaba-office.webp',
+        src: images.properties.yabaOffice,
         alt: 'Grade A open-plan office space in Yaba, Lagos',
       },
     ],
@@ -382,7 +383,7 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'bq', 'power'],
     images: [
       {
-        src: '/images/hero/hero-main.webp',
+        src: images.hero.main,
         alt: 'Four bedroom terrace duplex with landscaped frontage in Lekki Phase 2, Lagos',
       },
     ],
@@ -418,7 +419,7 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'serviced', 'swimming-pool', 'gym', 'lift', 'furnished', 'generator'],
     images: [
       {
-        src: '/images/categories/apartments.webp',
+        src: images.categories.apartments,
         alt: 'Serviced apartment building exterior in Ikoyi, Lagos',
       },
     ],
@@ -453,7 +454,7 @@ export const properties: Property[] = [
     tags: ['parking', 'swimming-pool', 'security', 'bq', 'garden', 'power'],
     images: [
       {
-        src: '/images/categories/houses.webp',
+        src: images.categories.houses,
         alt: 'Detached five bedroom family house with front lawn in Ikota, Lagos',
       },
     ],
@@ -488,7 +489,7 @@ export const properties: Property[] = [
     tags: ['security', 'serviced', 'power'],
     images: [
       {
-        src: '/images/categories/land.webp',
+        src: images.categories.land,
         alt: 'Serviced residential land plots in Sangotedo, Lekki, Lagos',
       },
     ],
@@ -524,7 +525,7 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'generator', 'serviced'],
     images: [
       {
-        src: '/images/categories/commercial.webp',
+        src: images.categories.commercial,
         alt: 'Retail unit frontage on a commercial street in Victoria Island, Lagos',
       },
     ],
@@ -559,7 +560,7 @@ export const properties: Property[] = [
     tags: ['parking', 'swimming-pool', 'security', 'gym', 'lift', 'serviced', 'generator'],
     images: [
       {
-        src: '/images/categories/luxury.webp',
+        src: images.categories.luxury,
         alt: 'Luxury penthouse living space with pool views in Ikoyi, Lagos',
       },
     ],
@@ -594,7 +595,7 @@ export const properties: Property[] = [
     tags: ['parking', 'swimming-pool', 'security', 'gym', 'lift', 'serviced'],
     images: [
       {
-        src: '/images/categories/developments.webp',
+        src: images.categories.developments,
         alt: 'New multi-unit residential development in Lekki Phase 1, Lagos',
       },
     ],
@@ -629,7 +630,7 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'swimming-pool', 'serviced'],
     images: [
       {
-        src: '/images/locations/lekki.webp',
+        src: images.locations.lekki,
         alt: 'Residential terrace homes in a managed estate in Sangotedo, Lekki, Lagos',
       },
     ],
@@ -664,7 +665,7 @@ export const properties: Property[] = [
     tags: ['security', 'serviced'],
     images: [
       {
-        src: '/images/blog/buying-land.webp',
+        src: images.blog.buyingLand,
         alt: 'Cleared residential land plots in Magodo, Lagos',
       },
     ],
@@ -699,7 +700,7 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'bq', 'garden', 'power'],
     images: [
       {
-        src: '/images/locations/ikoyi.webp',
+        src: images.locations.ikoyi,
         alt: 'Executive residential duplex in Ikota, Ikoyi, Lagos',
       },
     ],
@@ -735,7 +736,7 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'lift', 'serviced'],
     images: [
       {
-        src: '/images/locations/ikeja.webp',
+        src: images.locations.ikeja,
         alt: 'Fitted office suite in an Ikeja commercial building, Lagos',
       },
     ],
@@ -771,7 +772,7 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'serviced', 'lift', 'furnished', 'generator'],
     images: [
       {
-        src: '/images/locations/yaba.webp',
+        src: images.locations.yaba,
         alt: 'Furnished one bedroom apartment building in Yaba, Lagos',
       },
     ],
@@ -806,7 +807,7 @@ export const properties: Property[] = [
     tags: ['parking', 'swimming-pool', 'security', 'serviced', 'gym', 'lift', 'power'],
     images: [
       {
-        src: '/images/locations/victoria-island.webp',
+        src: images.locations.victoriaIsland,
         alt: 'Luxury apartment tower on Victoria Island, Lagos',
       },
     ],
@@ -842,7 +843,7 @@ export const properties: Property[] = [
     tags: ['parking', 'swimming-pool', 'security', 'serviced', 'gym', 'lift', 'generator', 'power'],
     images: [
       {
-        src: '/images/development/oasis-main.webp',
+        src: images.development.oasisMain,
         alt: 'New two bedroom apartment in a managed estate in Chevron, Lekki, Lagos',
       },
     ],
@@ -877,7 +878,7 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'bq', 'garden', 'serviced', 'power'],
     images: [
       {
-        src: '/images/development/oasis-alt.webp',
+        src: images.development.oasisAlt,
         alt: 'Four bedroom townhouse with private courtyard in Gupe, Lekki, Lagos',
       },
     ],
@@ -912,7 +913,7 @@ export const properties: Property[] = [
     tags: ['security', 'serviced', 'generator'],
     images: [
       {
-        src: '/images/blog/choosing-location.webp',
+        src: images.blog.choosingLocation,
         alt: 'Commercial-zoned land beside a major road in Osapa, Lekki, Lagos',
       },
     ],
@@ -947,7 +948,7 @@ export const properties: Property[] = [
     tags: ['parking', 'security', 'lift', 'serviced', 'power'],
     images: [
       {
-        src: '/images/blog/investment.webp',
+        src: images.blog.investment,
         alt: 'Three bedroom apartment interior in Lekki Phase 2, Lagos',
       },
     ],
@@ -982,7 +983,7 @@ export const properties: Property[] = [
     tags: ['parking', 'security'],
     images: [
       {
-        src: '/images/ui/cta-image.webp',
+        src: images.ui.ctaImage,
         alt: 'Two bedroom house exterior in Okokomaiko, Lagos',
       },
     ],
@@ -1026,7 +1027,7 @@ export const properties: Property[] = [
     ],
     images: [
       {
-        src: '/images/development/oasis-main.webp',
+        src: images.development.oasisMain,
         alt: 'Luxury five bedroom home with pool in Chevron, Lekki, Lagos',
       },
     ],
@@ -1062,7 +1063,7 @@ export const properties: Property[] = [
     tags: ['security', 'serviced', 'lift', 'furnished', 'generator'],
     images: [
       {
-        src: '/images/categories/apartments.webp',
+        src: images.categories.apartments,
         alt: 'Furnished studio apartment in a residential building in Yaba, Lagos',
       },
     ],

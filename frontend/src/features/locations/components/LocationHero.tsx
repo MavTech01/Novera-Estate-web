@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import { Link } from 'react-router-dom'
 import { company } from '@/data/company'
 import { locationSearchShortcuts } from '@/features/locations/data/locationOptions'
@@ -43,7 +44,7 @@ export function LocationHero({ controller, suggestions, onSearch, wave }: Locati
         title="Find Your Place in Lagos"
         description="Discover properties and developments across some of Lagos's most sought-after areas."
         image={{
-          src: '/images/hero/hero-main.webp',
+          src: images.hero.main,
           alt: 'Aerial view of Lagos showing residential districts, roads and the coastline',
         }}
         breadcrumbs={pageCrumbs({ label: 'Locations' })}

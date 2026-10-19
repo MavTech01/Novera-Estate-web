@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import { company, getStats } from '@/data'
 import { ButtonLink } from '@/shared/components/ui/Button'
 import { Container } from '@/shared/components/ui/Container'
@@ -64,7 +65,7 @@ export function HeroSection() {
           <div className="animate-fade-up-slow relative" style={{ animationDelay: '120ms' }}>
             <div className="relative z-10 overflow-hidden rounded-2xl shadow-lg">
               <SkeletonImage
-                src="/images/hero/hero-main.webp"
+                src={images.hero.main}
                 alt="Contemporary family home with landscaped garden, photographed for Novera Estates"
                 width={1400}
                 height={1000}

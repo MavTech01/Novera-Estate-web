@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import type { Development } from '@/types'
 import { locations } from './locations'
 
@@ -24,11 +25,11 @@ export const featuredDevelopment: Development = {
   ],
   images: [
     {
-      src: '/images/development/oasis-main.webp',
+      src: images.development.oasisMain,
       alt: 'Exterior view of The Oasis Residences development in Lekki, Lagos',
     },
     {
-      src: '/images/development/oasis-alt.webp',
+      src: images.development.oasisAlt,
       alt: 'Bright open-plan living area inside an Oasis Residences apartment',
     },
   ],

@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import type { Agent } from '@/types'
 
 /** The Novera Estates advisory team. Later served from an `agents` table. */
@@ -8,7 +9,7 @@ export const agents: Record<'adaeze' | 'tunde' | 'chiamaka', Agent> = {
     role: 'Head of Residential Sales',
     phone: '+234 802 345 6710',
     email: 'adaeze@noveraestates.com',
-    avatar: { src: '/images/team/ad-hoc.webp', alt: 'Portrait of Adaeze Okonkwo' },
+    avatar: { src: images.team.adHoc, alt: 'Portrait of Adaeze Okonkwo' },
   },
   tunde: {
     id: 'agent-tunde-bakare',
@@ -16,7 +17,7 @@ export const agents: Record<'adaeze' | 'tunde' | 'chiamaka', Agent> = {
     role: 'Investment & Land Advisor',
     phone: '+234 803 908 2244',
     email: 'tunde@noveraestates.com',
-    avatar: { src: '/images/team/tunde-b.webp', alt: 'Portrait of Tunde Bakare' },
+    avatar: { src: images.team.tundeB, alt: 'Portrait of Tunde Bakare' },
   },
   chiamaka: {
     id: 'agent-chiamaka-nwosu',
@@ -24,6 +25,6 @@ export const agents: Record<'adaeze' | 'tunde' | 'chiamaka', Agent> = {
     role: 'Leasing Specialist',
     phone: '+234 809 771 5533',
     email: 'chiamaka@noveraestates.com',
-    avatar: { src: '/images/team/chiamaka.webp', alt: 'Portrait of Chiamaka Nwosu' },
+    avatar: { src: images.team.chiamaka, alt: 'Portrait of Chiamaka Nwosu' },
   },
 }

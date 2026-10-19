@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import { company } from '@/data/company'
 import { PageHero, type PageHeroTrustItem } from '@/shared/components/layout/PageHero'
 import { Container } from '@/shared/components/ui/Container'
@@ -35,7 +36,7 @@ export function ProjectHero({ controller, onSearch }: ProjectHeroProps) {
         title="Discover Our Developments"
         description="Explore carefully planned residential developments designed for comfortable living, strong communities, and long-term value."
         image={{
-          src: '/images/categories/developments.webp',
+          src: images.categories.developments,
           alt: 'Contemporary residential development with landscaped grounds and apartment blocks, photographed for Novera Estates',
         }}
         breadcrumbs={pageCrumbs({ label: 'Projects' })}

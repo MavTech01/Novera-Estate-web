@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import { ButtonLink } from '@/shared/components/ui/Button'
 import { Container } from '@/shared/components/ui/Container'
 import { Icon } from '@/shared/components/ui/Icon'
@@ -55,7 +56,7 @@ export function AboutCTA() {
 
             <div className="relative min-h-[16rem] bg-ink-800 lg:min-h-[24rem]">
               <SkeletonImage
-                src="/images/ui/cta-image.webp"
+                src={images.ui.ctaImage}
                 alt="A two bedroom house exterior in a residential street in Okokomaiko, Lagos"
                 width={1600}
                 height={1100}

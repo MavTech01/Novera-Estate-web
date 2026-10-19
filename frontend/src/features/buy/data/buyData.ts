@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import type { IconName, PropertyType } from '@/types'
 import type {
   BuyCategory,
@@ -23,7 +24,7 @@ import type {
 
 /** The main photograph for the Buy page hero. */
 export const BUY_HERO_IMAGE = {
-  src: '/images/properties/lekki-duplex.webp',
+  src: images.properties.lekkiDuplex,
   alt: 'Exterior of a four-bedroom duplex in a Lekki residential estate, Lagos',
 }
 
@@ -50,7 +51,7 @@ export const buyCategorySeeds: Omit<BuyCategory, 'count'>[] = [
     description:
       'Detached and semi-detached homes, including duplexes within established estates across the island and mainland.',
     image: {
-      src: '/images/categories/houses.webp',
+      src: images.categories.houses,
       alt: 'A detached family house with a front lawn and covered entrance',
     },
     propertyType: 'house',
@@ -61,7 +62,7 @@ export const buyCategorySeeds: Omit<BuyCategory, 'count'>[] = [
     description:
       'Serviced flats, maisonettes and penthouse units in the city’s most connected districts.',
     image: {
-      src: '/images/categories/apartments.webp',
+      src: images.categories.apartments,
       alt: 'Modern apartment building with balconies and large windows',
     },
     propertyType: 'apartment',
@@ -72,7 +73,7 @@ export const buyCategorySeeds: Omit<BuyCategory, 'count'>[] = [
     description:
       'Signature homes in prime Lagos addresses — Banana Island, Ikoyi, Victoria Island and the Lekki corridor.',
     image: {
-      src: '/images/categories/luxury.webp',
+      src: images.categories.luxury,
       alt: 'Contemporary luxury home with large glazing and a pool',
     },
     propertyType: 'luxury',
@@ -83,7 +84,7 @@ export const buyCategorySeeds: Omit<BuyCategory, 'count'>[] = [
     description:
       'Documented residential plots in fast-growing corridors, ready for construction or a longer-term build plan.',
     image: {
-      src: '/images/categories/land.webp',
+      src: images.categories.land,
       alt: 'Cleared, surveyed plots of land awaiting development',
     },
     propertyType: 'land',
@@ -94,7 +95,7 @@ export const buyCategorySeeds: Omit<BuyCategory, 'count'>[] = [
     description:
       'Offices, retail space and mixed-use units for businesses planning their next move.',
     image: {
-      src: '/images/categories/commercial.webp',
+      src: images.categories.commercial,
       alt: 'Contemporary commercial building facade',
     },
     propertyType: 'commercial',
@@ -105,7 +106,7 @@ export const buyCategorySeeds: Omit<BuyCategory, 'count'>[] = [
     description:
       'Off-plan and completed estate projects — including units in Novera Estates’ own developments.',
     image: {
-      src: '/images/categories/developments.webp',
+      src: images.categories.developments,
       alt: 'New multi-unit residential development under construction',
     },
     propertyType: 'development',

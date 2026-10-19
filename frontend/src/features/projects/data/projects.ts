@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import type { Project, ProjectSeed } from '@/features/projects/types/projectTypes'
 import { buildProjectLocationInfo } from '@/features/projects/utils/projectGallery'
 import { buildProjectUnitTypes } from '@/features/projects/utils/projectUnitTypes'
@@ -44,15 +45,15 @@ const projectSeeds: ProjectSeed[] = [
       'Novera Heights is a carefully planned mid-rise development set a short walk from the Lekki expressway. The layout separates vehicle circulation from pedestrian routes, so gardens and play areas sit inside the development rather than beside a main road. Apartments are finished with fitted kitchens, tiled living areas and covered parking, and the estate runs on its own power and water treatment infrastructure.',
     images: [
       {
-        src: '/images/categories/developments.webp',
+        src: images.categories.developments,
         alt: 'Rendered view of the Novera Heights development showing landscaped courtyards and mid-rise apartment blocks',
       },
       {
-        src: '/images/development/oasis-main.webp',
+        src: images.development.oasisMain,
         alt: 'Close-up of the Novera Heights entrance elevation and porte-cochere',
       },
       {
-        src: '/images/properties/lekki-duplex.webp',
+        src: images.properties.lekkiDuplex,
         alt: 'Bright living room inside a Novera Heights apartment',
       },
     ],
@@ -91,11 +92,11 @@ const projectSeeds: ProjectSeed[] = [
       'Novera Gardens brings larger family homes to an established Ajah community at an entry-level price point. Terraces are arranged along internal roads wide enough for refuse trucks, and every home has a private garden area. The development shares a boundary wall, a central green and a single controlled entrance, which keeps the estate manageable without feeling enclosed.',
     images: [
       {
-        src: '/images/properties/gupe-duplex.webp',
+        src: images.properties.gupeDuplex,
         alt: 'Exterior of a Novera Gardens terraced home in Ajah, Lagos',
       },
       {
-        src: '/images/locations/ajah.webp',
+        src: images.locations.ajah,
         alt: 'Open landscape on the outskirts of Ajah where the Novera Gardens development sits',
       },
     ],
@@ -134,11 +135,11 @@ const projectSeeds: ProjectSeed[] = [
       'Novera Residences is a low-density apartment development in Ikoyi, planned for owners who want a serviced address rather than a building to maintain. Homes are generous in proportion, with double-height living rooms on the upper floors. Shared facilities include a residents’ lounge, a small gym and staff quarters for every apartment.',
     images: [
       {
-        src: '/images/properties/ikoyi-apartment.webp',
+        src: images.properties.ikoyiApartment,
         alt: 'Elegant apartment interior at Novera Residences in Ikoyi, Lagos',
       },
       {
-        src: '/images/properties/banana-island-home.webp',
+        src: images.properties.bananaIslandHome,
         alt: 'Open-plan living space overlooking landscaped grounds at Novera Residences',
       },
     ],
@@ -177,11 +178,11 @@ const projectSeeds: ProjectSeed[] = [
       'Novera Crest is finished and handed over. Twenty detached homes sit either side of a single circular drive, which keeps reversing and visitor parking off the house fronts. The estate is a short drive from the airport and the Ikeja business district, and three homes remain available.',
     images: [
       {
-        src: '/images/properties/ikeja-residence.webp',
+        src: images.properties.ikejaResidence,
         alt: 'Detached home at the completed Novera Crest estate in Ikeja, Lagos',
       },
       {
-        src: '/images/locations/ikeja.webp',
+        src: images.locations.ikeja,
         alt: 'Ikeja skyline at night, minutes from the Novera Crest estate',
       },
     ],
@@ -220,11 +221,11 @@ const projectSeeds: ProjectSeed[] = [
       'Novera Point is a mixed commercial block on the Victoria Island corridor, designed for businesses that need a visible address and dependable services. Floor plates are open and column-free, with dedicated lift groups and a service entrance kept separate from the main lobby. Ground-floor retail is planned to face the street frontage.',
     images: [
       {
-        src: '/images/properties/victoria-apartment.webp',
+        src: images.properties.victoriaApartment,
         alt: 'Office frontage at Novera Point on Victoria Island, Lagos',
       },
       {
-        src: '/images/categories/commercial.webp',
+        src: images.categories.commercial,
         alt: 'Commercial retail units at ground level of the Novera Point development',
       },
     ],
@@ -263,11 +264,11 @@ const projectSeeds: ProjectSeed[] = [
       'Novera Yards stacks residential apartments over ground-floor workspaces in Yaba. The building is planned so that deliveries and staff access happen at the rear, leaving the frontage for shops and a small café. Apartments are compact and efficient, with shared laundry and a rooftop terrace for residents.',
     images: [
       {
-        src: '/images/properties/yaba-office.webp',
+        src: images.properties.yabaOffice,
         alt: 'Ground-floor workspace at the Novera Yards development in Yaba, Lagos',
       },
       {
-        src: '/images/locations/yaba.webp',
+        src: images.locations.yaba,
         alt: 'Yaba district streetscape, home to the Novera Yards development',
       },
     ],
@@ -306,11 +307,11 @@ const projectSeeds: ProjectSeed[] = [
       'Novera Palms is the second Novera scheme on this site and is planned around the existing tree line rather than clearing it. Setbacks are wide enough for two cars to pass, and the estate holds a single recreation ground instead of scattered pocket parks. Homes are arranged in four short terraces so that every unit faces a green rather than a boundary wall.',
     images: [
       {
-        src: '/images/development/oasis-alt.webp',
+        src: images.development.oasisAlt,
         alt: 'Landscaped interior view planned for the Novera Palms estate in Lekki',
       },
       {
-        src: '/images/categories/houses.webp',
+        src: images.categories.houses,
         alt: 'Row of family homes planned for the Novera Palms estate',
       },
     ],
@@ -349,11 +350,11 @@ const projectSeeds: ProjectSeed[] = [
       'Novera Terrace handed over in 2025 and is now an established address. The development holds twenty-eight compact homes across two terraces, with parking kept to the rear so the frontage stays open. Five homes remain available, and the estate management team is on site weekly.',
     images: [
       {
-        src: '/images/properties/ajah-land.webp',
+        src: images.properties.ajahLand,
         alt: 'Completed terrace housing at Novera Terrace in Ajah, Lagos',
       },
       {
-        src: '/images/blog/choosing-location.webp',
+        src: images.blog.choosingLocation,
         alt: 'Neighbourhood context around the completed Novera Terrace development',
       },
     ],
@@ -392,11 +393,11 @@ const projectSeeds: ProjectSeed[] = [
       'Novera Exchange is a completed commercial building offered for sale or long leasehold. The common areas, lifts and power are managed centrally, which suits owner-occupiers who do not want to carry building management themselves. Two of the twelve floors remain available.',
     images: [
       {
-        src: '/images/ui/cta-image.webp',
+        src: images.ui.ctaImage,
         alt: 'The completed Novera Exchange office building on Victoria Island, Lagos',
       },
       {
-        src: '/images/categories/commercial.webp',
+        src: images.categories.commercial,
         alt: 'Lobby and reception area at Novera Exchange',
       },
     ],
@@ -435,11 +436,11 @@ const projectSeeds: ProjectSeed[] = [
       'Novera Commons puts homes above small-format retail and consulting rooms, a layout that suits a central Ikeja site with heavy footfall. The two entrances are separated so that commercial visitors never pass through the residential lobby. Structural work is complete and fit-out is underway.',
     images: [
       {
-        src: '/images/categories/apartments.webp',
+        src: images.categories.apartments,
         alt: 'Apartment interiors completed at the Novera Commons development in Ikeja',
       },
       {
-        src: '/images/blog/investment.webp',
+        src: images.blog.investment,
         alt: 'Novera Commons mixed-use frontage on a central Ikeja street',
       },
     ],
@@ -478,11 +479,11 @@ const projectSeeds: ProjectSeed[] = [
       'Novera Vista is finished and occupied, with two apartments left for sale. The building shares a podium with a pool deck, gym and residents’ lounge, and every apartment has a private balcony facing west over the Lekki corridor. Full estate management is in place.',
     images: [
       {
-        src: '/images/categories/luxury.webp',
+        src: images.categories.luxury,
         alt: 'Completed apartment interior at Novera Vista in Lekki Phase 1, Lagos',
       },
       {
-        src: '/images/blog/buying-land.webp',
+        src: images.blog.buyingLand,
         alt: 'Lekki skyline view from the Novera Vista development',
       },
     ],

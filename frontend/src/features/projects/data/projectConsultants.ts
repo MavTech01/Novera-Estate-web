@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import type { ProjectConsultant } from '@/features/projects/types/projectTypes'
 
 /**
@@ -21,7 +22,7 @@ export const projectConsultants: ProjectConsultant[] = [
     email: 'hello@noveraestates.com',
     emailHref: 'hello@noveraestates.com',
     whatsappHref: '2340000000000',
-    avatar: { src: '/images/team/ad-hoc.webp', alt: 'Novera Estates client advisory desk' },
+    avatar: { src: images.team.adHoc, alt: 'Novera Estates client advisory desk' },
   },
   {
     id: 'consultant-chiamaka',
@@ -33,7 +34,7 @@ export const projectConsultants: ProjectConsultant[] = [
     emailHref: 'chiamaka@noveraestates.com',
     whatsappHref: '2340000001141',
     avatar: {
-      src: '/images/team/chiamaka.webp',
+      src: images.team.chiamaka,
       alt: 'Portrait of Chiamaka Okafor, Senior Property Consultant at Novera Estates',
     },
   },
@@ -47,7 +48,7 @@ export const projectConsultants: ProjectConsultant[] = [
     emailHref: 'tunde@noveraestates.com',
     whatsappHref: '2340000002206',
     avatar: {
-      src: '/images/team/tunde-b.webp',
+      src: images.team.tundeB,
       alt: 'Portrait of Tunde Balogun, Development Sales Consultant at Novera Estates',
     },
   },

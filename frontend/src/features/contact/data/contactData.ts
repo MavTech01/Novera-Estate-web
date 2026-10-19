@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import { company } from '@/data/company'
 import { buildCallUrl, buildWhatsAppUrl } from '@/shared/lib/contactLinks'
 import type {
@@ -21,7 +22,7 @@ import type {
 
 /** The hero photograph: the office's own neighbourhood. */
 export const CONTACT_HERO_IMAGE = {
-  src: '/images/locations/lekki.webp',
+  src: images.locations.lekki,
   alt: 'A quiet residential street in Lekki Phase 1, where the Novera Estates office is located',
 }
 

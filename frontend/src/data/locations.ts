@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import type { GeoLocation, LocationSummary } from '@/types'
 
 /**
@@ -135,7 +136,7 @@ export const featuredLocations: LocationSummary[] = [
     description:
       'Established residential addresses with strong value growth and easy access to the Lekki corridor.',
     image: {
-      src: '/images/locations/lekki.webp',
+      src: images.locations.lekki,
       alt: 'Aerial view of the Lekki district and surrounding neighbourhoods in Lagos',
     },
     availableProperties: 86,
@@ -145,7 +146,7 @@ export const featuredLocations: LocationSummary[] = [
     description:
       'Affordable, fast-developing communities offering larger plots and newer estates.',
     image: {
-      src: '/images/locations/ajah.webp',
+      src: images.locations.ajah,
       alt: 'Open green landscape on the outskirts of Ajah, Lagos',
     },
     availableProperties: 64,
@@ -155,7 +156,7 @@ export const featuredLocations: LocationSummary[] = [
     description:
       'The address of choice for executives, embassies and premium residential projects.',
     image: {
-      src: '/images/locations/ikoyi.webp',
+      src: images.locations.ikoyi,
       alt: 'Ikoyi skyline at dusk with illuminated high-rise buildings',
     },
     availableProperties: 41,
@@ -165,7 +166,7 @@ export const featuredLocations: LocationSummary[] = [
     description:
       'Central Lagos convenience — close to the airport, business districts and major amenities.',
     image: {
-      src: '/images/locations/ikeja.webp',
+      src: images.locations.ikeja,
       alt: 'Ikeja commercial district skyline at night',
     },
     availableProperties: 73,
@@ -175,7 +176,7 @@ export const featuredLocations: LocationSummary[] = [
     description:
       'Nigeria’s business centre, home to landmark offices, serviced apartments and retail.',
     image: {
-      src: '/images/locations/victoria-island.webp',
+      src: images.locations.victoriaIsland,
       alt: 'Victoria Island business district with modern towers',
     },
     availableProperties: 52,
@@ -185,7 +186,7 @@ export const featuredLocations: LocationSummary[] = [
     description:
       'A thriving technology and creative hub with growing residential demand.',
     image: {
-      src: '/images/locations/yaba.webp',
+      src: images.locations.yaba,
       alt: 'Yaba district street view with modern buildings',
     },
     availableProperties: 38,

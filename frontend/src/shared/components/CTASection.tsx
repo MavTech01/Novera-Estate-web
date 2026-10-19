@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import { company } from '@/data'
 import { ButtonLink } from '@/shared/components/ui/Button'
 import { Container } from '@/shared/components/ui/Container'
@@ -47,7 +48,7 @@ export function CTASection() {
             {/* Photograph */}
             <div className="relative min-h-[16rem] bg-ink-800 lg:min-h-[26rem]">
               <SkeletonImage
-                src="/images/ui/cta-image.webp"
+                src={images.ui.ctaImage}
                 alt="Contemporary Novera Estates residence photographed at dusk"
                 width={1600}
                 height={1100}

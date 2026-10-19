@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import type { Location, LocationLandmark, LocationMapPosition, LocationSeed } from '@/features/locations/types/locationTypes'
 
 /**
@@ -30,20 +31,20 @@ const locationSeeds: LocationSeed[] = [
     longDescription:
       'Lekki is one of Lagos’s most active districts, stretching from the Phase 1 residential streets through to the newer estates on the Lekki–Epe corridor. It has an unusually broad mix for a single area: established family homes and terrace housing in the older phases, gated developments behind the phase boundaries, and a growing retail and leisure strip along the main artery. Daily needs are well served, and the Third Mainland Bridge and the Lekki–Epe Expressway both connect it to the rest of the state — which is why traffic, rather than availability, is the question most buyers ask about first.',
     image: {
-      src: '/images/locations/lekki.webp',
+      src: images.locations.lekki,
       alt: 'Aerial view of the Lekki district and surrounding neighbourhoods in Lagos',
     },
     gallery: [
       {
-        src: '/images/properties/lekki-duplex.webp',
+        src: images.properties.lekkiDuplex,
         alt: 'A four-bedroom detached duplex in a Lekki residential estate',
       },
       {
-        src: '/images/properties/gupe-duplex.webp',
+        src: images.properties.gupeDuplex,
         alt: 'Semi-detached duplex exterior in Gupe, Lekki',
       },
       {
-        src: '/images/categories/luxury.webp',
+        src: images.categories.luxury,
         alt: 'Contemporary luxury home facade in the Lekki area',
       },
     ],
@@ -116,20 +117,20 @@ const locationSeeds: LocationSeed[] = [
     longDescription:
       'Ajah sits north of Lekki along the Lekki–Epe Expressway and is where much of Lagos’s newest residential supply is being built. Plots and land tend to be larger and cheaper per square metre than the established districts to the south, and apartment estates are arriving faster than in most parts of the city. The trade-off is distance: daily errands, offices and schools are more spread out, and travel into the city depends heavily on the expressway and the bridge network at peak times.',
     image: {
-      src: '/images/locations/ajah.webp',
+      src: images.locations.ajah,
       alt: 'Open green landscape on the outskirts of Ajah, Lagos',
     },
     gallery: [
       {
-        src: '/images/properties/ajah-land.webp',
+        src: images.properties.ajahLand,
         alt: 'Serviced residential land plots for sale in Ajah, Lagos',
       },
       {
-        src: '/images/categories/developments.webp',
+        src: images.categories.developments,
         alt: 'New residential estate under construction in the Ajah area',
       },
       {
-        src: '/images/categories/houses.webp',
+        src: images.categories.houses,
         alt: 'Family home exterior in a growing Ajah estate',
       },
     ],
@@ -192,20 +193,20 @@ const locationSeeds: LocationSeed[] = [
     longDescription:
       'Ikoyi has a well-established premium address built around the lagoon, and it is home to a concentration of embassies, corporate headquarters and high-rise residential towers. Listings range from serviced apartments and short-let studios to full-floor penthouses and detached homes in the older residential pockets around Ikota and Banana Island. Prices sit at the top of the Lagos market, and the housing stock skews towards flats rather than family houses.',
     image: {
-      src: '/images/locations/ikoyi.webp',
+      src: images.locations.ikoyi,
       alt: 'Ikoyi skyline at dusk with illuminated high-rise buildings',
     },
     gallery: [
       {
-        src: '/images/properties/ikoyi-apartment.webp',
+        src: images.properties.ikoyiApartment,
         alt: 'Contemporary three-bedroom apartment in Ikoyi, Lagos',
       },
       {
-        src: '/images/properties/banana-island-home.webp',
+        src: images.properties.bananaIslandHome,
         alt: 'Detached home in Banana Island, Ikoyi',
       },
       {
-        src: '/images/categories/luxury.webp',
+        src: images.categories.luxury,
         alt: 'Premium residential building facade in Ikoyi',
       },
     ],
@@ -268,20 +269,20 @@ const locationSeeds: LocationSeed[] = [
     longDescription:
       'Ikeja is the closest of these areas to Murtala Muhammed International Airport, and that single fact shapes the housing market: a steady rental base from frequent travellers, embassies and corporate staff who need short commutes. The GRA and its surrounding streets carry large family homes on generous plots, while the wider area is dominated by older blocks, office buildings and light commercial premises along the major roads. It is one of the easier parts of Lagos to reach from almost anywhere.',
     image: {
-      src: '/images/locations/ikeja.webp',
+      src: images.locations.ikeja,
       alt: 'Ikeja commercial district skyline at night',
     },
     gallery: [
       {
-        src: '/images/properties/ikeja-residence.webp',
+        src: images.properties.ikejaResidence,
         alt: 'Modern family residence in Ikeja, Lagos',
       },
       {
-        src: '/images/properties/yaba-office.webp',
+        src: images.properties.yabaOffice,
         alt: 'Grade-A office space available in central Lagos',
       },
       {
-        src: '/images/categories/commercial.webp',
+        src: images.categories.commercial,
         alt: 'Commercial property frontage in Ikeja',
       },
     ],
@@ -343,20 +344,20 @@ const locationSeeds: LocationSeed[] = [
     longDescription:
       'Victoria Island is the country’s central business district, and the housing stock reflects that: mostly serviced and short-let apartments in converted office blocks, with a smaller number of purpose-built residential towers and older family homes. Commercial property is a major part of the market, from street-level retail to full office floors. Because it is an island reached by three bridges, commute times are sensitive to bridge traffic, and this is the single most common qualification agents give buyers here.',
     image: {
-      src: '/images/locations/victoria-island.webp',
+      src: images.locations.victoriaIsland,
       alt: 'Victoria Island business district with modern towers',
     },
     gallery: [
       {
-        src: '/images/properties/victoria-apartment.webp',
+        src: images.properties.victoriaApartment,
         alt: 'Serviced two-bedroom apartment in Victoria Island, Lagos',
       },
       {
-        src: '/images/categories/commercial.webp',
+        src: images.categories.commercial,
         alt: 'Office and retail space in the Victoria Island business district',
       },
       {
-        src: '/images/categories/apartments.webp',
+        src: images.categories.apartments,
         alt: 'Serviced apartment interiors typical of Victoria Island',
       },
     ],
@@ -419,20 +420,20 @@ const locationSeeds: LocationSeed[] = [
     longDescription:
       'Yaba has grown out of its role as a transport and industrial district into one of Lagos’s main technology and creative clusters, and the housing market has followed. Demand is strongest for compact, well-located apartments and studio units within walking distance of the main roads, alongside a smaller market in older family houses a few streets back. The area is on the mainland with no bridge crossing, which is a practical advantage for commuting towards the island during the day.',
     image: {
-      src: '/images/locations/yaba.webp',
+      src: images.locations.yaba,
       alt: 'Yaba district street view with modern buildings',
     },
     gallery: [
       {
-        src: '/images/properties/yaba-office.webp',
+        src: images.properties.yabaOffice,
         alt: 'Grade-A office space in Yaba, Lagos',
       },
       {
-        src: '/images/categories/apartments.webp',
+        src: images.categories.apartments,
         alt: 'Compact apartment building typical of central Yaba',
       },
       {
-        src: '/images/blog/choosing-location.webp',
+        src: images.blog.choosingLocation,
         alt: 'Yaba streetscape with a mix of older and newer buildings',
       },
     ],

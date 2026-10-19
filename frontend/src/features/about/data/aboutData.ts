@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import { navigationCta } from '@/data/company'
 import { routes } from '@/shared/lib/routes'
 import type {
@@ -41,7 +42,7 @@ const hero = {
   description:
     'Novera Estates helps people discover homes, developments and land that fit the life they are actually planning — with the detail, guidance and site visits needed to decide properly before committing.',
   image: {
-    src: '/images/properties/gupe-duplex.webp',
+    src: images.properties.gupeDuplex,
     alt: 'Semi-detached four bedroom duplex exterior in a gated estate in Gupe, Lekki, Lagos',
   },
   highlights: [
@@ -81,7 +82,7 @@ const introduction = {
     'The result is a smaller, clearer process. People who buy, rent, invest in, or own property in the areas we cover spend less time reconstructing the picture and more time deciding.',
   ],
   image: {
-    src: '/images/categories/houses.webp',
+    src: images.categories.houses,
     alt: 'Detached five bedroom family house with a front lawn in Ikota, Lagos',
   },
   audiences: [
@@ -142,7 +143,7 @@ const story: AboutStory = {
     'What that produces is a shorter, calmer path from "I am looking" to "this is the one" — and a better understanding of a property before anyone signs anything.',
   ],
   image: {
-    src: '/images/properties/ikeja-residence.webp',
+    src: images.properties.ikejaResidence,
     alt: 'Modern five bedroom family residence in Ikeja, Lagos',
   },
   pillars: [
@@ -341,7 +342,7 @@ const team: readonly AboutTeamMember[] = [
     role: 'Head of Residential Sales',
     description:
       'Works with buyers and families moving through the residential areas we cover, from the first shortlist to the paperwork after handover.',
-    avatar: { src: '/images/team/ad-hoc.webp', alt: 'Portrait of Adaeze Okonkwo' },
+    avatar: { src: images.team.adHoc, alt: 'Portrait of Adaeze Okonkwo' },
     focusAreas: ['Residential sales', 'Family homes', 'Handover support'],
     socials: [{ id: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com/company/noveraestates' }],
     isDemo: true,
@@ -352,7 +353,7 @@ const team: readonly AboutTeamMember[] = [
     role: 'Investment & Land Advisor',
     description:
       'Advises on land and income-producing property, covering documentation, access and the practicalities of buying in different parts of Lagos.',
-    avatar: { src: '/images/team/tunde-b.webp', alt: 'Portrait of Tunde Bakare' },
+    avatar: { src: images.team.tundeB, alt: 'Portrait of Tunde Bakare' },
     focusAreas: ['Land', 'Investment property', 'Documentation'],
     socials: [{ id: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com/company/noveraestates' }],
     isDemo: true,
@@ -363,7 +364,7 @@ const team: readonly AboutTeamMember[] = [
     role: 'Leasing Specialist',
     description:
       'Handles rentals and serviced apartments, matching tenants to properties and arranging viewings and lease terms.',
-    avatar: { src: '/images/team/chiamaka.webp', alt: 'Portrait of Chiamaka Nwosu' },
+    avatar: { src: images.team.chiamaka, alt: 'Portrait of Chiamaka Nwosu' },
     focusAreas: ['Rentals', 'Serviced apartments', 'Lease terms'],
     socials: [{ id: 'instagram', label: 'Instagram', href: 'https://instagram.com/noveraestates' }],
     isDemo: true,

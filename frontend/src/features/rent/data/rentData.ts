@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import type { IconName, PropertyType } from '@/types'
 import type {
   RentCategory,
@@ -24,7 +25,7 @@ import type {
 
 /** The main photograph for the Rent page hero. */
 export const RENT_HERO_IMAGE = {
-  src: '/images/properties/victoria-apartment.webp',
+  src: images.properties.victoriaApartment,
   alt: 'Bright, furnished apartment interior prepared for rental in Lagos',
 }
 
@@ -69,7 +70,7 @@ export const rentCategorySeeds: Omit<RentCategory, 'count'>[] = [
     description:
       'Serviced flats, maisonettes and well-connected units in Lagos’s established residential districts.',
     image: {
-      src: '/images/categories/apartments.webp',
+      src: images.categories.apartments,
       alt: 'Modern apartment building with balconies and large windows',
     },
     propertyType: 'apartment',
@@ -80,7 +81,7 @@ export const rentCategorySeeds: Omit<RentCategory, 'count'>[] = [
     description:
       'Detached, semi-detached and terrace homes with space for a family, in gated estates and quiet streets.',
     image: {
-      src: '/images/categories/houses.webp',
+      src: images.categories.houses,
       alt: 'A detached family house with a front lawn and covered entrance',
     },
     propertyType: 'house',
@@ -91,7 +92,7 @@ export const rentCategorySeeds: Omit<RentCategory, 'count'>[] = [
     description:
       'Signature homes and premium rentals in prime addresses such as Ikoyi, Victoria Island and the Lekki corridor.',
     image: {
-      src: '/images/categories/luxury.webp',
+      src: images.categories.luxury,
       alt: 'Contemporary luxury home with large glazing and a pool',
     },
     propertyType: 'luxury',
@@ -102,7 +103,7 @@ export const rentCategorySeeds: Omit<RentCategory, 'count'>[] = [
     description:
       'Compact, affordable rentals for students, young professionals and single occupiers close to work or campus.',
     image: {
-      src: '/images/properties/ikoyi-apartment.webp',
+      src: images.properties.ikoyiApartment,
       alt: 'Compact studio-style apartment interior in Lagos',
     },
     propertyType: 'apartment',
@@ -113,7 +114,7 @@ export const rentCategorySeeds: Omit<RentCategory, 'count'>[] = [
     description:
       'Offices, retail units and business premises available to let across the mainland and the island.',
     image: {
-      src: '/images/categories/commercial.webp',
+      src: images.categories.commercial,
       alt: 'Contemporary commercial building facade',
     },
     propertyType: 'commercial',
@@ -124,7 +125,7 @@ export const rentCategorySeeds: Omit<RentCategory, 'count'>[] = [
     description:
       'Units in recently completed and off-plan estates — including developments from Novera Estates.',
     image: {
-      src: '/images/categories/developments.webp',
+      src: images.categories.developments,
       alt: 'New multi-unit residential development under construction',
     },
     propertyType: 'development',

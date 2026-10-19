@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import { featuredLocations } from '@/data/locations'
 import type { ImageAsset } from '@/types'
 import type { Project } from '@/features/projects/types/projectTypes'
@@ -22,23 +23,23 @@ import { fallbackLocationContent, projectLocationContent } from '@/features/proj
 /** Falls back to the scheme's category shot when it has no own photography. */
 const CATEGORY_IMAGE: Record<Project['projectType'], { src: string; alt: string }> = {
   residential: {
-    src: '/images/categories/apartments.webp',
+    src: images.categories.apartments,
     alt: 'Residential apartment balconies photographed for Novera Estates',
   },
   'luxury-apartments': {
-    src: '/images/categories/luxury.webp',
+    src: images.categories.luxury,
     alt: 'Finished luxury apartment interior photographed for Novera Estates',
   },
   estate: {
-    src: '/images/categories/houses.webp',
+    src: images.categories.houses,
     alt: 'Detached family homes photographed for Novera Estates',
   },
   commercial: {
-    src: '/images/categories/commercial.webp',
+    src: images.categories.commercial,
     alt: 'Commercial office building photographed for Novera Estates',
   },
   'mixed-use': {
-    src: '/images/categories/developments.webp',
+    src: images.categories.developments,
     alt: 'Mixed-use development with landscaped grounds photographed for Novera Estates',
   },
 }

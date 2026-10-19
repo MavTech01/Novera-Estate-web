@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import type { Service } from '@/types'
 
 /** Services shown in the swipeable "Our Services" carousel. */
@@ -11,7 +12,7 @@ export const services: Service[] = [
       'From first viewing to signed documents, we handle valuations, negotiation and the paperwork behind every sale.',
     icon: 'badge-check',
     image: {
-      src: '/images/categories/houses.webp',
+      src: images.categories.houses,
       alt: 'Detached family home listed for sale by Novera Estates',
     },
     href: '/services/property-sales',
@@ -25,7 +26,7 @@ export const services: Service[] = [
       'Verified tenants, structured leases and deposit handling for landlords and renters across Lagos.',
     icon: 'key',
     image: {
-      src: '/images/categories/apartments.webp',
+      src: images.categories.apartments,
       alt: 'Serviced apartment building available for rent',
     },
     href: '/services/property-rentals',
@@ -39,7 +40,7 @@ export const services: Service[] = [
       'Genuine plots with clean title, survey references and site inspections arranged before you commit.',
     icon: 'land-plot',
     image: {
-      src: '/images/categories/land.webp',
+      src: images.categories.land,
       alt: 'Serviced residential land awaiting development',
     },
     href: '/services/land',
@@ -53,7 +54,7 @@ export const services: Service[] = [
       'Rental yield, location and exit strategy considered together so your capital works harder.',
     icon: 'trending-up',
     image: {
-      src: '/images/categories/commercial.webp',
+      src: images.categories.commercial,
       alt: 'Commercial property in a growing business district',
     },
     href: '/services/property-investment',
@@ -67,7 +68,7 @@ export const services: Service[] = [
       'Ongoing maintenance, tenant coordination and rent collection for owners who live elsewhere.',
     icon: 'building-2',
     image: {
-      src: '/images/categories/developments.webp',
+      src: images.categories.developments,
       alt: 'Managed residential development with multiple units',
     },
     href: '/services/property-management',

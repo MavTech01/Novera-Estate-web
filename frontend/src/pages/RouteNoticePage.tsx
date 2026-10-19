@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import { useLocation } from 'react-router-dom'
 
 import { Container } from '@/shared/components/ui/Container'
@@ -53,7 +54,7 @@ export function RouteNoticePage({ variant, title, description }: RouteNoticePage
         title={heading}
         description={heroDescription}
         image={{
-          src: '/images/development/oasis-main.webp',
+          src: images.development.oasisMain,
           alt: 'Exterior view of The Oasis Residences development in Lekki, Lagos',
         }}
         breadcrumbs={pageCrumbs({ label: heading })}

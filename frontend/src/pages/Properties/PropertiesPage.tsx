@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { MobileFilterDrawer } from '@/shared/components/properties/MobileFilterDrawer'
@@ -26,7 +27,7 @@ const catalogueHero = {
     title: 'Find Your Next Property',
     description: 'Explore homes, apartments, land and investment opportunities from Novera Estates.',
     image: {
-      src: '/images/hero/hero-main.webp',
+      src: images.hero.main,
       alt: 'Aerial view of residential streets and rooftops across a city',
     },
     breadcrumbs: pageCrumbs({ label: 'Properties' }),
@@ -37,7 +38,7 @@ const catalogueHero = {
     description:
       'Verified rentals across the neighbourhoods we know best, each one inspected before it reaches you.',
     image: {
-      src: '/images/categories/apartments.webp',
+      src: images.categories.apartments,
       alt: 'Modern apartment building with balconies and large windows',
     },
     breadcrumbs: pageCrumbs({ label: 'Properties', href: routes.properties }, { label: 'Rent' }),

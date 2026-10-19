@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import { company } from '@/data'
 import { ButtonLink } from '@/shared/components/ui/Button'
 import { Container } from '@/shared/components/ui/Container'
@@ -28,7 +29,7 @@ export function AboutSection() {
             />
             <div className="relative z-10 overflow-hidden rounded-2xl shadow-lg">
               <SkeletonImage
-                src="/images/locations/lekki.webp"
+                src={images.locations.lekki}
                 alt="Novera Estates residential listing in Lekki, Lagos"
                 width={1200}
                 height={900}

@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import type { Article } from '@/types'
 
 /**
@@ -15,7 +16,7 @@ export const articles: Article[] = [
     publishedAt: '2026-02-18',
     readTimeMinutes: 6,
     image: {
-      src: '/images/blog/buying-land.webp',
+      src: images.blog.buyingLand,
       alt: 'Survey documents and a site plan on a desk beside land',
     },
     author: 'Tunde Bakare',
@@ -30,7 +31,7 @@ export const articles: Article[] = [
     publishedAt: '2026-01-30',
     readTimeMinutes: 8,
     image: {
-      src: '/images/blog/investment.webp',
+      src: images.blog.investment,
       alt: 'Analyst reviewing property market charts in a bright office',
     },
     author: 'Adaeze Okonkwo',
@@ -45,7 +46,7 @@ export const articles: Article[] = [
     publishedAt: '2026-01-12',
     readTimeMinutes: 5,
     image: {
-      src: '/images/blog/choosing-location.webp',
+      src: images.blog.choosingLocation,
       alt: 'Aerial view of residential streets and rooftops across a city',
     },
     author: 'Chiamaka Nwosu',

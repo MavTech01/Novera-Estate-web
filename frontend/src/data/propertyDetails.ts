@@ -1,3 +1,4 @@
+import { images } from '@/assets/images'
 import type {
   Coordinates,
   Property,
@@ -89,23 +90,23 @@ const detailExtras: Record<string, PropertyDetailExtras> = {
     ],
     gallery: [
       {
-        src: '/images/properties/lekki-duplex.webp',
+        src: images.properties.lekkiDuplex,
         alt: 'Front elevation of a luxury four bedroom detached duplex in Lekki Phase 1, Lagos',
       },
       {
-        src: '/images/development/oasis-alt.webp',
+        src: images.development.oasisAlt,
         alt: 'Open-plan living area with large windows inside the Lekki duplex',
       },
       {
-        src: '/images/categories/luxury.webp',
+        src: images.categories.luxury,
         alt: 'Modern fitted kitchen with granite worktops in the duplex',
       },
       {
-        src: '/images/locations/lekki.webp',
+        src: images.locations.lekki,
         alt: 'Serviced residential street in Lekki Phase 1, Lagos',
       },
       {
-        src: '/images/ui/cta-image.webp',
+        src: images.ui.ctaImage,
         alt: 'Contemporary Novera Estates residence photographed at dusk',
       },
     ],
@@ -148,15 +149,15 @@ const detailExtras: Record<string, PropertyDetailExtras> = {
     amenities: ['Shared Pool', 'Gym', 'Visitor Parking', 'Reception', 'Housekeeping'],
     gallery: [
       {
-        src: '/images/properties/ikoyi-apartment.webp',
+        src: images.properties.ikoyiApartment,
         alt: 'Contemporary three bedroom apartment interior in Ikoyi, Lagos',
       },
       {
-        src: '/images/properties/ikeja-residence.webp',
+        src: images.properties.ikejaResidence,
         alt: 'Exterior of the serviced apartment building in Ikoyi',
       },
       {
-        src: '/images/categories/apartments.webp',
+        src: images.categories.apartments,
         alt: 'Shared rooftop terrace of a serviced apartment building',
       },
     ],
