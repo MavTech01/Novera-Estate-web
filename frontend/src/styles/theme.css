@@ -86,10 +86,25 @@
   /* Motion ------------------------------------------------------------ */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* Layout ------------------------------------------------------------ */
-  /* One page gutter (24px mobile, 32px from 640px up) and one content
-     width, with the navigation allowed a slightly wider 1280px rail so its
-     grouped links and CTA never crowd. */
-  --container-page: 1200px;
-  --container-nav: 1280px;
+  /* Layout Containers ------------------------------------------------- */
+  /* Available width presets:
+     - narrow: 1024px  (compact reading rail)
+     - medium: 1280px  (standard desktop)
+     - large:  1440px  (modern spacious desktop)
+     - wide:   1600px  (extra-wide layout for large displays)
+  */
+  --container-narrow: 1024px;
+  --container-medium: 1280px;
+  --container-large: 1440px;
+  --container-wide: 1600px;
+
+  /* ===================================================================
+     SITE-WIDE WIDTH CUSTOMIZATION (Change in this ONE place)
+     Choose your preferred active layout preset:
+       - var(--container-medium)  -> 1280px (medium)
+       - var(--container-large)   -> 1440px (large / default)
+       - var(--container-wide)    -> 1600px (wide)
+     =================================================================== */
+  --container-page: var(--container-large);
+  --container-nav: min(calc(var(--container-page) + 48px), var(--container-wide));
 }
