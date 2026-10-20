@@ -2,6 +2,7 @@ import { getSearchableLocations } from '@/data'
 import { getPriceBands, propertyTypeOptions, purposeOptions } from '@/data/searchOptions'
 import type { PropertyPurpose, PropertySearchCriteria, PropertyType } from '@/types'
 import { cn } from '@/shared/lib/cn'
+import { Button } from '@/shared/components/ui/Button'
 import { Icon } from '@/shared/components/ui/Icon'
 import { SegmentedControl } from '@/shared/components/ui/SegmentedControl'
 import { SelectField } from '@/shared/components/ui/SelectField'
@@ -30,9 +31,9 @@ export function PropertySearch({ criteria, onChange, onSubmit, className }: Prop
         event.preventDefault()
         onSubmit()
       }}
-      className={cn('rounded-xl border border-sand-200 bg-white p-5 shadow-md sm:p-6', className)}
+      className={cn('rounded-2xl border border-sand-200 bg-white p-5 shadow-sm sm:p-7', className)}
     >
-      <div className="flex flex-col gap-4 border-b border-sand-200 pb-5 lg:flex-row lg:items-end lg:justify-between">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <SegmentedControl
           label="Purpose"
           value={criteria.purpose}
@@ -63,7 +64,8 @@ export function PropertySearch({ criteria, onChange, onSubmit, className }: Prop
           label="Location"
           value={criteria.location}
           onChange={(value) => onChange('location', value)}
-          placeholder="Search location"
+          placeholder="Search location..."
+          icon="map-pin"
           className="lg:col-span-3"
         />
 
@@ -73,25 +75,29 @@ export function PropertySearch({ criteria, onChange, onSubmit, className }: Prop
           value={criteria.propertyType}
           options={propertyTypeOptions}
           onChange={(value) => onChange('propertyType', value as PropertyType | 'any')}
+          icon="house"
           className="lg:col-span-3"
         />
 
         <SelectField
           id="search-price"
-          label={criteria.purpose === 'rent' ? 'Rent (per year)' : 'Price'}
+          label={criteria.purpose === 'rent' ? 'Rent Range' : 'Price Range'}
           value={criteria.price}
           options={priceBands}
           onChange={(value) => onChange('price', value)}
+          icon="key"
           className="lg:col-span-3"
         />
 
-        <button
+        <Button
           type="submit"
-          className="group inline-flex h-12 items-center justify-center gap-2 rounded-md bg-accent-600 px-6 text-sm font-semibold text-white shadow-sm transition-all duration-200 ease-[var(--ease-out-soft)] hover:bg-accent-700 hover:shadow-md active:bg-accent-800 lg:col-span-3 lg:h-14"
+          variant="primary"
+          size="md"
+          className="w-full lg:col-span-3 lg:h-12"
         >
-          <Icon name="search" className="size-4" strokeWidth={2} />
+          <Icon name="search" className="size-4" strokeWidth={2.2} />
           Search Now
-        </button>
+        </Button>
       </div>
     </form>
   )

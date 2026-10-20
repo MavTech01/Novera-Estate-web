@@ -1,45 +1,48 @@
 import { images } from '@/assets/images'
-import { company, getStats } from '@/data'
+import { getStats } from '@/data'
+import { formatNumber } from '@/shared/lib/format'
 import { ButtonLink } from '@/shared/components/ui/Button'
 import { Container } from '@/shared/components/ui/Container'
 import { Icon } from '@/shared/components/ui/Icon'
-import { Reveal } from '@/shared/components/ui/Reveal'
 import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
-import { StatCard } from '@/shared/components/ui/StatCard'
 
-/**
- * Two-column hero: message on the left, property photography on the right
- * with an orange accent shape behind it, and a trust counter row underneath.
- */
 export function HeroSection() {
   const stats = getStats()
 
   return (
-    <section className="relative overflow-hidden bg-white pb-40 pt-28 lg:pb-44 lg:pt-36" aria-labelledby="hero-heading">
-      {/* Soft orange wash behind the media column */}
+    <section className="relative overflow-hidden bg-white pb-32 pt-28 sm:pb-36 lg:pb-40 lg:pt-36" aria-labelledby="hero-heading">
+      {/* Soft orange ambient wash */}
       <div
         aria-hidden
-        className="blob-orange absolute -right-24 top-24 hidden h-[26rem] w-[26rem] rounded-[3rem] opacity-25 lg:block"
+        className="blob-orange absolute -right-24 top-24 hidden h-[28rem] w-[28rem] rounded-[3rem] opacity-20 lg:block"
       />
       <div aria-hidden className="absolute inset-x-0 top-0 -z-10 h-px bg-sand-200" />
 
       <Container>
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 2xl:gap-20">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-14 2xl:gap-20">
           {/* Copy */}
           <div className="animate-fade-up">
-            <p className="inline-flex items-center gap-2 rounded-pill bg-tint-50 px-4 py-1.5 text-[length:var(--text-label)] uppercase leading-4 text-accent-700">
-              <Icon name="sparkles" className="size-3.5" strokeWidth={2.2} />
-              {company.descriptor}
-            </p>
+            {/* Eyebrow badge */}
+            <span className="inline-flex items-center gap-1.5 rounded-md bg-accent-50 px-3.5 py-1.5 text-[0.6875rem] font-bold uppercase tracking-wider text-accent-700">
+              <Icon name="star" className="size-3 fill-accent-600 text-accent-600" />
+              Premium Real Estate Service
+            </span>
 
-            <h1 id="hero-heading" className="mt-6 text-ink-900">
-              {company.tagline}
+            {/* Heading */}
+            <h1
+              id="hero-heading"
+              className="mt-6 font-display text-4xl font-extrabold tracking-tight text-ink-900 sm:text-5xl lg:text-[3.5rem] 2xl:text-6xl lg:leading-[1.12]"
+            >
+              Find a Place That<br />
+              <span className="text-accent-600">Feels Like Yours.</span>
             </h1>
 
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-500 sm:text-lg 2xl:max-w-2xl">
-              Discover exceptional homes, land, and investment opportunities in carefully selected locations.
+            {/* Paragraph */}
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-500 sm:text-lg">
+              Curated luxury homes and investment opportunities in premium locations. Your journey to a perfect home starts here.
             </p>
 
+            {/* Action Buttons */}
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <ButtonLink href="/properties" variant="primary" size="lg" withArrow>
                 Explore Properties
@@ -49,57 +52,63 @@ export function HeroSection() {
               </ButtonLink>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-ink-500">
-              <span className="flex items-center gap-2">
-                <Icon name="shield-check" className="size-4 text-accent-500" strokeWidth={2} />
+            {/* Trust Badges */}
+            <div className="mt-8 flex flex-wrap items-center gap-6 text-sm font-medium text-ink-600">
+              <span className="inline-flex items-center gap-2">
+                <span className="flex size-4.5 items-center justify-center rounded-full bg-emerald-500 text-white shadow-xs">
+                  <Icon name="check" className="size-2.5" strokeWidth={3} />
+                </span>
                 Verified listings only
               </span>
-              <span className="flex items-center gap-2">
-                <Icon name="calendar-search" className="size-4 text-accent-500" strokeWidth={2} />
-                Inspections within 48 hours
+              <span className="inline-flex items-center gap-2">
+                <span className="flex size-4.5 items-center justify-center rounded-full bg-sky-500 text-white shadow-xs">
+                  <Icon name="clock" className="size-2.5" strokeWidth={2.5} />
+                </span>
+                Inspections within 48h
               </span>
             </div>
           </div>
 
-          {/* Media */}
+          {/* Media with Integrated Glass Stats Card */}
           <div className="animate-fade-up-slow relative" style={{ animationDelay: '120ms' }}>
-            <div className="relative z-10 overflow-hidden rounded-2xl shadow-lg">
+            {/* Image card container */}
+            <div className="relative z-10 overflow-hidden rounded-[2.25rem] border border-sand-200/60 shadow-md sm:rounded-[2.75rem] lg:rounded-[3rem]">
               <SkeletonImage
                 src={images.hero.main}
-                alt="Contemporary family home with landscaped garden, photographed for Novera Estates"
+                alt="Contemporary luxury villa with pool at dusk, photographed for Novera Estates"
                 width={1400}
                 height={1000}
                 loading="eager"
                 fetchPriority="high"
-                className="aspect-[4/3] w-full"
+                className="aspect-[4/3] w-full object-cover lg:aspect-[5/4] xl:aspect-[4/3]"
               />
-            </div>
 
-            {/* Floating proof card */}
-            <div className="absolute -bottom-6 -left-4 z-20 flex items-center gap-3 rounded-xl bg-white p-4 shadow-md sm:-left-8">
-              <span className="flex size-11 items-center justify-center rounded-pill bg-tint-100 text-accent-600">
-                <Icon name="users" className="size-5" strokeWidth={2} />
-              </span>
-              <span className="flex flex-col">
-                <span className="font-display text-lg font-bold leading-none text-ink-900">1,200+</span>
-                <span className="mt-1 text-xs text-ink-500">clients guided since 2015</span>
-              </span>
+              {/* Bottom gradient scrim for legibility */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/50 via-black/10 to-transparent"
+              />
+
+              {/* Floating Glass Stats Bar */}
+              <div className="absolute inset-x-3 bottom-3 z-20 sm:inset-x-5 sm:bottom-5 lg:inset-x-6 lg:bottom-6">
+                <div className="rounded-2xl border border-white/50 bg-white/90 p-4 shadow-sm backdrop-blur-md sm:p-5">
+                  <dl className="grid grid-cols-3 divide-x divide-sand-300 text-center">
+                    {stats.map((stat) => (
+                      <div key={stat.id} className="px-2">
+                        <dt className="font-display text-xl font-extrabold text-ink-900 sm:text-2xl lg:text-3xl">
+                          {formatNumber(stat.value)}{stat.suffix}
+                        </dt>
+                        <dd className="mt-0.5 text-[0.625rem] font-bold uppercase tracking-wider text-ink-500 sm:text-xs">
+                          {stat.label.replace('Experience', 'Exp.')}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Trust counters */}
-        <Reveal className="mt-12 sm:mt-16 lg:mt-20">
-          <div className="rounded-2xl border border-sand-200/90 bg-gradient-to-b from-white via-white to-tint-50/40 p-3 shadow-sm backdrop-blur-xs sm:p-7 sm:shadow-md">
-            <dl className="grid grid-cols-3 divide-x divide-sand-200" aria-label="Novera Estates in numbers">
-              {stats.map((stat) => (
-                <div key={stat.id} className="px-1.5 sm:px-6 first:pl-0 sm:first:pl-2 last:pr-0 sm:last:pr-2">
-                  <StatCard stat={stat} active />
-                </div>
-              ))}
-            </dl>
-          </div>
-        </Reveal>
       </Container>
     </section>
   )
