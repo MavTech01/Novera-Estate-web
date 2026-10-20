@@ -20,7 +20,7 @@ export function AboutSection() {
   return (
     <Section id="about" tone="warm" className="scroll-mt-24">
       <Container>
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 2xl:gap-20">
           {/* Media */}
           <Reveal className="relative order-2 lg:order-1">
             <div

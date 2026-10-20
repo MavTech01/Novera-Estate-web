@@ -151,7 +151,7 @@ export function ServicesCarousel() {
             {services.map((service) => (
               <li
                 key={service.id}
-                className="w-[82%] shrink-0 snap-start last:snap-end sm:w-[46%] lg:w-[calc((100%-4.5rem)/3)]"
+                className="w-[82%] shrink-0 snap-start last:snap-end sm:w-[46%] lg:w-[calc((100%-4.5rem)/3)] 2xl:w-[calc((100%-6rem)/4)]"
               >
                 <ServiceCard service={service} />
               </li>

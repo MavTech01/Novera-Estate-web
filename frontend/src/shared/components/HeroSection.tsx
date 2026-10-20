@@ -24,7 +24,7 @@ export function HeroSection() {
       <div aria-hidden className="absolute inset-x-0 top-0 -z-10 h-px bg-sand-200" />
 
       <Container>
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 2xl:gap-20">
           {/* Copy */}
           <div className="animate-fade-up">
             <p className="inline-flex items-center gap-2 rounded-pill bg-tint-50 px-4 py-1.5 text-[length:var(--text-label)] uppercase leading-4 text-accent-700">
@@ -36,7 +36,7 @@ export function HeroSection() {
               {company.tagline}
             </h1>
 
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-500 sm:text-lg">
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-500 sm:text-lg 2xl:max-w-2xl">
               Discover exceptional homes, land, and investment opportunities in carefully selected locations.
             </p>
 

@@ -102,9 +102,9 @@
      SITE-WIDE WIDTH CUSTOMIZATION (Change in this ONE place)
      Choose your preferred active layout preset:
        - var(--container-medium)  -> 1280px (medium)
-       - var(--container-large)   -> 1440px (large / default)
-       - var(--container-wide)    -> 1600px (wide)
+       - var(--container-large)   -> 1440px (large)
+       - var(--container-wide)    -> 1600px (wide / default for big screens)
      =================================================================== */
-  --container-page: var(--container-large);
-  --container-nav: min(calc(var(--container-page) + 48px), var(--container-wide));
+  --container-page: var(--container-wide);
+  --container-nav: var(--container-wide);
 }

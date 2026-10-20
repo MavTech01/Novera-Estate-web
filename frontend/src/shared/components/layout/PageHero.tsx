@@ -123,7 +123,7 @@ export function PageHero({
       <div aria-hidden className="absolute inset-x-0 top-0 -z-10 h-px bg-white/10" />
 
       <Container className="relative z-10 flex flex-1 flex-col justify-center pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-32 lg:pb-24">
-        <div className="flex w-full max-w-[45rem] flex-col gap-6">
+        <div className="flex w-full max-w-[45rem] flex-col gap-6 2xl:max-w-[54rem]">
           {breadcrumbs && breadcrumbs.length > 0 && (
             <div className="hero-fade" style={delay(0)}>
               <Breadcrumbs items={[...breadcrumbs]} tone="onBrown" />
@@ -141,7 +141,7 @@ export function PageHero({
 
           <h1
             id={headingId}
-            className="max-w-[45rem] text-[length:clamp(2.5rem,4.4vw,4rem)] font-bold leading-[1.1] text-white"
+            className="max-w-[45rem] text-[length:clamp(2.5rem,4.4vw,4rem)] font-bold leading-[1.1] text-white 2xl:max-w-[54rem]"
           >
             {titleWords.map((word, index) => (
               <span key={`${word}-${index}`}>
@@ -154,7 +154,7 @@ export function PageHero({
           </h1>
 
           {description && (
-            <p className="hero-fade max-w-[35rem] text-lg leading-relaxed text-white/85" style={delay(480)}>
+            <p className="hero-fade max-w-[35rem] text-lg leading-relaxed text-white/85 2xl:max-w-[42rem]" style={delay(480)}>
               {description}
             </p>
           )}

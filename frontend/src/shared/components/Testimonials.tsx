@@ -93,7 +93,7 @@ export function Testimonials() {
           align="center"
         />
 
-        <Reveal className="relative mx-auto mt-10 max-w-3xl sm:mt-12">
+        <Reveal className="relative mx-auto mt-10 max-w-3xl sm:mt-12 2xl:max-w-4xl">
           <div
             className="group relative"
             onMouseEnter={() => setIsPaused(true)}
