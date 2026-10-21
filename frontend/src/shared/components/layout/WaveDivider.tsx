@@ -54,7 +54,7 @@ const WAVE_MORPH = [0, Math.PI / 2, Math.PI, (3 * Math.PI) / 2, Math.PI * 2]
   .join(';')
 
 const frontWavePath =
-  'M0,78 C200,44 360,92 560,72 C760,52 940,96 1140,74 C1290,58 1380,66 1440,58 L1440,120 L0,120 Z'
+  'M0,78 C200,44 360,92 560,72 C760,52 940,96 1140,74 C1270,56 1370,70 1440,78 L1440,120 L0,120 Z'
 
 /**
  * The shared banner-to-section wave.
@@ -77,7 +77,7 @@ export function WaveDivider({ color = 'white', className }: WaveDividerProps) {
         role="presentation"
         className="block h-15 w-full lg:h-28"
       >
-        <path d={backWavePath(0)} fill="#F97316" fillOpacity="0.22">
+        <path d={backWavePath(0)} fill="var(--color-accent-600)" fillOpacity="0.22">
           {!reduceMotion && (
             <animate
               attributeName="d"

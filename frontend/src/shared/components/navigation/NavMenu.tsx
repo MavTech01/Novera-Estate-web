@@ -67,28 +67,27 @@ export function NavMenu({ menu, isActive }: NavMenuProps) {
           setIsOpen(true)
         }}
         className={cn(
-          'relative flex items-center gap-1 whitespace-nowrap rounded-md px-2 py-2 text-sm font-medium transition-colors duration-200 min-[1200px]:px-3 min-[1200px]:text-[0.9375rem]',
-          isActive ? 'text-accent-700' : 'text-ink-600 hover:text-accent-600',
+          'flex items-center gap-1.5 whitespace-nowrap px-3.5 py-1.5 text-sm font-semibold transition-colors duration-200 min-[1200px]:px-4 min-[1200px]:text-[0.9375rem]',
+          isActive
+            ? 'text-accent-600 font-bold'
+            : 'text-ink-800 hover:text-accent-600',
         )}
       >
         {menu.label}
         <Icon
           name="chevron-down"
-          className={cn('size-3.5 transition-transform duration-200', isOpen && 'rotate-180')}
-          strokeWidth={2.4}
-        />
-        <span
-          aria-hidden
           className={cn(
-            'absolute -bottom-0.5 left-2 right-2 h-0.5 origin-left rounded-pill bg-accent-500 transition-transform duration-300 ease-[var(--ease-out-soft)] min-[1200px]:left-3 min-[1200px]:right-3',
-            isActive ? 'scale-x-100' : 'scale-x-0',
+            'size-3.5 transition-transform duration-200',
+            isActive ? 'text-accent-600' : 'text-ink-700',
+            isOpen && 'rotate-180',
           )}
+          strokeWidth={2.4}
         />
       </button>
 
       <div
         className={cn(
-          'absolute left-0 top-full z-50 w-72 origin-top-left pt-2',
+          'absolute left-1/2 -translate-x-1/2 top-full z-50 w-72 pt-3',
           'transition duration-200 ease-[var(--ease-out-soft)]',
           isOpen
             ? 'visible translate-y-0 opacity-100'
@@ -98,7 +97,7 @@ export function NavMenu({ menu, isActive }: NavMenuProps) {
         <div
           id={panelId}
           aria-label={menu.label}
-          className="rounded-xl border border-sand-200 bg-white p-2 shadow-lg"
+          className="rounded-2xl border border-sand-200 bg-white/95 backdrop-blur-xl p-2 shadow-2xl"
         >
           {menu.items.map((item) => (
             <Link

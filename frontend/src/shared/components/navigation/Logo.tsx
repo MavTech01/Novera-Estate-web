@@ -18,7 +18,7 @@ export function Logo({ tone = 'dark', showSubline = true, className }: LogoProps
       <svg
         viewBox="0 0 40 40"
         aria-hidden
-        className={cn('size-10 shrink-0', isLight ? 'text-white' : 'text-accent-600')}
+        className={cn('block size-10 shrink-0', isLight ? 'text-white' : 'text-accent-600')}
       >
         <rect width="40" height="40" rx="12" fill="currentColor" />
         <path
@@ -39,11 +39,11 @@ export function Logo({ tone = 'dark', showSubline = true, className }: LogoProps
         />
       </svg>
 
-      <span className="flex flex-col leading-none">
+      <span className="flex flex-col justify-center leading-none">
         <span
           className={cn(
-            'font-display text-[1.375rem] font-extrabold uppercase leading-none tracking-[-0.01em]',
-            isLight ? 'text-white' : 'text-ink-900',
+            'font-display text-[1.3125rem] font-extrabold uppercase leading-none tracking-[-0.01em]',
+            isLight ? 'text-white' : 'text-ink-950',
           )}
         >
           Novera
@@ -51,7 +51,7 @@ export function Logo({ tone = 'dark', showSubline = true, className }: LogoProps
         {showSubline && (
           <span
             className={cn(
-              'mt-1 font-sans text-[0.5625rem] font-semibold uppercase tracking-[0.34em]',
+              'mt-1 font-sans text-[0.5625rem] font-bold uppercase tracking-[0.32em]',
               isLight ? 'text-white/60' : 'text-accent-600',
             )}
           >

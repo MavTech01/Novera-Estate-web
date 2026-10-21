@@ -2,7 +2,6 @@ import { AboutSection } from '@/features/about/components/AboutSection'
 import { BlogPreview } from '@/features/news/components/BlogPreview'
 import { CTASection } from '@/shared/components/CTASection'
 import { FeaturedDevelopment } from '@/features/projects/components/FeaturedDevelopment'
-import { HeroSearchOverlay } from '@/shared/components/HeroSearchOverlay'
 import { HeroSection } from '@/shared/components/HeroSection'
 import { LocationsSection } from '@/features/locations/components/LocationsSection'
 import { HowItWorks } from '@/shared/components/HowItWorks'
@@ -13,6 +12,7 @@ import { Testimonials } from '@/shared/components/Testimonials'
 import { WhyChooseUs } from '@/shared/components/WhyChooseUs'
 import { getFeaturedProperties } from '@/data'
 import { usePropertySearch } from '@/features/properties/hooks/usePropertySearch'
+import type { PropertyPurpose, PropertyType } from '@/types'
 
 /**
  * Landing page — composes every homepage section in order.
@@ -32,9 +32,14 @@ export function HomePage() {
 
   return (
     <main id="main-content" tabIndex={-1} className="focus:outline-none">
-      <HeroSection />
-
-      <HeroSearchOverlay criteria={criteria} onChange={updateCriteria} onSubmit={handleSearch} />
+      <HeroSection
+        criteria={criteria}
+        onPurposeChange={(purpose: PropertyPurpose) => updateCriteria('purpose', purpose)}
+        onLocationChange={(location: string) => updateCriteria('location', location)}
+        onTypeChange={(type: PropertyType | 'any') => updateCriteria('propertyType', type)}
+        onPriceChange={(price: string) => updateCriteria('price', price)}
+        onSubmit={handleSearch}
+      />
 
       <FeaturedProperties
         properties={visibleProperties}
