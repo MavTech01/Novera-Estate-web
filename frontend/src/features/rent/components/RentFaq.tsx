@@ -20,7 +20,7 @@ export function RentFaq({ items }: RentFaqProps) {
           id="rent-faq-heading"
           eyebrow="Good to know"
           title="Questions Renters Ask Us"
-          description="Straight answers about searches, inspections and costs — including the honest one, that the listings here are a demonstration."
+          description="Straight answers about property searches, viewings, inspections, and tenancy costs."
         />
 
         <div className="mt-12 mx-auto max-w-3xl">

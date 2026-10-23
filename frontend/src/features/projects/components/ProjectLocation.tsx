@@ -116,9 +116,6 @@ export function ProjectLocation({ project, contained = false }: ProjectLocationP
         <div className="mt-10">
           <div className="flex flex-wrap items-baseline justify-between gap-3">
             <h3 className="font-display text-xl text-ink-900">Nearby</h3>
-            <p className="text-xs text-ink-400">
-              Indicative surroundings for a demonstration development — not verified or measured.
-            </p>
           </div>
 
           <dl

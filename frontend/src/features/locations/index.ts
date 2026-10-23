@@ -27,6 +27,15 @@ export { LocationHighlights } from './components/LocationHighlights'
 export { LocationMap } from './components/LocationMap'
 export { LocationSearch } from './components/LocationSearch'
 export { LocationsClosingCta } from './components/LocationsClosingCta'
+export { LocationsSection } from './components/LocationsSection'
+export {
+  LocationInteractiveMap,
+  LocationMapPin,
+  LocationSummaryCard,
+  LOCATION_MAP_METADATA,
+  DEFAULT_LOCATION_MAP_METADATA,
+  type LocationMapMetadata,
+} from './components/explorer'
 export { PropertiesByLocation } from './components/PropertiesByLocation'
 export { WhyLocationMatters } from './components/WhyLocationMatters'
 

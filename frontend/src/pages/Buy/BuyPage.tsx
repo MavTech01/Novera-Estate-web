@@ -1,6 +1,5 @@
 import {
   BuyCategories,
-  BuyDemoNotice,
   BuyErrorState,
   BuyFaq,
   BuyFeaturedProperties,
@@ -85,8 +84,6 @@ export function BuyPage() {
 
       {/* Pulls up over the hero's lower edge, the way the listing page's search bar does. */}
       <BuySearchPanel areas={catalogue.locations} />
-
-      <BuyDemoNotice />
 
       <BuyCategories categories={catalogue.categories} />
 

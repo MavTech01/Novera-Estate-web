@@ -29,7 +29,7 @@ export function ProjectUnitTypes({ project }: ProjectUnitTypesProps) {
         <SectionHeading
           eyebrow="What you can choose from"
           title="Available Unit Types"
-          description="Configurations currently planned for this development. Prices are demonstration figures."
+          description="Configurations currently planned for this development with indicative pricing."
         />
 
         <ul className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3">

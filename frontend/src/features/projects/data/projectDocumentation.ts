@@ -17,7 +17,7 @@ const DOCUMENTATION_ENTRIES: ProjectDocumentation['entries'] = [
 ]
 
 const DEMO_NOTE =
-  'This is a demonstration project. Documentation information is available upon request. Prospective buyers should independently verify all documentation and legal information before making a purchase.'
+  'Documentation information is available upon request. Prospective buyers should independently verify all documentation and legal information before making a purchase.'
 
 /**
  * One shared, immutable record for every project.

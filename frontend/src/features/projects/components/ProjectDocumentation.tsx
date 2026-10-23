@@ -28,7 +28,7 @@ export function ProjectDocumentation({ project }: { project: Project }) {
         <Reveal className="mt-10 overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm">
           <div className="border-b border-sand-200 bg-sand-100 px-5 py-4 sm:px-6">
             <p className="flex items-start gap-2.5 text-xs leading-relaxed text-ink-600">
-              <Icon name="triangle-alert" className="mt-0.5 size-4 shrink-0 text-accent-600" strokeWidth={2} />
+              <Icon name="shield-check" className="mt-0.5 size-4 shrink-0 text-accent-600" strokeWidth={2} />
               <span>{documentation.note}</span>
             </p>
           </div>

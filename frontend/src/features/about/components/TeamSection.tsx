@@ -24,10 +24,7 @@ const TEAM_NOTICE_ID = 'team-placeholder'
  * notice is returned by the service alongside the roster, so replacing the data
  * with the real `agents` records drops it without touching this component.
  */
-export function TeamSection({ team, notices }: TeamSectionProps) {
-  const notice = findNotice(notices, TEAM_NOTICE_ID)
-  const showNotice = team.some((member) => member.isDemo) && Boolean(notice)
-
+export function TeamSection({ team }: TeamSectionProps) {
   return (
     <Section tone="white">
       <Container>
@@ -36,13 +33,6 @@ export function TeamSection({ team, notices }: TeamSectionProps) {
           title="Meet the People Behind Novera Estates"
           description="Every enquiry is handled by a person, from the first search through to the inspection and the paperwork after it."
         />
-
-        {showNotice && notice && (
-          <p className="mt-8 flex items-start gap-2.5 rounded-md border border-sand-200 bg-sand-100 px-4 py-3 text-xs leading-relaxed text-ink-600">
-            <Icon name={notice.icon} className="mt-0.5 size-4 shrink-0 text-accent-600" strokeWidth={2} />
-            <span>{notice.message}</span>
-          </p>
-        )}
 
         {team.length > 0 ? (
           <ul className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">

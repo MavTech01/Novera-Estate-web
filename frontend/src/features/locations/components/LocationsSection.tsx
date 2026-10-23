@@ -1,62 +1,27 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import { getFeaturedLocations } from '@/data'
-import { cn } from '@/shared/lib/cn'
-import { locationPath, propertiesPathForLocationSlug } from '@/shared/lib/routes'
-import type { LocationSummary } from '@/types'
 import { ArrowLink } from '@/shared/components/ui/ArrowLink'
 import { Container } from '@/shared/components/ui/Container'
-import { Icon } from '@/shared/components/ui/Icon'
-import { Reveal } from '@/shared/components/ui/Reveal'
 import { Section } from '@/shared/components/ui/Section'
 import { SectionHeading } from '@/shared/components/ui/SectionHeading'
-import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
+import {
+  LocationInteractiveMap,
+  LocationSummaryCard,
+  LOCATION_MAP_METADATA,
+  DEFAULT_LOCATION_MAP_METADATA,
+} from './explorer'
 
-function LocationCard({ location }: { location: LocationSummary }) {
-  return (
-    <article
-      className={cn(
-        'group relative flex h-full flex-col overflow-hidden rounded-xl border border-sand-200 bg-white shadow-sm',
-        'transition-all duration-300 ease-[var(--ease-out-soft)]',
-        'hover:-translate-y-1.5 hover:border-accent-200 hover:shadow-lg',
-        'focus-within:-translate-y-1.5 focus-within:shadow-lg',
-      )}
-    >
-      <div className="relative aspect-[3/2] overflow-hidden bg-tint-100">
-        <SkeletonImage
-          src={location.image.src}
-          alt={location.image.alt}
-          width={900}
-          height={600}
-          className="absolute inset-0 size-full"
-          imgClassName="media"
-        />
-
-        <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-pill bg-white/95 px-3 py-1.5 text-xs font-semibold text-ink-900 shadow-sm backdrop-blur-sm">
-          <Icon name="map-pin" className="size-3.5 text-accent-600" strokeWidth={2} />
-          {location.availableProperties} available
-        </span>
-      </div>
-
-      <div className="flex flex-1 flex-col p-5">
-        <h3 className="font-display text-xl text-ink-900 transition-colors duration-200 group-hover:text-accent-700">
-          <Link to={locationPath(location.slug)} className="after:absolute after:inset-0 after:content-['']">
-            {location.name}
-          </Link>
-        </h3>
-
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{location.description}</p>
-
-        <div className="mt-5 border-t border-sand-200 pt-4">
-          <ArrowLink href={propertiesPathForLocationSlug(location.slug)}>View Properties</ArrowLink>
-        </div>
-      </div>
-    </article>
-  )
-}
-
-/** "Explore Prime Locations" — browse the neighbourhoods we cover. */
+/**
+ * "Explore Prime Locations" section on the home page.
+ * Features an interactive light-mode map of Lagos and a synchronized estate preview card.
+ */
 export function LocationsSection() {
   const locations = getFeaturedLocations()
+  const [activeSlug, setActiveSlug] = useState<string>(locations[0]?.slug ?? 'lekki-phase-1')
+
+  const activeLocation = locations.find((loc) => loc.slug === activeSlug) ?? locations[0]
+  const activeMeta =
+    LOCATION_MAP_METADATA[activeLocation.slug] ?? DEFAULT_LOCATION_MAP_METADATA
 
   return (
     <Section id="locations" tone="white" className="scroll-mt-24">
@@ -64,21 +29,27 @@ export function LocationsSection() {
         <SectionHeading
           eyebrow="Prime locations"
           title="Explore Prime Locations"
-          description="We focus on the neighbourhoods where families, professionals and investors are choosing to settle."
+          description="Explore our interactive coverage map showing the prime neighbourhoods where Novera Estates develops and curates luxury properties."
           action={
             <ArrowLink href="/locations" size="md">
-              All locations
+              All locations catalogue
             </ArrowLink>
           }
         />
 
-        <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3">
-          {locations.map((location, index) => (
-            <Reveal as="li" key={location.id} delay={(index % 3) * 100} className="flex">
-              <LocationCard location={location} />
-            </Reveal>
-          ))}
-        </ul>
+        {/* Side-by-Side Desktop Layout (Interactive Map on Left, Location Summary Card on Right) */}
+        <div className="mt-10 grid grid-cols-1 items-stretch gap-8 lg:mt-12 lg:grid-cols-2 lg:gap-8">
+          <LocationInteractiveMap
+            locations={locations}
+            activeSlug={activeSlug}
+            onSelectLocation={setActiveSlug}
+          />
+
+          <LocationSummaryCard
+            location={activeLocation}
+            metadata={activeMeta}
+          />
+        </div>
       </Container>
     </Section>
   )

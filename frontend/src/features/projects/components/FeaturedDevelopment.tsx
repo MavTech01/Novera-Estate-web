@@ -44,7 +44,7 @@ export function FeaturedDevelopment() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" aria-hidden />
 
-            <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-center gap-3 p-5 sm:p-6">
+            <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-center gap-3 p-4 sm:p-6">
               <Badge tone="light" icon="map-pin">
                 {development.location.label}
               </Badge>
@@ -54,23 +54,28 @@ export function FeaturedDevelopment() {
 
           {/* Information panel */}
           <Reveal delay={120} className="flex flex-col justify-center p-6 sm:p-9 lg:p-12">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-600">
+            <p className="text-[clamp(0.6875rem,2vw,0.75rem)] font-semibold uppercase tracking-[0.18em] text-accent-600">
               {development.developer}
             </p>
 
-            <h3 className="mt-3 font-display text-3xl leading-tight text-ink-900 sm:text-4xl">
+            <h3 className="mt-2.5 font-display text-[clamp(1.5rem,4.5vw,2.25rem)] font-extrabold leading-tight text-ink-900">
               {development.name}
             </h3>
 
-            <p className="mt-4 text-base leading-relaxed text-ink-500">{development.description}</p>
+            <p className="mt-3.5 text-[clamp(0.875rem,2.4vw,1rem)] leading-relaxed text-ink-600">
+              {development.description}
+            </p>
 
             <DevelopmentSpecs specs={specs} />
 
             <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
               {development.highlights.map((highlight) => (
-                <li key={highlight} className="flex items-start gap-2.5 text-sm text-ink-600">
+                <li
+                  key={highlight}
+                  className="flex items-start gap-2.5 text-[clamp(0.8125rem,2.2vw,0.875rem)] leading-snug text-ink-700"
+                >
                   <Icon name="badge-check" className="mt-0.5 size-4 shrink-0 text-accent-500" strokeWidth={2} />
-                  {highlight}
+                  <span>{highlight}</span>
                 </li>
               ))}
             </ul>

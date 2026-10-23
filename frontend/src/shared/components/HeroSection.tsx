@@ -51,10 +51,13 @@ export function HeroSection({
           {/* Headline */}
           <h1
             id="hero-heading"
-            className="max-w-3xl font-display text-[2.75rem] font-extrabold tracking-tight text-white leading-[1.08]  sm:text-5xl lg:text-6xl"
+            className="max-w-3xl font-display text-[clamp(2.25rem,6.5vw,3.75rem)] font-extrabold tracking-tight text-white leading-[1.1] sm:leading-[1.08]"
           >
             Find a Place <br />
-            That <span className="">Feels Like Yours.</span>
+            That{' '}
+            <span className="bg-gradient-to-r from-accent-500 via-accent-400 to-accent-500 bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(249,115,22,0.4)]">
+              Feels Like Yours.
+            </span>
           </h1>
 
           {/* Subtitle */}

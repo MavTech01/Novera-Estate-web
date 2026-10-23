@@ -26,7 +26,7 @@ export function BuyFaq({ items }: BuyFaqProps) {
           id="buy-faq-heading"
           eyebrow="Good to know"
           title="Questions Buyers Ask Us"
-          description="Straight answers — including the honest one, that the listings here are a demonstration."
+          description="Straight answers about property purchases, inspections, documentation, and handover."
         />
 
         <div className="mt-12 mx-auto max-w-3xl">

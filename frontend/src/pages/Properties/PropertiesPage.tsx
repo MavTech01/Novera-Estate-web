@@ -72,6 +72,7 @@ export function PropertiesPage() {
 
   const { isFavourite, toggleFavourite } = useFavourites()
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const resultsRef = useRef<HTMLDivElement>(null)
 
   // The repository clamps the page to the available range; mirror that back so
@@ -87,6 +88,15 @@ export function PropertiesPage() {
   const handleSearch = useCallback(() => {
     setIsDrawerOpen(false)
     scrollToResults()
+  }, [scrollToResults])
+
+  const handleOpenFilters = useCallback(() => {
+    if (window.innerWidth < 1024) {
+      setIsDrawerOpen(true)
+    } else {
+      setIsSidebarOpen((prev) => !prev)
+      scrollToResults()
+    }
   }, [scrollToResults])
 
   const handlePageChange = useCallback(
@@ -117,29 +127,37 @@ export function PropertiesPage() {
           48px pull-up put its top edge level with the wave crest, and two white
           shapes at that height read as one.
         */}
-        <div className="relative z-20 -mt-4 sm:-mt-5 lg:-mt-6">
-          <Container>
-            <PropertySearchBar controller={controller} onSearch={handleSearch} />
+        <div className="relative z-20 pt-6 sm:pt-8 lg:pt-10">
+          <Container className="max-w-2xl">
+            <PropertySearchBar
+              controller={controller}
+              onSearch={handleSearch}
+              onOpenFilters={handleOpenFilters}
+            />
           </Container>
         </div>
 
         {/* Results */}
-        <section className="pb-20 pt-12 sm:pt-14" aria-labelledby="property-results-heading">
+        <section className="pb-20 pt-8 sm:pt-10" aria-labelledby="property-results-heading">
           <Container>
             <h2 id="property-results-heading" className="sr-only">
               Property search results
             </h2>
 
-            <div className="lg:grid lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-8 xl:grid-cols-[18.5rem_minmax(0,1fr)] xl:gap-10">
-              <PropertyFiltersSidebar controller={controller} />
+            <div
+              className={
+                isSidebarOpen
+                  ? 'lg:grid lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-8 xl:grid-cols-[18.5rem_minmax(0,1fr)] xl:gap-10'
+                  : ''
+              }
+            >
+              {isSidebarOpen && <PropertyFiltersSidebar controller={controller} />}
 
               <div ref={resultsRef} className="scroll-mt-24 min-w-0">
                 <PropertyResultsHeader
                   total={total}
                   sort={sort}
                   onSortChange={setSort}
-                  onOpenFilters={() => setIsDrawerOpen(true)}
-                  activeCount={activeCount}
                   isLoading={isRefreshing}
                 />
 
@@ -169,8 +187,8 @@ export function PropertiesPage() {
                         label={`Showing ${results?.from ?? 0} to ${results?.to ?? 0} of ${total} properties`}
                         className={
                           isRefreshing
-                            ? 'grid grid-cols-1 gap-6 opacity-60 transition-opacity duration-200 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7'
-                            : undefined
+                            ? `grid grid-cols-1 sm:grid-cols-2 ${isSidebarOpen ? 'lg:grid-cols-2' : 'lg:grid-cols-3'} gap-6 lg:gap-7 opacity-60 transition-opacity duration-200`
+                            : `grid grid-cols-1 sm:grid-cols-2 ${isSidebarOpen ? 'lg:grid-cols-2' : 'lg:grid-cols-3'} gap-6 lg:gap-7`
                         }
                       />
 

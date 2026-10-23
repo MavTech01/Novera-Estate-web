@@ -131,7 +131,7 @@ export function PageHero({
           )}
 
           {eyebrow && (
-            <p className="flex items-center gap-2 text-[length:var(--text-label)] uppercase leading-4 text-accent-400">
+            <p className="flex items-center gap-2 text-[length:clamp(0.6875rem,1.6vw,0.8125rem)] uppercase leading-4 text-accent-400">
               <span aria-hidden className="hero-line h-px w-6 bg-accent-400/60" style={delay(60)} />
               <span className="hero-fade" style={delay(140)}>
                 {eyebrow}
@@ -154,7 +154,7 @@ export function PageHero({
           </h1>
 
           {description && (
-            <p className="hero-fade max-w-[35rem] text-lg leading-relaxed text-white/85 2xl:max-w-[42rem]" style={delay(480)}>
+            <p className="hero-fade max-w-[35rem] text-[length:clamp(0.9375rem,2.2vw,1.125rem)] leading-relaxed text-white/85 2xl:max-w-[42rem]" style={delay(480)}>
               {description}
             </p>
           )}
@@ -190,7 +190,7 @@ export function PageHero({
 
           {trust && trust.length > 0 && (
             <ul
-              className="hero-fade mt-2 flex flex-col gap-3 text-sm font-medium text-white/85 sm:flex-row sm:flex-wrap sm:items-center sm:gap-0"
+              className="hero-fade mt-2 flex flex-col gap-3 text-[length:clamp(0.8125rem,1.8vw,0.875rem)] font-medium text-white/85 sm:flex-row sm:flex-wrap sm:items-center sm:gap-0"
               style={delay(680)}
             >
               {trust.map((item) => (

@@ -102,15 +102,6 @@ export function ContactEnquiryForm({ initialType = null }: ContactEnquiryFormPro
                 </li>
               ))}
             </ul>
-
-            <p className="mt-8 flex items-start gap-2.5 rounded-md border border-sand-200 bg-tint-50 px-4 py-3 text-xs leading-relaxed text-ink-500">
-              <Icon name="triangle-alert" className="mt-0.5 size-4 shrink-0 text-accent-600" strokeWidth={2} />
-              <span>
-                This form is running in demonstration mode, so nothing is emailed to a real inbox
-                yet. Submitting shows you exactly what happens — and gives you a WhatsApp message
-                you can send us right now.
-              </span>
-            </p>
           </Reveal>
 
           {/* The form itself. */}
@@ -302,11 +293,6 @@ function ContactEnquirySuccess({
                   </div>
                 ))}
               </dl>
-
-              <p className="mx-auto mt-6 max-w-md text-center text-xs leading-relaxed text-ink-400">
-                This site is running in demonstration mode, so no email has actually left the
-                browser. Sending the message below reaches us for real.
-              </p>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
                 <ButtonLink

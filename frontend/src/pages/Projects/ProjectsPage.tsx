@@ -5,7 +5,6 @@ import {
   PrimeLocations,
   ProjectActiveFilters,
   ProjectCategoryFilter,
-  ProjectDemoNotice,
   ProjectEmptyState,
   ProjectErrorState,
   ProjectGrid,
@@ -64,8 +63,6 @@ export function ProjectsPage() {
           aria-labelledby="projects-catalogue-heading"
         >
           <Container>
-            <ProjectDemoNotice className="mb-10" />
-
             <h2 id="projects-catalogue-heading" className="sr-only">
               Browse developments
             </h2>

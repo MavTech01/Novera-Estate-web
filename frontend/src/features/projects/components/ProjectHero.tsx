@@ -50,8 +50,8 @@ export function ProjectHero({ controller, onSearch }: ProjectHeroProps) {
         shapes merged into one. A smaller overlap keeps the "part of the banner"
         reading while leaving a clear band of white between the curve and the card.
       */}
-      <div className="relative z-20 -mt-4 sm:-mt-5 lg:-mt-6">
-        <Container>
+      <div className="relative z-20 pt-6 sm:pt-8 lg:pt-10">
+        <Container className="max-w-2xl">
           <ProjectSearchForm controller={controller} onSearch={onSearch} />
         </Container>
       </div>

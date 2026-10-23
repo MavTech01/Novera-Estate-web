@@ -1,6 +1,5 @@
 import {
   RentCategories,
-  RentDemoNotice,
   RentErrorState,
   RentFaq,
   RentFeaturedProperties,
@@ -86,8 +85,6 @@ export function RentPage() {
 
       {/* Pulls up over the hero's lower edge, the way the listing page's search bar does. */}
       <RentSearchPanel areas={catalogue.locations} />
-
-      <RentDemoNotice />
 
       <RentCategories categories={catalogue.categories} />
 

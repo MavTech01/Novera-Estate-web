@@ -70,19 +70,6 @@ export function ProjectDescription({ project }: { project: Project }) {
               <ProjectProgress project={project} variant="detailed" />
             </Reveal>
           )}
-
-          {/*
-            Deliberately absent: any claim about appreciation, rental yield or
-            investment return. A development description should not imply a
-            financial outcome we cannot support.
-          */}
-          <p className="mt-10 flex items-start gap-2 border-t border-sand-200 pt-5 text-xs leading-relaxed text-ink-400">
-            <Icon name="file-text" className="mt-0.5 size-3.5 shrink-0" strokeWidth={2} />
-            <span>
-              Demonstration content for a fictional development. Figures and imagery do not represent a live
-              Novera Estates scheme.
-            </span>
-          </p>
         </Container>
       </div>
     </Section>

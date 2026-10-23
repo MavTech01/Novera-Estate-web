@@ -8,7 +8,6 @@ import {
   LocationActiveFilters,
   LocationCategoryFilter,
   LocationComparison,
-  LocationDemoNotice,
   LocationEmptyState,
   LocationErrorState,
   LocationGrid,
@@ -118,10 +117,6 @@ export function LocationsPage() {
               title="Explore Our Locations"
               description="Find the right area for your lifestyle, property goals, and everyday needs."
             />
-
-            <div className="mt-10 lg:mt-12">
-              <LocationDemoNotice />
-            </div>
 
             <div className="mt-8 sm:mt-10">
               <LocationCategoryFilter value={filters.category} onChange={controller.setCategory} />
