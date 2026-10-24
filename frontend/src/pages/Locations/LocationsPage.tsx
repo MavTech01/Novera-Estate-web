@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useRef, useState } from 'react'
 
 import { useAllProjects } from '@/features/projects'
 import {
@@ -6,10 +6,9 @@ import {
   FeaturedLocation,
   FeaturedLocationSkeleton,
   LocationActiveFilters,
-  LocationCategoryFilter,
-  LocationComparison,
   LocationEmptyState,
   LocationErrorState,
+  LocationFilterSheet,
   LocationGrid,
   LocationGridSkeleton,
   LocationHero,
@@ -19,7 +18,6 @@ import {
   WhyLocationMatters,
   useAllLocations,
   useFeaturedLocation,
-  useLocationComparison,
   useLocationSearch,
   useLocations,
 } from '@/features/locations'
@@ -68,8 +66,8 @@ export function LocationsPage() {
   const { value: allLocations } = useAllLocations()
   const { value: featuredLocation } = useFeaturedLocation()
   const { value: projects } = useAllProjects()
-  const comparison = useLocationComparison()
 
+  const [isFilterSheetOpen, setIsFilterSheetOpen] = useState(false)
   const gridRef = useRef<HTMLDivElement>(null)
 
   /**
@@ -79,6 +77,7 @@ export function LocationsPage() {
    * and on mobile the search field sits well above the results.
    */
   const scrollToResults = useCallback(() => {
+    setIsFilterSheetOpen(false)
     gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [])
 
@@ -92,13 +91,14 @@ export function LocationsPage() {
           controller={controller}
           suggestions={allLocations.map((location) => ({ slug: location.slug, name: location.name }))}
           onSearch={scrollToResults}
+          onOpenFilters={() => setIsFilterSheetOpen(true)}
           wave={isFiltered ? 'cream' : 'white'}
         />
 
         {/* Featured area: a promotion, not a result, so it hides as soon as a
             search or category is applied. */}
         {!isFiltered && (
-          <section className="bg-white pb-20 sm:pb-24 lg:pb-28" aria-label="Featured location">
+          <section className="bg-white pt-12 sm:pt-16 lg:pt-20 xl:pt-24 pb-20 sm:pb-24 lg:pb-28" aria-label="Featured location">
             <Container>
               {!featuredLocation ? (
                 <FeaturedLocationSkeleton />
@@ -118,45 +118,30 @@ export function LocationsPage() {
               description="Find the right area for your lifestyle, property goals, and everyday needs."
             />
 
-            <div className="mt-8 sm:mt-10">
-              <LocationCategoryFilter value={filters.category} onChange={controller.setCategory} />
-            </div>
-
-            <div ref={gridRef} className="mt-8 scroll-mt-24">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <p className="text-sm text-ink-500" aria-live="polite">
-                  <span className="font-semibold text-ink-900">
-                    {isInitialLoad ? '—' : locations.length.toLocaleString('en-NG')}
-                  </span>{' '}
-                  {locations.length === 1 ? 'location' : 'locations'} found
-                </p>
-              </div>
-
+            <div ref={gridRef} className="mt-8 scroll-mt-24 lg:mt-10">
               <LocationActiveFilters
                 filters={controller.activeFilters}
                 onRemove={(field) => controller.removeFilter(field)}
                 onClearAll={controller.reset}
-                className="mt-5"
+                className="mb-6"
               />
 
-              <div className="mt-8">
-                {isInitialLoad ? (
-                  <LocationGridSkeleton count={6} />
-                ) : status === 'error' ? (
-                  <LocationErrorState message={error ?? undefined} onRetry={retry} />
-                ) : locations.length === 0 ? (
-                  <LocationEmptyState
-                    onReset={controller.reset}
-                    action={{ label: 'Browse all properties', href: routes.properties }}
-                  />
-                ) : (
-                  <LocationGrid
-                    locations={locations}
-                    label={`Showing ${locations.length} ${locations.length === 1 ? 'location' : 'locations'}`}
-                    className={isRefreshing ? 'opacity-60 transition-opacity duration-200' : undefined}
-                  />
-                )}
-              </div>
+              {isInitialLoad ? (
+                <LocationGridSkeleton count={6} />
+              ) : status === 'error' ? (
+                <LocationErrorState message={error ?? undefined} onRetry={retry} />
+              ) : locations.length === 0 ? (
+                <LocationEmptyState
+                  onReset={controller.reset}
+                  action={{ label: 'Browse all properties', href: routes.properties }}
+                />
+              ) : (
+                <LocationGrid
+                  locations={locations}
+                  label={`Showing ${locations.length} ${locations.length === 1 ? 'location' : 'locations'}`}
+                  className={isRefreshing ? 'opacity-60 transition-opacity duration-200' : undefined}
+                />
+              )}
             </div>
           </Container>
         </Section>
@@ -170,9 +155,15 @@ export function LocationsPage() {
         <LocationMap locations={allLocations} />
 
         <PropertiesByLocation locations={allLocations} />
-
-        <LocationComparison table={comparison} />
       </main>
+
+      <LocationFilterSheet
+        isOpen={isFilterSheetOpen}
+        onClose={() => setIsFilterSheetOpen(false)}
+        controller={controller}
+        onApply={scrollToResults}
+        resultCount={locations.length}
+      />
 
       <LocationsClosingCta />
     </>

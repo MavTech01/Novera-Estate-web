@@ -107,8 +107,14 @@ export function PropertyFilters({
         </div>
       )}
 
-      {/* Scrollable filter body */}
-      <div className={cn('min-h-0 flex-1 overflow-y-auto overscroll-contain', variant === 'drawer' ? 'px-5 pb-6' : 'pt-1')}>
+      {/* Scrollable filter body for drawer, natural flowing body for sidebar */}
+      <div
+        className={cn(
+          variant === 'drawer'
+            ? 'custom-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 py-2 pb-8 sm:px-7'
+            : 'px-1 pt-1.5 pb-2',
+        )}
+      >
         <PropertyFilterGroup title="Property Type" count={filters.propertyType.length}>
           <CheckboxGroup
             label="Property type"
@@ -184,19 +190,21 @@ export function PropertyFilters({
           />
         </PropertyFilterGroup>
 
-        <div className={cn(variant === 'drawer' && 'sticky bottom-0 -mx-5 mt-5 border-t border-sand-200 bg-white px-5 pt-4')}>
-          <Button
-            type="button"
-            variant={variant === 'drawer' ? 'outline' : 'ghost'}
-            size="md"
-            onClick={controller.reset}
-            disabled={activeCount === 0}
-            className={cn(variant === 'sidebar' && 'w-full justify-center text-ink-600')}
-          >
-            <Icon name="rotate-ccw" className="size-4" strokeWidth={2} />
-            Reset Filters
-          </Button>
-        </div>
+        {variant === 'sidebar' && (
+          <div className="pt-4">
+            <Button
+              type="button"
+              variant="ghost"
+              size="md"
+              onClick={controller.reset}
+              disabled={activeCount === 0}
+              className="w-full justify-center text-ink-600 hover:bg-tint-50 hover:text-accent-700"
+            >
+              <Icon name="rotate-ccw" className="size-4" strokeWidth={2} />
+              Reset Filters
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   )

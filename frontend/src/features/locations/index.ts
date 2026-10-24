@@ -16,6 +16,7 @@ export { LocationComparison } from './components/LocationComparison'
 export { LocationDemoNotice } from './components/LocationDemoNotice'
 export { LocationEmptyState } from './components/LocationEmptyState'
 export { LocationErrorState } from './components/LocationErrorState'
+export { LocationFilterSheet } from './components/LocationFilterSheet'
 export { LocationGrid } from './components/LocationGrid'
 export {
   LocationCardSkeleton,

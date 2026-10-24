@@ -4,7 +4,6 @@ import {
   RentFaq,
   RentFeaturedProperties,
   RentFinalCta,
-  RentInspectionCta,
   RentLocations,
   RentSavedPropertiesCta,
   RentSearchPanel,
@@ -99,8 +98,6 @@ export function RentPage() {
       <RentSavedPropertiesCta />
 
       <RentFaq items={rentFaq} />
-
-      <RentInspectionCta />
 
       <RentFinalCta />
     </main>

@@ -75,6 +75,14 @@ export interface ContactChannel {
   kind: 'link' | 'text'
   /** Extra line under the value, e.g. what the office hours cover. */
   note: string
+  /** Status badge shown in the top-right corner of the card. */
+  badge?: string
+  /** Tone for the status badge pill. */
+  badgeTone?: 'emerald' | 'accent' | 'sand'
+  /** Call to action label for the button/pill. */
+  actionLabel?: string
+  /** Whether opening this channel targets an external tab. */
+  external?: boolean
 }
 
 /** One entry in the quick-action row above the form. */

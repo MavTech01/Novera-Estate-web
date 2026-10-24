@@ -147,7 +147,7 @@ export function PropertiesPage() {
             <div
               className={
                 isSidebarOpen
-                  ? 'lg:grid lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-8 xl:grid-cols-[18.5rem_minmax(0,1fr)] xl:gap-10'
+                  ? 'lg:grid lg:grid-cols-[clamp(19.5rem,18rem+3vw,22rem)_minmax(0,1fr)] lg:gap-8 xl:grid-cols-[clamp(21.5rem,19rem+4vw,24rem)_minmax(0,1fr)] xl:gap-10'
                   : ''
               }
             >
@@ -159,6 +159,7 @@ export function PropertiesPage() {
                   sort={sort}
                   onSortChange={setSort}
                   isLoading={isRefreshing}
+                  isFiltered={controller.isFiltered}
                 />
 
                 <PropertyActiveFilters

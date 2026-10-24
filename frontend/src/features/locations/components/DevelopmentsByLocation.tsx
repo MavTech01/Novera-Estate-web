@@ -62,7 +62,7 @@ export function DevelopmentsByLocation({ locations, projects, className }: Devel
           {grouped.map(({ location, projects: areaProjects, total }) => (
             <Reveal key={location.id}>
               <section aria-labelledby={`developments-${location.slug}`}>
-                <div className="flex flex-wrap items-end justify-between gap-4 border-b border-sand-200 pb-5">
+                <div className="flex flex-wrap items-end justify-between gap-4">
                   <div>
                     <h3
                       id={`developments-${location.slug}`}
@@ -96,7 +96,7 @@ export function DevelopmentsByLocation({ locations, projects, className }: Devel
                   </div>
                 </div>
 
-                <ul className="mt-7 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-7">
+                <ul className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-7">
                   {areaProjects.map((project) => (
                     <li key={project.id} className="flex">
                       <ProjectCard project={project} />

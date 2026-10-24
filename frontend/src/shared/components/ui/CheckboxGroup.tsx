@@ -57,7 +57,7 @@ export function CheckboxGroup<T extends string>({
             <label
               key={option.value}
               className={cn(
-                'group flex cursor-pointer items-center gap-2.5 rounded-md py-1.5 transition-colors duration-200',
+                'group relative flex cursor-pointer items-center gap-2.5 rounded-md py-1.5 transition-colors duration-200',
                 'hover:text-accent-700',
                 isChecked ? 'text-ink-900' : 'text-ink-600',
                 iconPosition === 'trailing' && 'flex-row-reverse justify-between',
@@ -92,7 +92,7 @@ export function CheckboxGroup<T extends string>({
                 <Icon name={option.icon} className="size-4 shrink-0 text-ink-500" strokeWidth={1.75} />
               )}
 
-              <span className="text-sm font-medium leading-snug">{option.label}</span>
+              <span className="text-[clamp(0.8125rem,0.78rem+0.2vw,0.875rem)] font-medium leading-snug">{option.label}</span>
 
               {option.hint && <span className="sr-only"> — {option.hint}</span>}
             </label>

@@ -190,13 +190,13 @@ export function PageHero({
 
           {trust && trust.length > 0 && (
             <ul
-              className="hero-fade mt-2 flex flex-col gap-3 text-[length:clamp(0.8125rem,1.8vw,0.875rem)] font-medium text-white/85 sm:flex-row sm:flex-wrap sm:items-center sm:gap-0"
+              className="hero-fade mt-2 flex flex-col gap-3 text-[length:clamp(0.8125rem,1.8vw,0.875rem)] font-medium text-white/85 sm:flex-row sm:items-center sm:gap-0"
               style={delay(680)}
             >
               {trust.map((item) => (
                 <li
                   key={item.id}
-                  className="flex items-center gap-2 sm:border-l sm:border-white/20 sm:px-6 sm:first:border-l-0 sm:first:pl-0"
+                  className="flex items-center gap-2 whitespace-nowrap sm:border-l sm:border-white/20 sm:px-3 sm:first:border-l-0 sm:first:pl-0 md:px-4 lg:px-5"
                 >
                   <Icon name={item.icon} className="size-4 text-accent-400" strokeWidth={2} />
                   {item.label}

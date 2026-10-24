@@ -237,6 +237,39 @@
   display: none;
 }
 
+/* Thin custom scrollbar for desktop scrollable panels ----------------- */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-sand-300) transparent;
+}
+
+@supports selector(::-webkit-scrollbar) {
+  .custom-scrollbar {
+    scrollbar-width: auto;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  margin-top: 14px;
+  margin-bottom: 14px;
+  margin-block: 14px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--color-sand-300);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-sand-400);
+}
+
 /* Decorative shapes --------------------------------------------------- */
 .blob-orange {
   background: linear-gradient(135deg, var(--color-accent-200) 0%, var(--color-accent-400) 100%);

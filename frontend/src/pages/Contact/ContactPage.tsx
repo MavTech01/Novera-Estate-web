@@ -6,7 +6,6 @@ import {
   ContactFinalCta,
   ContactInfoCards,
   ContactMapPlaceholder,
-  ContactQuickActions,
   enquiryTypeFromQuery,
 } from '@/features/contact'
 import { company } from '@/data/company'
@@ -26,9 +25,8 @@ import { buildCallUrl } from '@/shared/lib/contactLinks'
  * "Book an Inspection" CTA arrives with that enquiry already selected rather than
  * making the visitor choose it again.
  *
- * Tones alternate so consecutive sections never blend: warm hero → white contact
- * details → tint quick actions → white form → white map → tint FAQ preview →
- * brown closing band.
+ * Tones alternate so consecutive sections never blend: warm hero → tint contact
+ * details → white form → tint map → white FAQ preview → brown closing band.
  */
 export function ContactPage() {
   const [query] = useSearchParams()
@@ -55,13 +53,13 @@ export function ContactPage() {
 
       <ContactInfoCards />
 
-      <ContactQuickActions />
-
       <div id="contact-enquiry" className="scroll-mt-24">
         <ContactEnquiryForm initialType={initialType} />
       </div>
 
-      <ContactMapPlaceholder />
+      <div id="contact-map" className="scroll-mt-24">
+        <ContactMapPlaceholder />
+      </div>
 
       <ContactFaqPreview />
 

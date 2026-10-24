@@ -22,7 +22,7 @@ interface SelectFieldProps {
 export function SelectField({ id, label, value, options, onChange, className, placeholder, icon }: SelectFieldProps) {
   return (
     <div className={cn('flex flex-col gap-1.5', className)}>
-      <label htmlFor={id} className="text-[length:var(--text-label)] uppercase leading-4 text-ink-400">
+      <label htmlFor={id} className="text-[clamp(0.6875rem,0.65rem+0.15vw,0.75rem)] font-semibold uppercase tracking-wider leading-4 text-ink-400">
         {label}
       </label>
       <div className="relative">
@@ -39,7 +39,7 @@ export function SelectField({ id, label, value, options, onChange, className, pl
           value={value}
           onChange={(event) => onChange(event.target.value)}
           className={cn(
-            'h-12 w-full cursor-pointer appearance-none truncate rounded-md border border-sand-200 bg-white pr-10 text-sm font-semibold text-ink-900 transition-colors duration-200 hover:border-accent-300 focus-visible:border-accent-500',
+            'h-12 w-full cursor-pointer appearance-none truncate rounded-md border border-sand-200 bg-white pr-10 text-[clamp(0.8125rem,0.78rem+0.2vw,0.875rem)] font-semibold text-ink-900 transition-colors duration-200 hover:border-accent-300 focus-visible:border-accent-500',
             icon ? 'pl-10' : 'pl-3.5',
           )}
         >

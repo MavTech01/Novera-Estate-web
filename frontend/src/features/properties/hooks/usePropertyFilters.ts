@@ -78,7 +78,7 @@ export function usePropertyFilters(): PropertyFiltersController {
         })
 
         return serialiseQuery(next.filters, next.sort, next.page)
-      }, { replace: true })
+      }, { replace: true, preventScrollReset: true })
     },
     [setSearchParams],
   )
@@ -88,7 +88,7 @@ export function usePropertyFilters(): PropertyFiltersController {
   // fighting back or forward — those never need rewriting.
   useEffect(() => {
     const canonical = serialiseQuery(filters, sort, page)
-    if (canonical.toString() !== searchParams.toString()) setSearchParams(canonical, { replace: true })
+    if (canonical.toString() !== searchParams.toString()) setSearchParams(canonical, { replace: true, preventScrollReset: true })
   }, [filters, sort, page, searchParams, setSearchParams])
 
   /** Any change resets to the first page — page 4 of the old result set makes no sense. */

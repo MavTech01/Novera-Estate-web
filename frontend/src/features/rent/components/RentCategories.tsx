@@ -37,8 +37,8 @@ export function RentCategories({ categories }: RentCategoriesProps) {
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((category, index) => {
             const card = (
-              <div className="group flex h-full flex-col">
-                <div className="relative overflow-hidden rounded-t-2xl">
+              <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                <div className="relative overflow-hidden">
                   <SkeletonImage
                     src={category.image.src}
                     alt={category.image.alt}
@@ -54,7 +54,7 @@ export function RentCategories({ categories }: RentCategoriesProps) {
                   </div>
                 </div>
 
-                <div className="flex flex-1 flex-col border border-t-0 border-sand-200 bg-white p-6">
+                <div className="flex flex-1 flex-col p-6">
                   <h3 className="font-display text-lg font-bold text-ink-900">{category.name}</h3>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{category.description}</p>
                   <div className="mt-5">

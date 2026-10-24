@@ -1,10 +1,9 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useRef, useState } from 'react'
 
 import {
   FeaturedProject,
   PrimeLocations,
   ProjectActiveFilters,
-  ProjectCategoryFilter,
   ProjectEmptyState,
   ProjectErrorState,
   ProjectGrid,
@@ -38,6 +37,7 @@ export function ProjectsPage() {
   const { value: projects, status, error, isLoading, isStale, retry } = useProjects(filters)
   const { value: featuredProject } = useFeaturedProject()
 
+  const [isFilterSheetOpen, setIsFilterSheetOpen] = useState(false)
   const resultsRef = useRef<HTMLDivElement>(null)
 
   const scrollToResults = useCallback(() => {
@@ -47,6 +47,7 @@ export function ProjectsPage() {
   // Submitting the hero form (or confirming the drawer) brings the grid into
   // view — on mobile the form sits well above the results.
   const handleSearch = useCallback(() => {
+    setIsFilterSheetOpen(false)
     scrollToResults()
   }, [scrollToResults])
 
@@ -56,10 +57,14 @@ export function ProjectsPage() {
   return (
     <>
       <main id="main-content">
-        <ProjectHero controller={controller} onSearch={handleSearch} />
+        <ProjectHero
+          controller={controller}
+          onSearch={handleSearch}
+          onOpenFilters={() => setIsFilterSheetOpen(true)}
+        />
 
         <section
-          className="bg-white pb-20 pt-14 sm:pb-24 sm:pt-16 lg:pb-28"
+          className="bg-white pb-20 pt-10 sm:pb-24 sm:pt-12 lg:pb-28"
           aria-labelledby="projects-catalogue-heading"
         >
           <Container>
@@ -67,12 +72,9 @@ export function ProjectsPage() {
               Browse developments
             </h2>
 
-            <ProjectCategoryFilter value={filters.projectType} onChange={controller.setProjectType} />
-
-            <div ref={resultsRef} className="mt-10 scroll-mt-24 sm:mt-12">
+            <div ref={resultsRef} className="scroll-mt-24">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <ProjectResultsHeader total={projects.length} isLoading={isInitialLoad} />
-                <ProjectMobileFilterDrawer controller={controller} onApply={handleSearch} />
               </div>
 
               <ProjectActiveFilters
@@ -120,6 +122,14 @@ export function ProjectsPage() {
         <WhyChooseNovera />
         <PrimeLocations />
       </main>
+
+      <ProjectMobileFilterDrawer
+        isOpen={isFilterSheetOpen}
+        onClose={() => setIsFilterSheetOpen(false)}
+        controller={controller}
+        onApply={handleSearch}
+        resultCount={projects.length}
+      />
 
       <ProjectsClosingCta />
     </>

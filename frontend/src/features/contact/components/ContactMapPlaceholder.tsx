@@ -18,7 +18,7 @@ import { SectionHeading } from '@/shared/components/ui/SectionHeading'
  */
 export function ContactMapPlaceholder() {
   return (
-    <Section tone="white" ariaLabelledBy="contact-map-heading">
+    <Section tone="tint" ariaLabelledBy="contact-map-heading">
       <Container>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14">
           <Reveal className="lg:col-span-5">

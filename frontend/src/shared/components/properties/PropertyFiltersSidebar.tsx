@@ -1,3 +1,4 @@
+import { cn } from '@/shared/lib/cn'
 import type { PropertyFiltersController } from '@/shared/types/propertyFiltersController'
 import { PropertyFilters } from './PropertyFilters'
 
@@ -18,10 +19,12 @@ export function PropertyFiltersSidebar({ controller, className }: PropertyFilter
   return (
     <aside
       aria-label="Refine results"
-      className={`hidden lg:sticky lg:top-24 lg:block lg:self-start ${className ?? ''}`}
+      className={cn('hidden lg:sticky lg:top-24 lg:block lg:self-start', className)}
     >
-      <div className="rounded-xl border border-sand-200 bg-white p-5 shadow-sm xl:p-6">
-        <PropertyFilters controller={controller} variant="sidebar" idPrefix="sidebar" />
+      <div className="overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-sm pr-1.5 py-4">
+        <div className="custom-scrollbar max-h-[calc(100vh-9.5rem)] overflow-y-auto pl-[clamp(1.25rem,1rem+0.75vw,1.625rem)] pr-2 py-0.5">
+          <PropertyFilters controller={controller} variant="sidebar" idPrefix="sidebar" />
+        </div>
       </div>
     </aside>
   )

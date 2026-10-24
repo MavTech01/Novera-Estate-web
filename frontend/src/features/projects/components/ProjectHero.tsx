@@ -9,6 +9,7 @@ import { ProjectSearchForm } from './ProjectSearchForm'
 interface ProjectHeroProps {
   controller: ProjectFiltersController
   onSearch: () => void
+  onOpenFilters?: () => void
 }
 
 const projectTrust: readonly PageHeroTrustItem[] = [
@@ -27,7 +28,7 @@ const projectTrust: readonly PageHeroTrustItem[] = [
  * form is a sibling rather than a child so it can overlap the banner's wave
  * without the wave's white fill being cut off by it.
  */
-export function ProjectHero({ controller, onSearch }: ProjectHeroProps) {
+export function ProjectHero({ controller, onSearch, onOpenFilters }: ProjectHeroProps) {
   return (
     <>
       <PageHero
@@ -52,7 +53,7 @@ export function ProjectHero({ controller, onSearch }: ProjectHeroProps) {
       */}
       <div className="relative z-20 pt-6 sm:pt-8 lg:pt-10">
         <Container className="max-w-2xl">
-          <ProjectSearchForm controller={controller} onSearch={onSearch} />
+          <ProjectSearchForm controller={controller} onSearch={onSearch} onOpenFilters={onOpenFilters} />
         </Container>
       </div>
     </>

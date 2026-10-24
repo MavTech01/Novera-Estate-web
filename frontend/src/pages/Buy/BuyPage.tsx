@@ -4,7 +4,6 @@ import {
   BuyFaq,
   BuyFeaturedProperties,
   BuyFinalCta,
-  BuyInspectionCta,
   BuyLocations,
   BuySavedPropertiesCta,
   BuySearchPanel,
@@ -98,8 +97,6 @@ export function BuyPage() {
       <BuySavedPropertiesCta />
 
       <BuyFaq items={buyFaq} />
-
-      <BuyInspectionCta />
 
       <BuyFinalCta />
     </main>

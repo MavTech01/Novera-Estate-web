@@ -4,38 +4,38 @@ import { Icon } from '@/shared/components/ui/Icon'
 import { Reveal } from '@/shared/components/ui/Reveal'
 import { Section } from '@/shared/components/ui/Section'
 import { SectionHeading } from '@/shared/components/ui/SectionHeading'
+import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
 import { propertiesPathForLocation } from '@/shared/lib/routes'
 import { cn } from '@/shared/lib/cn'
 import type { Location } from '@/features/locations/types/locationTypes'
 
 interface PropertiesByLocationProps {
   locations: Location[]
-  /** Dims the rows while the catalogue is being replaced. */
+  /** Dims the cards while the catalogue is being replaced. */
   isLoading?: boolean
   className?: string
 }
 
 /**
- * "Find Properties by Location" — the six areas and their sample property
- * counts, each linking into the properties catalogue already filtered to that
- * area.
+ * "Find Properties by Location" — modern, responsive catalogue directory.
  *
- * This section owns no property data. It reads the counts off the location
- * records and hands the filtering to the Properties feature through the URL, so
- * the two pages can never disagree about what "properties in Lekki" means.
- *
- * A table on desktop because it is genuinely tabular — a name, a number and a
- * destination. It collapses to stacked rows on mobile rather than scrolling
- * sideways, because a horizontally-scrolling table is miserable to read on a
- * phone.
+ * Each location card highlights sample inventory, popular property types,
+ * and direct one-tap links to the full properties catalogue pre-filtered
+ * to that specific area.
  */
 export function PropertiesByLocation({ locations, isLoading = false, className }: PropertiesByLocationProps) {
   if (locations.length === 0) return null
 
   return (
-    <Section tone="tint" className={className}>
+    <Section
+      tone="white"
+      spacing="none"
+      className={cn('pt-20 sm:pt-24 lg:pt-28 pb-8 sm:pb-10 lg:pb-12', className)}
+      ariaLabelledBy="properties-by-location"
+    >
       <Container>
         <SectionHeading
+          id="properties-by-location"
           eyebrow="Browse the catalogue"
           title="Find Properties by Location"
           description="Jump straight into the properties catalogue for the area you are considering. Counts below are sample figures."
@@ -44,77 +44,92 @@ export function PropertiesByLocation({ locations, isLoading = false, className }
         <Reveal className="mt-10 lg:mt-12">
           <div
             className={cn(
-              'overflow-hidden rounded-xl border border-sand-200 bg-white shadow-sm transition-opacity duration-200',
-              isLoading && 'opacity-60',
+              'grid grid-cols-1 gap-5 transition-opacity duration-200 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6',
+              isLoading && 'pointer-events-none opacity-60',
             )}
           >
-            <table className="w-full border-collapse text-left">
-              <caption className="sr-only">
-                Sample property counts for each Lagos area, with a link to that area's listings
-              </caption>
+            {locations.map((location) => {
+              const href = propertiesPathForLocation(location.propertyLocationSlugs)
 
-              <thead className="hidden bg-sand-100 sm:table-header-group">
-                <tr>
-                  <th scope="col" className="px-6 py-4 text-[length:var(--text-label)] uppercase leading-4 text-ink-500">
-                    Location
-                  </th>
-                  <th scope="col" className="px-6 py-4 text-[length:var(--text-label)] uppercase leading-4 text-ink-500">
-                    Properties
-                  </th>
-                  <th scope="col" className="hidden px-6 py-4 text-right text-[length:var(--text-label)] uppercase leading-4 text-ink-500 md:table-cell">
-                    <span className="sr-only">Actions</span>
-                  </th>
-                </tr>
-              </thead>
+              return (
+                <article
+                  key={location.id}
+                  className={cn(
+                    'group relative flex w-full flex-col justify-between overflow-hidden rounded-2xl border border-sand-200 bg-white p-5 sm:p-6 shadow-xs',
+                    'transition-all duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-1 hover:border-accent-300 hover:shadow-md',
+                    'focus-within:-translate-y-1 focus-within:border-accent-300 focus-within:shadow-md',
+                  )}
+                >
+                  <div>
+                    {/* Header Row: Thumbnail + Location Info */}
+                    <div className="flex items-start gap-4">
+                      <div className="relative size-16 shrink-0 overflow-hidden rounded-xl border border-sand-200/80 bg-tint-100 shadow-xs sm:size-20">
+                        <SkeletonImage
+                          src={location.image.src}
+                          alt={location.image.alt}
+                          width={160}
+                          height={160}
+                          className="size-full"
+                          imgClassName="size-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                        />
+                      </div>
 
-              <tbody className="divide-y divide-sand-200">
-                {locations.map((location) => {
-                  const href = propertiesPathForLocation(location.propertyLocationSlugs)
-
-                  return (
-                    <tr key={location.id} className="group transition-colors duration-200 hover:bg-tint-50">
-                      <th
-                        scope="row"
-                        className="px-5 py-4 text-left align-middle font-normal sm:px-6 sm:py-5"
-                      >
-                        <span className="flex items-center gap-3">
-                          <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-tint-50 text-accent-600">
-                            <Icon name="map-pin" className="size-5" strokeWidth={2} />
-                          </span>
-                          <span className="min-w-0">
-                            <span className="block font-display text-base font-bold text-ink-900">
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center justify-between gap-1.5">
+                          <h3 className="truncate font-display text-lg font-bold text-ink-900 transition-colors duration-200 group-hover:text-accent-600 sm:text-xl">
+                            <Link
+                              to={href}
+                              className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
+                            >
                               {location.name}
-                            </span>
-                            <span className="mt-0.5 block text-xs text-ink-500">{location.regionLabel}</span>
+                              <span className="sr-only"> — view properties in {location.name}</span>
+                            </Link>
+                          </h3>
+                          <span className="inline-flex shrink-0 items-center rounded-pill border border-accent-100 bg-tint-50 px-2.5 py-0.5 text-xs font-semibold text-accent-800">
+                            {location.propertyCount} {location.propertyCount === 1 ? 'home' : 'homes'}
                           </span>
-                        </span>
-                      </th>
+                        </div>
 
-                      <td className="px-5 py-4 align-middle sm:px-6 sm:py-5">
-                        <span className="font-display text-lg font-bold text-ink-900">
-                          {location.propertyCount.toLocaleString('en-NG')}
-                        </span>
-                        <span className="ml-1.5 text-sm text-ink-500">
-                          {location.propertyCount === 1 ? 'property' : 'properties'}
-                        </span>
-                      </td>
+                        <p className="mt-1 flex items-center gap-1 text-xs text-ink-500">
+                          <Icon name="map-pin" className="size-3.5 shrink-0 text-accent-500" strokeWidth={2} />
+                          <span className="truncate">{location.regionLabel}</span>
+                        </p>
 
-                      <td className="px-5 py-4 text-right align-middle sm:px-6 sm:py-5">
-                        <Link
-                          to={href}
-                          className="inline-flex min-h-11 items-center gap-1.5 rounded-md px-3 text-sm font-semibold text-accent-700 transition-colors duration-200 hover:bg-tint-100 hover:text-accent-800"
-                        >
-                          <span className="hidden sm:inline">View properties</span>
-                          <span className="sm:hidden">View</span>
-                          <Icon name="arrow-right" className="arrow-nudge size-4" strokeWidth={2.2} />
-                          <span className="sr-only">in {location.name}</span>
-                        </Link>
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+                        <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-ink-600">
+                          {location.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Popular Types Chips */}
+                    {location.popularPropertyTypes.length > 0 && (
+                      <div className="mt-4 flex flex-wrap items-center gap-1.5">
+                        {location.popularPropertyTypes.slice(0, 3).map((type) => (
+                          <span
+                            key={type}
+                            className="inline-block rounded-md bg-sand-100/70 px-2 py-0.5 text-[11px] font-medium text-ink-600"
+                          >
+                            {type}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Footer Row: Developments count + CTA */}
+                  <div className="mt-4 flex items-center justify-between border-t border-sand-100 pt-3.5 text-xs font-semibold">
+                    <span className="flex items-center gap-1.5 font-normal text-ink-500">
+                      <Icon name="building-2" className="size-3.5 text-accent-500" strokeWidth={2} />
+                      {location.projectCount} {location.projectCount === 1 ? 'development' : 'developments'}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 text-accent-600 transition-colors duration-200 group-hover:text-accent-700">
+                      Browse catalogue
+                      <Icon name="arrow-right" className="arrow-nudge size-4" strokeWidth={2.2} />
+                    </span>
+                  </div>
+                </article>
+              )
+            })}
           </div>
         </Reveal>
       </Container>

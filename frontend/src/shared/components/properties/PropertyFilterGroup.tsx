@@ -48,9 +48,9 @@ export function PropertyFilterGroup({
             className={cn(headingClasses, 'group rounded-md')}
           >
             <span className="flex items-center gap-2">
-              <span className="text-[0.8125rem] font-bold uppercase tracking-[0.1em] text-ink-900">{title}</span>
+              <span className="text-[clamp(0.75rem,0.72rem+0.2vw,0.8125rem)] font-bold uppercase tracking-[0.1em] text-ink-900">{title}</span>
               {count > 0 && (
-                <span className="inline-flex min-w-5 items-center justify-center rounded-pill bg-accent-600 px-1.5 py-0.5 text-[0.6875rem] font-bold leading-none text-white">
+                <span className="inline-flex min-w-5 items-center justify-center rounded-pill bg-accent-600 px-1.5 py-0.5 text-[clamp(0.625rem,0.58rem+0.15vw,0.6875rem)] font-bold leading-none text-white">
                   {count}
                   <span className="sr-only"> filters applied</span>
                 </span>
@@ -60,7 +60,7 @@ export function PropertyFilterGroup({
             <Icon
               name="chevron-down"
               className={cn(
-                'size-4 shrink-0 text-ink-400 transition-transform duration-300 ease-[var(--ease-out-soft)]',
+                'size-[clamp(0.875rem,0.8rem+0.2vw,1rem)] shrink-0 text-ink-400 transition-transform duration-300 ease-[var(--ease-out-soft)]',
                 isOpen && 'rotate-180',
               )}
               strokeWidth={2.2}
@@ -69,9 +69,9 @@ export function PropertyFilterGroup({
         ) : (
           <span className={headingClasses}>
             <span className="flex items-center gap-2">
-              <span className="text-[0.8125rem] font-bold uppercase tracking-[0.1em] text-ink-900">{title}</span>
+              <span className="text-[clamp(0.75rem,0.72rem+0.2vw,0.8125rem)] font-bold uppercase tracking-[0.1em] text-ink-900">{title}</span>
               {count > 0 && (
-                <span className="inline-flex min-w-5 items-center justify-center rounded-pill bg-accent-600 px-1.5 py-0.5 text-[0.6875rem] font-bold leading-none text-white">
+                <span className="inline-flex min-w-5 items-center justify-center rounded-pill bg-accent-600 px-1.5 py-0.5 text-[clamp(0.625rem,0.58rem+0.15vw,0.6875rem)] font-bold leading-none text-white">
                   {count}
                   <span className="sr-only"> filters applied</span>
                 </span>
@@ -91,7 +91,7 @@ export function PropertyFilterGroup({
         )}
       >
         <div className={cn('overflow-hidden', !isOpen && 'invisible')}>
-          <div className="pt-3">{children}</div>
+          <div className="pt-3 pb-3 px-2 sm:px-2.5">{children}</div>
         </div>
       </div>
     </section>
