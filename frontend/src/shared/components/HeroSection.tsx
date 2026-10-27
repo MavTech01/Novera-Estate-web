@@ -51,7 +51,7 @@ export function HeroSection({
           {/* Headline */}
           <h1
             id="hero-heading"
-            className="max-w-3xl font-display text-[clamp(1.99rem,6.8vw,3.75rem)] font-extrabold tracking-tight text-white leading-[1.12] sm:text-[clamp(2.25rem,6.5vw,3.75rem)] sm:leading-[1.08]"
+            className="max-w-3xl font-display text-[clamp(1.9rem,6.8vw,3.75rem)] font-extrabold tracking-tight text-white leading-[1.12] sm:text-[clamp(2.25rem,6.5vw,3.75rem)] sm:leading-[1.08]"
           >
             Find a Place <br />
             That{' '}
