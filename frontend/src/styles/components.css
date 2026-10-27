@@ -532,3 +532,35 @@
     animation: none;
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/* Hero Headline Gradient & Text Clip Cross-Browser Compatibility             */
+/* -------------------------------------------------------------------------- */
+/* Ensure WebKit prefix is always emitted in Vite dev server as well as build */
+.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Fallback cleanly to solid accent color without rendering an opaque
+ * background block on older engines or browsers lacking text-clip support.
+ */
+.hero-gradient-text {
+  color: var(--color-accent-400, #fb923c);
+  background: none;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .hero-gradient-text {
+    background-image: linear-gradient(
+      to right,
+      var(--color-accent-500, #f97316),
+      var(--color-accent-400, #fb923c),
+      var(--color-accent-500, #f97316)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}

@@ -51,17 +51,19 @@ export function HeroSection({
           {/* Headline */}
           <h1
             id="hero-heading"
-            className="max-w-3xl font-display text-[clamp(2.1rem,6.8vw,2.75rem)] font-extrabold tracking-tight text-white leading-[1.12] sm:text-[clamp(2.25rem,6.5vw,3.75rem)] sm:leading-[1.08]"
+            className="max-w-3xl font-display text-[clamp(1.85rem,6.8vw,2.75rem)] font-extrabold tracking-tight text-white leading-[1.12] sm:text-[clamp(2.25rem,6.5vw,3.75rem)] sm:leading-[1.08]"
           >
             Find a Place <br />
             That{' '}
-            <span className="bg-gradient-to-r from-accent-500 via-accent-400 to-accent-500 bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(249,115,22,0.4)]">
-              Feels Like Yours.
+            <span className="inline-block max-w-full drop-shadow-[0_0_24px_rgba(249,115,22,0.4)]">
+              <span className="hero-gradient-text">
+                Feels Like Yours.
+              </span>
             </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="mt-4 max-w-xl text-base leading-snug text-sand-100 sm:text-lg sm:leading-normal font-thin">
+          <p className="mt-2 max-w-xl text-[clamp(0.9375rem,2.2vw,1.2rem)] leading-snug text-sand-100 font-thin sm:mt-2.5">
             Curated luxury homes and investment opportunities in premium locations.
           </p>
 
