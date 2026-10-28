@@ -107,7 +107,7 @@ export const buyCategorySeeds: Omit<BuyCategory, 'count'>[] = [
       'Off-plan and completed estate projects — including units in Novera Estates’ own developments.',
     image: {
       src: images.categories.developments,
-      alt: 'New multi-unit residential development under construction',
+      alt: 'Contemporary residential estate development',
     },
     propertyType: 'development',
   },

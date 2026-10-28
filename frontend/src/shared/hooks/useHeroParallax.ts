@@ -7,8 +7,7 @@ import { useEffect, useRef } from 'react'
  * The transform is written straight to the element inside a rAF-throttled
  * scroll handler — no React state, so scrolling never re-renders. The offset is
  * capped at a fraction of the surrounding section's height, which keeps the
- * (oversized) image covering its frame at every scroll position. Disabled
- * entirely under `prefers-reduced-motion`.
+ * (oversized) image covering its frame at every scroll position.
  */
 export function useHeroParallax<T extends HTMLElement>(factor = 0.12) {
   const ref = useRef<T>(null)
@@ -16,7 +15,6 @@ export function useHeroParallax<T extends HTMLElement>(factor = 0.12) {
   useEffect(() => {
     const element = ref.current
     if (!element) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     let frame = 0
 

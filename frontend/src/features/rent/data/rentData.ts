@@ -126,7 +126,7 @@ export const rentCategorySeeds: Omit<RentCategory, 'count'>[] = [
       'Units in recently completed and off-plan estates — including developments from Novera Estates.',
     image: {
       src: images.categories.developments,
-      alt: 'New multi-unit residential development under construction',
+      alt: 'Contemporary residential estate development',
     },
     propertyType: 'development',
   },

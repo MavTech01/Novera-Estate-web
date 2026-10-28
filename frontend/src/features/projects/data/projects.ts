@@ -46,7 +46,7 @@ const projectSeeds: ProjectSeed[] = [
     images: [
       {
         src: images.categories.developments,
-        alt: 'Rendered view of the Novera Heights development showing landscaped courtyards and mid-rise apartment blocks',
+        alt: 'Contemporary view of the Novera Heights development showing landscaped grounds and residential blocks',
       },
       {
         src: images.development.oasisMain,

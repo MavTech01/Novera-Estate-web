@@ -1,9 +1,20 @@
-import { images } from '@/assets/images'
+import type { CSSProperties } from 'react'
+
 import type { PropertyPurpose, PropertySearchCriteria, PropertyType } from '@/types'
 import { Container } from '@/shared/components/ui/Container'
-import { SkeletonImage } from '@/shared/components/ui/SkeletonImage'
 import { WaveDivider } from '@/shared/components/layout/WaveDivider'
-import { HeroPurposeTabs, HeroSearchBar, HeroStats } from './hero'
+import {
+  HeroBackground,
+  HeroHeading,
+  HeroPurposeTabs,
+  HeroSearchBar,
+  HeroSlideIndicators,
+  HeroStats,
+  useHeroCarousel,
+} from './hero'
+
+const delay = (ms: number): CSSProperties =>
+  ({ '--hero-delay': `${ms}ms` } as CSSProperties)
 
 interface HeroSectionProps {
   criteria: PropertySearchCriteria
@@ -22,74 +33,69 @@ export function HeroSection({
   onPriceChange,
   onSubmit,
 }: HeroSectionProps) {
+  const {
+    slides,
+    currentSlide,
+    prevSlide,
+    goToSlide,
+    setIsHovered,
+  } = useHeroCarousel()
+
   return (
     <section
       className="relative isolate z-30 flex min-h-screen flex-col justify-between bg-ink-950 pt-28 sm:pt-32 lg:pt-36"
       aria-labelledby="hero-heading"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Background Image */}
-      <div className="absolute inset-0 -z-20 overflow-hidden">
-        <SkeletonImage
-          src={images.hero.main}
-          alt="Contemporary luxury villa with pool at dusk, photographed for Novera Estates"
-          width={1920}
-          height={1080}
-          loading="eager"
-          fetchPriority="high"
-          className="size-full object-cover"
-        />
-      </div>
-
-      {/* Gradient dark overlay from bottom to top across the hero image */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+      {/* Auto-Rotating Background Images with Ken Burns Crossfade */}
+      <HeroBackground
+        slides={slides}
+        currentSlide={currentSlide}
+        prevSlide={prevSlide}
       />
 
       <Container className="my-auto">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          {/* Headline */}
-          <h1
-            id="hero-heading"
-            className="max-w-3xl font-display text-[clamp(1.9rem,6.8vw,3.75rem)] font-extrabold tracking-tight text-white leading-[1.12] sm:text-[clamp(2.25rem,6.5vw,3.75rem)] sm:leading-[1.08]"
-          >
-            Find a Place <br />
-            That{' '}
-            <span className="inline-block max-w-full drop-shadow-[0_0_24px_rgba(249,115,22,0.4)]">
-              <span className="hero-gradient-text">
-                Feels Like Yours.
-              </span>
-            </span>
-          </h1>
+          {/* Main Headline & Subtitle */}
+          <HeroHeading slides={slides} currentSlide={currentSlide} />
 
-          {/* Subtitle */}
-          <p className="mt-2 max-w-xl text-[clamp(0.9375rem,2.2vw,1.2rem)] leading-snug text-sand-100 font-thin sm:mt-2.5">
-            Curated luxury homes and investment opportunities in premium locations.
-          </p>
-
-          {/* Search & Filters Section */}
+          {/* Search Bar, Filters, Stats & Slide Controls */}
           <div className="mt-9 w-full max-w-xl">
-            {/* Purpose Tabs (Buy / Rent) */}
-            <HeroPurposeTabs
-              purpose={criteria.purpose}
-              onChange={onPurposeChange}
-              className="mb-3"
-            />
+            <div className="hero-fade" style={delay(500)}>
+              <HeroPurposeTabs
+                purpose={criteria.purpose}
+                onChange={onPurposeChange}
+                className="mb-3"
+              />
+            </div>
 
-            {/* Search Bar with Location Input & Filter Popover */}
-            <HeroSearchBar
-              criteria={criteria}
-              onLocationChange={onLocationChange}
-              onTypeChange={onTypeChange}
-              onPriceChange={onPriceChange}
-              onSubmit={onSubmit}
-            />
+            <div className="hero-fade" style={delay(620)}>
+              <HeroSearchBar
+                criteria={criteria}
+                onLocationChange={onLocationChange}
+                onTypeChange={onTypeChange}
+                onPriceChange={onPriceChange}
+                onSubmit={onSubmit}
+              />
+            </div>
 
             {/* Stats directly beneath search bar */}
-            <HeroStats />
+            <div className="hero-fade" style={delay(740)}>
+              <HeroStats />
+            </div>
           </div>
         </div>
       </Container>
+
+      {/* Floating Vertical Side Rail (Right Edge) */}
+      <HeroSlideIndicators
+        slides={slides}
+        currentSlide={currentSlide}
+        onSelectSlide={goToSlide}
+        className="hero-fade"
+        style={delay(860)}
+      />
 
       {/* Decorative Wave Divider flush at the bottom edge */}
       <WaveDivider color="white" className="relative z-10 mt-auto" />

@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { usePrefersReducedMotion } from './usePrefersReducedMotion'
-
 interface UseStepperProgressOptions {
   /** Fraction of a step that must be visible before it fades in. */
   revealThreshold?: number
@@ -43,9 +41,6 @@ const clamp = (value: number, min: number, max: number) => Math.min(max, Math.ma
  *    can carry a step straight over a band without a callback ever firing, and
  *    the previous step stays stuck as "current". Measuring the distance has no
  *    window to miss, tracks the scroll exactly, and reverses for free.
- *
- * With `prefers-reduced-motion` the slide is dropped but the hand-off is kept:
- * colour changes are not motion.
  */
 export function useStepperProgress(
   count: number,
@@ -62,9 +57,8 @@ export function useStepperProgress(
   const indices = useRef<Map<Element, number>>(new Map())
   const revealedRef = useRef<boolean[]>(Array.from({ length: count }, () => false))
 
-  const prefersReducedMotion = usePrefersReducedMotion()
-  // Nothing to observe, or the user asked for no motion: start out settled.
-  const startsRevealed = !observerSupported || prefersReducedMotion
+  // Nothing to observe: start out settled.
+  const startsRevealed = !observerSupported
 
   const [isRevealed, setIsRevealed] = useState<boolean[]>(() => Array.from({ length: count }, () => startsRevealed))
   const [activeIndex, setActiveIndex] = useState(() => (observerSupported ? -1 : count - 1))
@@ -74,11 +68,6 @@ export function useStepperProgress(
 
     const itemElements = items.current
     if (itemElements.length === 0) return
-
-    if (prefersReducedMotion) {
-      revealedRef.current = Array.from({ length: count }, () => true)
-      setIsRevealed(revealedRef.current)
-    }
 
     const revealObserver = new IntersectionObserver(
       (entries) => {
@@ -180,7 +169,7 @@ export function useStepperProgress(
       window.removeEventListener('scroll', onFrame)
       window.removeEventListener('resize', onFrame)
     }
-  }, [count, prefersReducedMotion, revealMargin, revealThreshold])
+  }, [count, revealMargin, revealThreshold])
 
   return {
     registerItem: (index: number) => (node: HTMLElement | null) => {

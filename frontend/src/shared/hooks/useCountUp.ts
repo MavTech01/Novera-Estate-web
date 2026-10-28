@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { usePrefersReducedMotion } from './usePrefersReducedMotion'
-
 interface UseCountUpOptions {
   /** Total animation time in milliseconds. */
   duration?: number
@@ -13,15 +11,13 @@ const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t))
 
 /**
  * Counts up to `target` once `active` becomes true.
- * Falls back to the final value instantly when reduced motion is preferred.
  */
 export function useCountUp(target: number, active: boolean, { duration = 1600, delay = 120 }: UseCountUpOptions = {}) {
   const [count, setCount] = useState(0)
-  const prefersReducedMotion = usePrefersReducedMotion()
   const frameRef = useRef<number | null>(null)
 
   useEffect(() => {
-    if (!active || prefersReducedMotion) return
+    if (!active) return
 
     let startTime: number | null = null
 
@@ -45,7 +41,7 @@ export function useCountUp(target: number, active: boolean, { duration = 1600, d
     return () => {
       if (frameRef.current !== null) cancelAnimationFrame(frameRef.current)
     }
-  }, [active, delay, duration, prefersReducedMotion, target])
+  }, [active, delay, duration, target])
 
-  return prefersReducedMotion ? target : count
+  return count
 }

@@ -455,83 +455,7 @@
   animation: stepper-pulse 1.8s ease-out infinite;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-  }
 
-  /*
-   * The floating background is decoration and stays put rather than being
-   * removed: the orbs and outlines are part of the section's visual identity,
-   * and dropping them would change the layout, not just the motion.
-   */
-  .fb-drift-a,
-  .fb-drift-b,
-  .fb-drift-c,
-  .fb-float-a,
-  .fb-float-b {
-    animation: none;
-  }
-
-  /* The banner photograph arrives already in place rather than settling in. */
-  .hero-settle {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  /* Banner copy is shown in place; no per-word or per-element entrance. */
-  .hero-word,
-  .hero-fade,
-  .hero-line {
-    animation: none;
-    opacity: 1;
-    transform: none;
-    filter: none;
-  }
-
-  .hero-cta::after {
-    display: none;
-  }
-
-  .stepper-item,
-  .stepper-item[data-revealed='false'],
-  .stepper-item[data-revealed='true'] {
-    opacity: 1;
-    translate: none;
-    transition: none;
-  }
-
-  /* Static ring instead of a pulsing one, so the active step still reads as active. */
-  .stepper-node-current {
-    animation: none;
-    box-shadow: 0 0 0 5px rgb(249 115 22 / 0.25);
-  }
-
-  [data-nav-drawer] .mobile-nav-item > a {
-    opacity: 1;
-    transform: none;
-  }
-
-  .media,
-  .arrow-nudge {
-    transition: none;
-  }
-
-  .group:hover .media,
-  .group:hover .arrow-nudge {
-    transform: none;
-  }
-
-  .skeleton::after {
-    animation: none;
-  }
-
-  .card-stagger {
-    animation: none;
-  }
-}
 
 /* -------------------------------------------------------------------------- */
 /* Hero Headline Gradient & Text Clip Cross-Browser Compatibility             */
@@ -562,5 +486,15 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
+  }
+}
+
+/* Hero Carousel Auto-Filling Progress Bar Animation */
+@keyframes hero-fill-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }

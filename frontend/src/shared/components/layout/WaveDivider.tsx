@@ -1,5 +1,4 @@
 import { cn } from '@/shared/lib/cn'
-import { usePrefersReducedMotion } from '@/shared/hooks/usePrefersReducedMotion'
 
 type WaveColor = 'white' | 'cream'
 
@@ -64,10 +63,9 @@ const frontWavePath =
  * stays still, so the seam meets the following section exactly. The SVG
  * stretches edge to edge (`preserveAspectRatio="none"`) at a fixed height, and
  * a one-pixel negative bottom margin kills the hairline browsers otherwise
- * leave. The ripple is skipped for visitors who reduce motion.
+ * leave.
  */
 export function WaveDivider({ color = 'white', className }: WaveDividerProps) {
-  const reduceMotion = usePrefersReducedMotion()
 
   return (
     <div aria-hidden className={cn('pointer-events-none -mb-px w-full', className)}>
@@ -78,15 +76,13 @@ export function WaveDivider({ color = 'white', className }: WaveDividerProps) {
         className="block h-15 w-full lg:h-28"
       >
         <path d={backWavePath(0)} fill="var(--color-accent-600)" fillOpacity="0.22">
-          {!reduceMotion && (
-            <animate
-              attributeName="d"
-              dur="5s"
-              repeatCount="indefinite"
-              calcMode="linear"
-              values={WAVE_MORPH}
-            />
-          )}
+          <animate
+            attributeName="d"
+            dur="5s"
+            repeatCount="indefinite"
+            calcMode="linear"
+            values={WAVE_MORPH}
+          />
         </path>
         <path d={frontWavePath} fill={frontFills[color]} />
       </svg>

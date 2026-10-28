@@ -127,7 +127,7 @@ const locationSeeds: LocationSeed[] = [
       },
       {
         src: images.categories.developments,
-        alt: 'New residential estate under construction in the Ajah area',
+        alt: 'Modern residential estate in the Ajah area',
       },
       {
         src: images.categories.houses,

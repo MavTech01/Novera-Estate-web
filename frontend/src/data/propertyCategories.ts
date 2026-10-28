@@ -65,7 +65,7 @@ export const propertyCategories: PropertyCategory[] = [
     description: 'Off-plan and completed estate projects.',
     image: {
       src: images.categories.developments,
-      alt: 'New multi-unit residential development under construction',
+      alt: 'Contemporary multi-unit residential estate development',
     },
     href: '/projects',
   },

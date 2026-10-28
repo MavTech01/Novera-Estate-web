@@ -1,4 +1,3 @@
-import { usePrefersReducedMotion } from '@/shared/hooks/usePrefersReducedMotion'
 import { useStepperProgress } from '@/shared/hooks/useStepperProgress'
 import { cn } from '@/shared/lib/cn'
 import type { IconName } from '@/types'
@@ -34,7 +33,6 @@ type StepState = 'completed' | 'current' | 'upcoming'
 export function Stepper({ steps, ariaLabel = 'Process', className }: StepperProps) {
   const count = steps.length
   const progress = useStepperProgress(count)
-  const prefersReducedMotion = usePrefersReducedMotion()
 
   return (
     <ol
@@ -63,9 +61,9 @@ export function Stepper({ steps, ariaLabel = 'Process', className }: StepperProp
             aria-current={state === 'current' ? 'step' : undefined}
             className={cn(
               'relative flex flex-col gap-7 pl-14 md:pl-0 lg:gap-8',
-              !prefersReducedMotion && 'stepper-item',
+              'stepper-item',
             )}
-            style={prefersReducedMotion ? undefined : { transitionDelay: `${index * 120}ms` }}
+            style={{ transitionDelay: `${index * 120}ms` }}
           >
             {/* Marker at the step's visual centre — the point the focus band
                 tracks, so activation follows what the user is looking at. */}

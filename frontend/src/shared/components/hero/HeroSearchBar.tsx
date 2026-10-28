@@ -18,8 +18,8 @@ interface HeroSearchBarProps {
 export function HeroSearchBar({
   criteria,
   onLocationChange,
-  onTypeChange,
-  onPriceChange,
+  onTypeChange: _onTypeChange,
+  onPriceChange: _onPriceChange,
   onSubmit,
   className,
 }: HeroSearchBarProps) {

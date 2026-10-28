@@ -30,14 +30,4 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .route-progress-enter {
-    animation: none;
-    transform: scaleX(0.5);
-  }
 
-  .route-progress-complete {
-    animation: none;
-    opacity: 0;
-  }
-}
