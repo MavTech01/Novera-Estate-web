@@ -43,7 +43,7 @@ export function HeroSection({
 
   return (
     <section
-      className="relative isolate z-30 flex min-h-screen flex-col justify-between bg-ink-950 pt-28 sm:pt-32 lg:pt-36"
+      className="relative isolate z-30 flex min-h-[100dvh] lg:h-[100dvh] flex-col justify-between bg-ink-950 pt-20 sm:pt-24 lg:pt-28"
       aria-labelledby="hero-heading"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -55,13 +55,13 @@ export function HeroSection({
         prevSlide={prevSlide}
       />
 
-      <Container className="my-auto">
+      <Container className="my-auto py-1 sm:py-2">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
           {/* Main Headline & Subtitle */}
           <HeroHeading slides={slides} currentSlide={currentSlide} />
 
           {/* Search Bar, Filters, Stats & Slide Controls */}
-          <div className="mt-9 w-full max-w-xl">
+          <div className="mt-6 sm:mt-7 lg:mt-8 w-full max-w-xl">
             <div className="hero-fade" style={delay(500)}>
               <HeroPurposeTabs
                 purpose={criteria.purpose}

@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 import { useLockBodyScroll } from '@/shared/hooks/useLockBodyScroll'
 import { cn } from '@/shared/lib/cn'
@@ -14,17 +15,12 @@ import {
   serialiseQuery,
   toggleListValue,
 } from '@/shared/lib/propertyQuery'
-import { findPriceBandByBounds, getPriceBands, type PriceBand } from '@/data/searchOptions'
+import { findPriceBandByBounds, getPriceBands } from '@/data/searchOptions'
 import { routes } from '@/shared/lib/routes'
 import type { PropertyFiltersController } from '@/shared/types/propertyFiltersController'
 import type {
-  ActiveFilter,
-  ListingStatusFilter,
   PropertyFilters as PropertyFiltersType,
   PropertyPurpose,
-  PropertySort,
-  PropertyTag,
-  PropertyType,
 } from '@/types'
 
 export interface PropertyFilterSheetProps {
@@ -78,8 +74,10 @@ export function PropertyFilterSheet({
     query: initialQuery,
   }))
 
-  // Sync initial purpose/query when sheet opens
-  useEffect(() => {
+  // Sync initial purpose/query when sheet opens without triggering effect-cascade
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen)
+  if (prevIsOpen !== isOpen) {
+    setPrevIsOpen(isOpen)
     if (isOpen && !externalController) {
       setStandaloneFilters((prev) => ({
         ...prev,
@@ -87,7 +85,7 @@ export function PropertyFilterSheet({
         query: initialQuery || prev.query,
       }))
     }
-  }, [isOpen, initialPurpose, initialQuery, externalController])
+  }
 
   // Compute live matched count in standalone mode
   const standaloneResultCount = useMemo(() => {
@@ -263,7 +261,9 @@ export function PropertyFilterSheet({
     onClose()
   }, [onApply, effectiveController.filters, externalController, standaloneFilters, navigate, onClose])
 
-  return (
+  if (typeof document === 'undefined') return null
+
+  return createPortal(
     <>
       {/* Backdrop */}
       <div
@@ -272,7 +272,7 @@ export function PropertyFilterSheet({
         className={cn(
           'fixed inset-0 z-[60] bg-ink-900/50 backdrop-blur-xs transition-opacity duration-300 ease-[var(--ease-out-soft)]',
           !isDesktopDrawer && 'lg:hidden',
-          isOpen ? 'opacity-100' : 'pointer-events-none opacity-0',
+          isOpen ? 'opacity-100 pointer-events-auto' : 'pointer-events-none opacity-0',
         )}
       />
 
@@ -341,6 +341,7 @@ export function PropertyFilterSheet({
           </button>
         </div>
       </div>
-    </>
+    </>,
+    document.body,
   )
 }

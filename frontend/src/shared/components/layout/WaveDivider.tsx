@@ -73,7 +73,7 @@ export function WaveDivider({ color = 'white', className }: WaveDividerProps) {
         viewBox="0 0 1440 120"
         preserveAspectRatio="none"
         role="presentation"
-        className="block h-15 w-full lg:h-28"
+        className="block h-12 sm:h-16 lg:h-24 w-full"
       >
         <path d={backWavePath(0)} fill="var(--color-accent-600)" fillOpacity="0.22">
           <animate
